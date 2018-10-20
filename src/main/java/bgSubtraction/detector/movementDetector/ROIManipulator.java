@@ -9,6 +9,11 @@ import bgSubtraction.camera.Camera;
 import bgSubtraction.keyboardControl.Key;
 import bgSubtraction.keyboardControl.KeyPressType;
 
+/**
+ * 
+ * @author Tsvetan "Neutralizer" Trifonov
+ *
+ */
 public class ROIManipulator {
 
 	private int currentCameraWidth;

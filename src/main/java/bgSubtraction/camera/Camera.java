@@ -5,16 +5,16 @@ import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameGrabber.Exception;
 
-
 /**
- * 0 camera num is always integrated camera; 1 camera num is always the droid camera;
- *  num 2 is the external camera and so on
+ * 0 camera num is always integrated camera; 1 camera num is always the droid
+ * camera; num 2 is the external camera and so on
+ * 
  * @author Tsvetan "Neutralizer" Trifonov
  *
  */
 public class Camera {
-	private final int cameraWidth;
-	private final int cameraHeight;
+	private int cameraWidth;
+	private int cameraHeight;
 	private final int cameraNum;
 	private FrameGrabber grabber;
 
@@ -23,6 +23,12 @@ public class Camera {
 		VideoCapture v = new VideoCapture(cameraNum);
 		cameraWidth = (int) v.get(3);
 		cameraHeight = (int) v.get(4);
+		if (isCameraBiggerThan640()) {
+			v.set(3,640);
+			v.set(4,480);
+			cameraWidth = 640;
+			cameraHeight = 480;
+		}
 		v.close();
 
 		try {
@@ -31,6 +37,13 @@ public class Camera {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private boolean isCameraBiggerThan640() {
+		if (cameraWidth > 640 && cameraHeight > 480) {
+			return true;
+		}
+		return false;
 	}
 
 	public boolean isDetected() {
@@ -58,7 +71,7 @@ public class Camera {
 	public int getCameraHeight() {
 		return cameraHeight;
 	}
-	
+
 	public String getCameraWidthAndHeight() {
 		return cameraWidth + " " + cameraHeight;
 	}
