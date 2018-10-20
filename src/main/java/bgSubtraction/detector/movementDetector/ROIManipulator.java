@@ -66,6 +66,7 @@ public class ROIManipulator {
 	}
 
 	/**
+	 * 
 	 * percentage overload
 	 * @param percentage1
 	 * @param percentage2
