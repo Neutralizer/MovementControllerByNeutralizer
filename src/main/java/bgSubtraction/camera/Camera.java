@@ -1,7 +1,5 @@
 package bgSubtraction.camera;
 
-import java.awt.Point;
-
 import org.bytedeco.javacpp.opencv_videoio.VideoCapture;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
