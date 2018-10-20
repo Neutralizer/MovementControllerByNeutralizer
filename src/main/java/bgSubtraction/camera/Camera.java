@@ -57,6 +57,10 @@ public class Camera {
 	public int getCameraHeight() {
 		return cameraHeight;
 	}
+	
+	public String getCameraWidthAndHeight() {
+		return "Camera resolution is "  + cameraWidth + " " + cameraHeight;
+	}
 
 	public int getCameraNum() {
 		return cameraNum;

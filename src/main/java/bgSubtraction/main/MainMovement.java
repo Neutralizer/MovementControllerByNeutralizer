@@ -27,7 +27,7 @@ public class MainMovement implements Runnable {
 	private KeyController keyController;
 
 	public static void main(String[] args) throws AWTException {
-		Camera camera = new Camera(4);
+		Camera camera = new Camera(1);
 		Display display = new Display();
 		MovementDetector movementDetector = new MovementDetector();
 		KeyController keyController = new KeyController();
@@ -53,6 +53,9 @@ public class MainMovement implements Runnable {
 		if (!camera.isDetected()) {
 			throw new IllegalStateException("Camera not detected (tududu duuummm)");
 		}
+		
+		//TODO test
+		System.out.println("Camera width and height " + camera.getCameraWidthAndHeight());
 	}
 
 	public void run() {
