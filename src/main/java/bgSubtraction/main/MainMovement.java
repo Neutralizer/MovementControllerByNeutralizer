@@ -10,6 +10,7 @@ import org.bytedeco.javacv.CanvasFrame;
 import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.MovementDetector;
 import bgSubtraction.detector.movementDetector.ROI;
+import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.display.Display;
 import bgSubtraction.keyboardControl.KeyController;
 import bgSubtraction.keyboardControl.KeyPressType;
@@ -27,7 +28,7 @@ public class MainMovement implements Runnable {
 	private KeyController keyController;
 
 	public static void main(String[] args) throws AWTException {
-		Camera camera = new Camera(1);
+		Camera camera = new Camera(0);
 		Display display = new Display();
 		MovementDetector movementDetector = new MovementDetector();
 		KeyController keyController = new KeyController();
@@ -66,17 +67,21 @@ public class MainMovement implements Runnable {
 					new java.awt.Point(0, 0));
 			frameMovement.setSize(camera.getCameraWidth(), camera.getCameraHeight());
 			// frameMovement.setResizable(false);
+			
+			ROIManipulator roi = new ROIManipulator(camera);
 
 			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL,1000);
 
-			ROI.addRoiToList(100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
-			ROI.addRoiToList(100, 0, KeyEvent.VK_R, KeyPressType.PRESS);
-			ROI.addRoiToList(600, 0, KeyEvent.VK_P, KeyPressType.PRESS);
-			ROI.addRoiToList(520, 0, KeyEvent.VK_E, KeyPressType.PRESS);
-			ROI.addRoiToList(0, 0, KeyEvent.VK_ESCAPE, KeyPressType.PRESS);
-//			ROI.addRoiToList(280, 0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
-//			ROI.addRoiToList(0, 440, KeyEvent.VK_CONTROL, KeyPressType.PRESS);
-			ROI.addRoiToList(0, 250, wsKey);
+			roi.addRoiToList(100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
+//			roi.addRoiToList(0.2, 0.95, 0.75, 0.05, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
+			roi.addRoiToList(100, 0, KeyEvent.VK_R, KeyPressType.PRESS);
+			roi.addRoiToList(600, 0, KeyEvent.VK_P, KeyPressType.PRESS);
+			roi.addRoiToList(520, 0, KeyEvent.VK_E, KeyPressType.PRESS);
+			roi.addRoiToList(0, 0, KeyEvent.VK_ESCAPE, KeyPressType.PRESS);
+//			roi.addRoiToList(280, 0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
+//			roi.addRoiToList(0, 440, KeyEvent.VK_CONTROL, KeyPressType.PRESS);
+			roi.addRoiToList(0, 250, wsKey);
+			roi.addRoiToList(0.20, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 			
 			while (true) {
 				img = display.convertFromFrameToIplImage(camera.getFrame());
@@ -87,11 +92,11 @@ public class MainMovement implements Runnable {
 					movementDetector.processImage(img, bgResult);
 					
 					int keyWS = keyController.switchKeyToBePressed(wsKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
-					ROI.getListRoi().get(0).getKey().setKeyCode(keyWS);
+					roi.getListRoi().get(0).getKey().setKeyCode(keyWS);
 					
-					ROI.executeAllROI(ROI.getListRoi(), bgResult);
+					roi.executeAllROI(bgResult);
 
-					display.drawAllROI(ROI.getListRoi(), bgResult);
+					display.drawAllROI(roi.getListRoi(), bgResult);
 					display.showImage(frameMovement, bgResult);
 
 				}

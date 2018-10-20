@@ -7,7 +7,8 @@ import org.bytedeco.javacv.FrameGrabber.Exception;
 
 
 /**
- * 0 camera num is always integrated camera; 1 camera num is always the external camera and so on
+ * 0 camera num is always integrated camera; 1 camera num is always the droid camera;
+ *  num 2 is the external camera and so on
  * @author Tsvetan "Neutralizer" Trifonov
  *
  */
@@ -59,7 +60,7 @@ public class Camera {
 	}
 	
 	public String getCameraWidthAndHeight() {
-		return "Camera resolution is "  + cameraWidth + " " + cameraHeight;
+		return cameraWidth + " " + cameraHeight;
 	}
 
 	public int getCameraNum() {

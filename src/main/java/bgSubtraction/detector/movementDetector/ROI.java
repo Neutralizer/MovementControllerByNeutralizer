@@ -40,20 +40,20 @@ public class ROI {
 		this.key = key;
 	}
 
-	public static ArrayList<ROI> getListRoi() {
-		return listRoi;
-	}
+//	public static ArrayList<ROI> getListRoi() {
+//		return listRoi;
+//	}
 	
-	public static void addRoiToList(int point1, int point2, int keyEvent, KeyPressType keyPressType) {
-		listRoi.add(new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
-	}
-	public static void addRoiToList(int point1, int point2, Key key) {
-		listRoi.add(new ROI(new Point(point1, point2), key));
-	}
-	
-	public static void addRoiToList(int point1, int point2, int point3,int point4,int keyEvent, KeyPressType keyPressType) {
-		listRoi.add(new ROI(new Point(point1, point2),point3,point4, new Key(keyEvent, keyPressType)));
-	}
+//	public static void addRoiToList(int point1, int point2, int keyEvent, KeyPressType keyPressType) {
+//		listRoi.add(new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
+//	}
+//	public static void addRoiToList(int point1, int point2, Key key) {
+//		listRoi.add(new ROI(new Point(point1, point2), key));
+//	}
+//	
+//	public static void addRoiToList(int point1, int point2, int point3,int point4,int keyEvent, KeyPressType keyPressType) {
+//		listRoi.add(new ROI(new Point(point1, point2),point3,point4, new Key(keyEvent, keyPressType)));
+//	}
 	
 	public Rect getRoi() {
 		return this.roi;
@@ -79,10 +79,10 @@ public class ROI {
 		key.executeAction(isDetected);
 	}
 
-	public static void executeAllROI(ArrayList<ROI> listRoi, Mat bgResult) {
-		for (ROI roi : listRoi) {
-			roi.execute(bgResult);
-		}
-	}
+//	public static void executeAllROI(ArrayList<ROI> listRoi, Mat bgResult) {
+//		for (ROI roi : listRoi) {
+//			roi.execute(bgResult);
+//		}
+//	}
 
 }
