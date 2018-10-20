@@ -25,28 +25,34 @@ public class ROIManipulator {
 		return list;
 	}
 
+	public void addRoiToList(int point1, int point2, int keyEvent, KeyPressType keyPressType) {
+		isCoordinateWithinCameraRange(point1, point2);
+		list.add(new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
+	}
+
 	/**
 	 * percentage overload
+	 * 
 	 * @param percentage1
 	 * @param percentage2
 	 * @param keyEvent
 	 * @param keyPressType
 	 */
 	public void addRoiToList(double percentage1, double percentage2, int keyEvent, KeyPressType keyPressType) {
-		list.add(new ROI(new Point((int) (currentCameraWidth * percentage1), (int) (currentCameraHeight * percentage2)),
-				new Key(keyEvent, keyPressType)));
-	}
-
-	public void addRoiToList(int point1, int point2, int keyEvent, KeyPressType keyPressType) {
+		int point1 = (int) (currentCameraWidth * percentage1);
+		int point2 = (int) (currentCameraHeight * percentage2);
+		isCoordinateWithinCameraRange(point1, point2);
 		list.add(new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
 	}
 
 	public void addRoiToList(int point1, int point2, int point3, int point4, int keyEvent, KeyPressType keyPressType) {
+		isCoordinateWithinCameraRange(point1, point2);
 		list.add(new ROI(new Point(point1, point2), point3, point4, new Key(keyEvent, keyPressType)));
 	}
 
 	/**
 	 * percentage overload
+	 * 
 	 * @param percentage1
 	 * @param percentage2
 	 * @param percentage3
@@ -56,31 +62,60 @@ public class ROIManipulator {
 	 */
 	public void addRoiToList(double percentage1, double percentage2, double percentage3, double percentage4,
 			int keyEvent, KeyPressType keyPressType) {
-		list.add(new ROI(new Point((int) (currentCameraWidth * percentage1), (int) (currentCameraHeight * percentage2)),
-				(int) (currentCameraWidth * percentage3), (int) (currentCameraHeight * percentage4),
-				new Key(keyEvent, keyPressType)));
+		int point1 = (int) (currentCameraWidth * percentage1);
+		int point2 = (int) (currentCameraHeight * percentage2);
+		isCoordinateWithinCameraRange(point1, point2);
+		list.add(new ROI(new Point(point1, point2), (int) (currentCameraWidth * percentage3),
+				(int) (currentCameraHeight * percentage4), new Key(keyEvent, keyPressType)));
 	}
 
 	public void addRoiToList(int point1, int point2, Key key) {
+		isCoordinateWithinCameraRange(point1, point2);
 		list.add(new ROI(new Point(point1, point2), key));
 	}
 
 	/**
 	 * 
 	 * percentage overload
+	 * 
 	 * @param percentage1
 	 * @param percentage2
 	 * @param key
 	 */
 	public void addRoiToList(double percentage1, double percentage2, Key key) {
-		list.add(new ROI(new Point((int) (currentCameraWidth * percentage1), (int) (currentCameraHeight * percentage2)),
-				key));
+		int point1 = (int) (currentCameraWidth * percentage1);
+		int point2 = (int) (currentCameraHeight * percentage2);
+		list.add(new ROI(new Point(point1, point2), key));
 	}
 
 	public void executeAllROI(Mat bgResult) {
 		for (ROI roi : list) {
 			roi.execute(bgResult);
 		}
+	}
+
+	/**
+	 * Throws exception when the parameters are not in camera range
+	 * 
+	 * @param width
+	 * @param height
+	 */
+	private void isCoordinateWithinCameraRange(int width, int height) {
+		if (!isWithinCameraRangeWidth(width)) {
+			throw new IllegalStateException("ROI Width (Vertical) coordinate is not in range");
+		}
+
+		if (!isWithinCameraRangeHeight(height)) {
+			throw new IllegalStateException("ROI Height (Horisontal) coordinate is not in range");
+		}
+	}
+
+	private boolean isWithinCameraRangeWidth(int width) {
+		return (width >= 0 && width <= currentCameraWidth);
+	}
+
+	private boolean isWithinCameraRangeHeight(int height) {
+		return (height >= 0 && height <= currentCameraHeight);
 	}
 
 }
