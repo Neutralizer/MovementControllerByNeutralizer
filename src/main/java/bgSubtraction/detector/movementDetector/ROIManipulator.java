@@ -47,6 +47,7 @@ public class ROIManipulator {
 
 	public void addRoiToList(int point1, int point2, int point3, int point4, int keyEvent, KeyPressType keyPressType) {
 		isCoordinateWithinCameraRange(point1, point2);
+		isSizeWithinCameraRange(point1, point2, point3, point4);
 		list.add(new ROI(new Point(point1, point2), point3, point4, new Key(keyEvent, keyPressType)));
 	}
 
@@ -64,9 +65,11 @@ public class ROIManipulator {
 			int keyEvent, KeyPressType keyPressType) {
 		int point1 = (int) (currentCameraWidth * percentage1);
 		int point2 = (int) (currentCameraHeight * percentage2);
+		int point3 = (int) (currentCameraWidth * percentage3);
+		int point4 = (int) (currentCameraHeight * percentage4);
 		isCoordinateWithinCameraRange(point1, point2);
-		list.add(new ROI(new Point(point1, point2), (int) (currentCameraWidth * percentage3),
-				(int) (currentCameraHeight * percentage4), new Key(keyEvent, keyPressType)));
+		isSizeWithinCameraRange(point1, point2, point3, point4);
+		list.add(new ROI(new Point(point1, point2), point3, point4, new Key(keyEvent, keyPressType)));
 	}
 
 	public void addRoiToList(int point1, int point2, Key key) {
@@ -116,6 +119,13 @@ public class ROIManipulator {
 
 	private boolean isWithinCameraRangeHeight(int height) {
 		return (height >= 0 && height <= currentCameraHeight);
+	}
+
+	private void isSizeWithinCameraRange(int point1, int point2, int point3, int point4) {
+		// from point1 starts point 3 and from point 2 starts point 4
+		int widthLength = point1 + point3;
+		int heightLength = point2 + point4;
+		isCoordinateWithinCameraRange(widthLength, heightLength);
 	}
 
 }
