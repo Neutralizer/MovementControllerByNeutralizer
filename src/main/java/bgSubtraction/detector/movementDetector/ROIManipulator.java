@@ -25,8 +25,10 @@ public class ROIManipulator {
 		return list;
 	}
 
+	//TODO uses 40 size hardcoded value
 	public void addRoiToList(int point1, int point2, int keyEvent, KeyPressType keyPressType) {
 		isCoordinateWithinCameraRange(point1, point2);
+		isSizeWithinCameraRange(point1, point2, 40, 40);
 		list.add(new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
 	}
 
@@ -42,6 +44,7 @@ public class ROIManipulator {
 		int point1 = (int) (currentCameraWidth * percentage1);
 		int point2 = (int) (currentCameraHeight * percentage2);
 		isCoordinateWithinCameraRange(point1, point2);
+		isSizeWithinCameraRange(point1, point2, 40, 40);
 		list.add(new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
 	}
 
@@ -74,6 +77,7 @@ public class ROIManipulator {
 
 	public void addRoiToList(int point1, int point2, Key key) {
 		isCoordinateWithinCameraRange(point1, point2);
+		isSizeWithinCameraRange(point1, point2, 40, 40);
 		list.add(new ROI(new Point(point1, point2), key));
 	}
 
@@ -88,6 +92,8 @@ public class ROIManipulator {
 	public void addRoiToList(double percentage1, double percentage2, Key key) {
 		int point1 = (int) (currentCameraWidth * percentage1);
 		int point2 = (int) (currentCameraHeight * percentage2);
+		isCoordinateWithinCameraRange(point1, point2);
+		isSizeWithinCameraRange(point1, point2, 40, 40);
 		list.add(new ROI(new Point(point1, point2), key));
 	}
 
@@ -121,11 +127,25 @@ public class ROIManipulator {
 		return (height >= 0 && height <= currentCameraHeight);
 	}
 
+	/**
+	 * Throws exception when the parameters are not in camera range
+	 * @param point1
+	 * @param point2
+	 * @param point3
+	 * @param point4
+	 */
 	private void isSizeWithinCameraRange(int point1, int point2, int point3, int point4) {
 		// from point1 starts point 3 and from point 2 starts point 4
 		int widthLength = point1 + point3;
 		int heightLength = point2 + point4;
-		isCoordinateWithinCameraRange(widthLength, heightLength);
+		
+		if (!isWithinCameraRangeWidth(widthLength)) {
+			throw new IllegalStateException("ROI Width (Vertical) length is not in range");
+		}
+
+		if (!isWithinCameraRangeHeight(heightLength)) {
+			throw new IllegalStateException("ROI Height (Horisontal) length is not in range");
+		}
 	}
 
 }

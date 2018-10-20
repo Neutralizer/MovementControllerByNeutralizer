@@ -78,10 +78,10 @@ public class MainMovement implements Runnable {
 			roi.addRoiToList(600, 0, KeyEvent.VK_P, KeyPressType.PRESS);
 			roi.addRoiToList(520, 0, KeyEvent.VK_E, KeyPressType.PRESS);
 			roi.addRoiToList(0, 0, KeyEvent.VK_ESCAPE, KeyPressType.PRESS);
-//			roi.addRoiToList(280, 0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
+			roi.addRoiToList(280, 0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
+//			roi.addRoiToList(0.20, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 //			roi.addRoiToList(0, 440, KeyEvent.VK_CONTROL, KeyPressType.PRESS);
 			roi.addRoiToList(0, 250, wsKey);
-			roi.addRoiToList(0.20, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 			
 			while (true) {
 				img = display.convertFromFrameToIplImage(camera.getFrame());
