@@ -28,7 +28,7 @@ public class MainMovement implements Runnable {
 	private KeyController keyController;
 
 	public static void main(String[] args) throws AWTException {
-		Camera camera = new Camera(0);
+		Camera camera = new Camera(2);
 		Display display = new Display();
 		MovementDetector movementDetector = new MovementDetector();
 		KeyController keyController = new KeyController();
@@ -82,7 +82,7 @@ public class MainMovement implements Runnable {
 //			roi.addRoiToList(0.20, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 //			roi.addRoiToList(0, 440, KeyEvent.VK_CONTROL, KeyPressType.PRESS);
 			roi.addRoiToList(0, 250, wsKey);
-			
+			Thread.sleep(500);//delay for camera
 			while (true) {
 				img = display.convertFromFrameToIplImage(camera.getFrame());
 				if (img != null) {
