@@ -69,7 +69,7 @@ public class MainMovement implements Runnable {
 			
 			ROIManipulator roi = new ROIManipulator(camera);
 
-			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL,1000);
+			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
 
 			roi.addRoiToList(100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
 //			roi.addRoiToList(0.2, 0.95, 0.75, 0.05, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st

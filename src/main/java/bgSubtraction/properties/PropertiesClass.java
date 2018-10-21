@@ -46,8 +46,11 @@ public class PropertiesClass {
 			
 			ROIManipulator roiObj = new ROIManipulator(new Camera(0));
 			String[] result = prop.getProperty("F").split(",");
+			//TODO based on the length of the result - choose overloaded constructor
 			System.out.println(Arrays.asList(result));
-//			roi.addRoiToList();
+			roiObj.addRoiToList(3,3,3,KeyPressType.getType(3));
+			
+			// if 6 - w; if 4 - regular key; if 3 - special
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

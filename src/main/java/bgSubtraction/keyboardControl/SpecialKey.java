@@ -32,6 +32,18 @@ public class SpecialKey extends Key {
 		startTimer = 0;
 		this.keyLimiter = keyLimiter;
 	}
+	
+	/**
+	 * set constant keyLimiter because of the properties file
+	 * @param keyCode
+	 * @param keyPressType
+	 */
+	public SpecialKey(int keyCode, KeyPressType keyPressType) {
+		super(keyCode, keyPressType);
+		switched = false;
+		startTimer = 0;
+		this.keyLimiter = 1000;
+	}
 
 	public boolean getSwitched() {
 		return this.switched;
