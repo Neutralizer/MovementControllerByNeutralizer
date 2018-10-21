@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.Properties;
 
 import bgSubtraction.camera.Camera;
@@ -43,7 +44,10 @@ public class PropertiesClass {
 //			System.out.println(prop.getProperty("dbuser"));
 //			System.out.println(prop.getProperty("dbpassword"));
 			
-			ROIManipulator roi = new ROIManipulator(new Camera(0));
+			ROIManipulator roiObj = new ROIManipulator(new Camera(0));
+			String[] result = prop.getProperty("F").split(",");
+			System.out.println(Arrays.asList(result));
+//			roi.addRoiToList();
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -61,14 +65,14 @@ public class PropertiesClass {
 	public void createPropFile(String filename) {
 		try {
 
-//			String filename = "config.properties";
 			output = new FileOutputStream("c:\\MovementController\\" + filename);
 
 			// set the properties value
 			prop.setProperty("camera", "0");
-			prop.setProperty("W", "100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT");
-			prop.setProperty("R", "100, 0, KeyEvent.VK_R, KeyPressType.PRESS");
-			prop.setProperty("F", "600, 0, KeyEvent.VK_F, KeyPressType.PRESS");
+//			prop.setProperty("W", "100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT");
+//			prop.setProperty("R", "100, 0, KeyEvent.VK_R, KeyPressType.PRESS");
+			int[] f = new int[] {600,0,KeyEvent.VK_F,KeyPressType.PRESS.ordinal()};
+			prop.setProperty("F", f[0] + "," + f[1] + "," + f[2]  + "," + f[3] + "");
 
 			// save properties to project root folder
 			prop.store(output, null);
