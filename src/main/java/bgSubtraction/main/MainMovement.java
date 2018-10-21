@@ -9,7 +9,6 @@ import org.bytedeco.javacv.CanvasFrame;
 
 import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.MovementDetector;
-import bgSubtraction.detector.movementDetector.ROI;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.display.Display;
 import bgSubtraction.keyboardControl.KeyController;
@@ -75,10 +74,10 @@ public class MainMovement implements Runnable {
 			roi.addRoiToList(100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
 //			roi.addRoiToList(0.2, 0.95, 0.75, 0.05, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
 			roi.addRoiToList(100, 0, KeyEvent.VK_R, KeyPressType.PRESS);
-			roi.addRoiToList(600, 0, KeyEvent.VK_P, KeyPressType.PRESS);
+			roi.addRoiToList(600, 0, KeyEvent.VK_F, KeyPressType.PRESS);
 			roi.addRoiToList(520, 0, KeyEvent.VK_E, KeyPressType.PRESS);
 			roi.addRoiToList(0, 0, KeyEvent.VK_ESCAPE, KeyPressType.PRESS);
-			roi.addRoiToList(280, 0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
+//			roi.addRoiToList(280, 0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 //			roi.addRoiToList(0.20, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 //			roi.addRoiToList(0, 440, KeyEvent.VK_CONTROL, KeyPressType.PRESS);
 			roi.addRoiToList(0, 250, wsKey);
