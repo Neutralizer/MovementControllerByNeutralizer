@@ -13,7 +13,7 @@ import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.keyboardControl.KeyPressType;
 
-public class PropertiesClass {
+public class PropertiesOperations {
 
 	InputStream input = null;
 	OutputStream output = null;
@@ -23,7 +23,7 @@ public class PropertiesClass {
 	static ROIManipulator roiObj = new ROIManipulator(new Camera(0));
 
 	public static void main(String[] args) {
-		PropertiesClass cl = new PropertiesClass();
+		PropertiesOperations cl = new PropertiesOperations();
 		// cl.loadPropertiesFile("config.properties");
 		cl.createPropFile("config.properties");
 	}
@@ -37,15 +37,16 @@ public class PropertiesClass {
 			}
 
 			// load a properties file from class path, inside static method
-			prop.load(input);
+			prop.load(input);//TODO add from here
 
 			// get the property value and print it out
 			// System.out.println(prop.getProperty("database"));
 			// System.out.println(prop.getProperty("dbuser"));
 			// System.out.println(prop.getProperty("dbpassword"));
-
+			int cameraNum = loadCameraFromProperty();
 			String[] result = getPropertyValues("F");
-			addROIToList(result);
+			
+			loadROIToListFromProperties(result);
 			System.out.println(Arrays.asList(result));
 			roiObj.addRoiToList(3, 3, 3, KeyPressType.getType(3));
 
@@ -66,7 +67,7 @@ public class PropertiesClass {
 
 	// TODO do not add camera info as ROI
 	// TODO change here to percentages
-	public void addROIToList(String[] result) {
+	public void loadROIToListFromProperties(String[] result) {
 		int resultInt[] = convertToInt(result);
 		if (resultInt.length == 7) {// key +6 values
 			roiObj.addRoiToList(resultInt[1], resultInt[2], resultInt[3], resultInt[4], resultInt[5],
@@ -75,7 +76,11 @@ public class PropertiesClass {
 		if (resultInt.length == 5) {// key + 4 values
 			roiObj.addRoiToList(resultInt[1], resultInt[2], resultInt[3], KeyPressType.getType(resultInt[4]));
 		}
-
+	}
+	
+	public int loadCameraFromProperty() {
+		int cameraNum = Integer.valueOf(prop.getProperty("camera"));
+		return cameraNum;
 	}
 
 	// first index is the string key - do not convert it to int
@@ -100,7 +105,7 @@ public class PropertiesClass {
 
 			addRoiToProperty("F", 600, 0, KeyEvent.VK_F, KeyPressType.PRESS);
 			addRoiToProperty("W", 100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT);
-			addCameraToProperty("Hercules", 2);
+			addCameraToProperty(2);
 
 			prop.store(output, null);
 
@@ -118,8 +123,9 @@ public class PropertiesClass {
 		}
 	}
 
-	public void addCameraToProperty(String cameraName, int cameraNum) {
-		prop.setProperty(cameraName, cameraNum + "");
+	//TODO get camera name in frontend
+	public void addCameraToProperty(int cameraNum) {
+		prop.setProperty("camera", cameraNum + "");
 	}
 
 	public void addRoiToProperty(String keyString, int width, int height, int keyEvent, KeyPressType type) {
