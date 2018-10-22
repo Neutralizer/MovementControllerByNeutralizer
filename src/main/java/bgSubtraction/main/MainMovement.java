@@ -68,6 +68,7 @@ public class MainMovement implements Runnable {
 			// frameMovement.setResizable(false);
 			
 			ROIManipulator roi = new ROIManipulator(camera);
+			
 
 			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
 
