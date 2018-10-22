@@ -19,19 +19,20 @@ public class PropertiesClass {
 	OutputStream output = null;
 	Properties prop = new Properties();
 
+	// Temporary here
+	static ROIManipulator roiObj = new ROIManipulator(new Camera(0));
+
 	public static void main(String[] args) {
 		PropertiesClass cl = new PropertiesClass();
-//		cl.loadPropertiesFile("config.properties");
-		 cl.createPropFile("config.properties");
+		// cl.loadPropertiesFile("config.properties");
+		cl.createPropFile("config.properties");
 	}
 
 	public void loadPropertiesFile(String filename) {
-
 		try {
-
 			input = new FileInputStream("c:\\MovementController\\" + filename);
 			if (input == null) {
-				System.out.println("Sorry, unable to find " + filename);
+				System.err.println("Error - unable to find " + filename);
 				return;
 			}
 
@@ -43,13 +44,12 @@ public class PropertiesClass {
 			// System.out.println(prop.getProperty("dbuser"));
 			// System.out.println(prop.getProperty("dbpassword"));
 
-			ROIManipulator roiObj = new ROIManipulator(new Camera(0));
-			String[] result = prop.getProperty("F").split(",");
-			// TODO based on the length of the result - choose overloaded constructor
+			String[] result = getPropertyValues("F");
+			addROIToList(result);
 			System.out.println(Arrays.asList(result));
 			roiObj.addRoiToList(3, 3, 3, KeyPressType.getType(3));
 
-			// if 6 - w; if 4 - regular key; if 3 - special
+			// if 6 - w(custom size); if 4 - regular key; if 3 - special
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -64,18 +64,43 @@ public class PropertiesClass {
 		}
 	}
 
+	// TODO do not add camera info as ROI
+	// TODO change here to percentages
+	public void addROIToList(String[] result) {
+		int resultInt[] = convertToInt(result);
+		if (resultInt.length == 7) {// key +6 values
+			roiObj.addRoiToList(resultInt[1], resultInt[2], resultInt[3], resultInt[4], resultInt[5],
+					KeyPressType.getType(resultInt[6]));
+		}
+		if (resultInt.length == 5) {// key + 4 values
+			roiObj.addRoiToList(resultInt[1], resultInt[2], resultInt[3], KeyPressType.getType(resultInt[4]));
+		}
+
+	}
+
+	// first index is the string key - do not convert it to int
+	// TODO does it throw error when length is 0 - add 0 check in wrapper method
+	private int[] convertToInt(String[] result) {
+		int resultInt[] = new int[result.length];
+		for (int i = 1; i < resultInt.length; i++) {
+			resultInt[i] = Integer.valueOf(result[i]);
+		}
+		return resultInt;
+	}
+
+	public String[] getPropertyValues(String property) {
+		String[] result = prop.getProperty(property).split(",");
+		return result;
+	}
+
 	public void createPropFile(String filename) {
 		try {
 
 			output = new FileOutputStream("c:\\MovementController\\" + filename);
 
-			// set the properties value
-//			prop.setProperty("camera", "0");
-			// prop.setProperty("W", "100, 440, 450, 40, KeyEvent.VK_W,
-			// KeyPressType.CONSTANT");
-			// prop.setProperty("R", "100, 0, KeyEvent.VK_R, KeyPressType.PRESS");
 			addRoiToProperty("F", 600, 0, KeyEvent.VK_F, KeyPressType.PRESS);
-			addCamera("Hercules", 2);
+			addRoiToProperty("W", 100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT);
+			addCameraToProperty("Hercules", 2);
 
 			prop.store(output, null);
 
@@ -93,7 +118,7 @@ public class PropertiesClass {
 		}
 	}
 
-	public void addCamera(String cameraName, int cameraNum) {
+	public void addCameraToProperty(String cameraName, int cameraNum) {
 		prop.setProperty(cameraName, cameraNum + "");
 	}
 
