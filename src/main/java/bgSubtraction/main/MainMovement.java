@@ -14,6 +14,7 @@ import bgSubtraction.display.Display;
 import bgSubtraction.keyboardControl.KeyController;
 import bgSubtraction.keyboardControl.KeyPressType;
 import bgSubtraction.keyboardControl.SpecialKey;
+import bgSubtraction.properties.PropertiesOperations;
 
 /**
  * 
@@ -27,7 +28,7 @@ public class MainMovement implements Runnable {
 	private KeyController keyController;
 
 	public static void main(String[] args) throws AWTException {
-		Camera camera = new Camera(2);
+		Camera camera = new Camera(0);
 		Display display = new Display();
 		MovementDetector movementDetector = new MovementDetector();
 		KeyController keyController = new KeyController();
@@ -68,12 +69,16 @@ public class MainMovement implements Runnable {
 			// frameMovement.setResizable(false);
 			
 			ROIManipulator roi = new ROIManipulator(camera);
+			PropertiesOperations prop = new PropertiesOperations(roi);
 			
-
 			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
+			roi.addRoiToList(0.16, 0.92, 0.70, 0.08, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
+			roi.addRoiToList(0, 250, wsKey);
+			prop.loadPropertiesFile("config.properties");
 
+			/**
 			roi.addRoiToList(100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
-//			roi.addRoiToList(0.2, 0.95, 0.75, 0.05, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
+//			roi.addRoiToList(0.16, 0.92, 0.70, 0.09, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
 			roi.addRoiToList(100, 0, KeyEvent.VK_R, KeyPressType.PRESS);
 			roi.addRoiToList(600, 0, KeyEvent.VK_F, KeyPressType.PRESS);
 			roi.addRoiToList(520, 0, KeyEvent.VK_E, KeyPressType.PRESS);
@@ -81,7 +86,7 @@ public class MainMovement implements Runnable {
 //			roi.addRoiToList(280, 0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 //			roi.addRoiToList(0.20, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 //			roi.addRoiToList(0, 440, KeyEvent.VK_CONTROL, KeyPressType.PRESS);
-			roi.addRoiToList(0, 250, wsKey);
+			*/
 			Thread.sleep(500);//delay for camera
 			while (true) {
 				img = display.convertFromFrameToIplImage(camera.getFrame());
