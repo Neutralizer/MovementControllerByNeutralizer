@@ -2,6 +2,7 @@ package bgSubtraction.main;
 
 import java.awt.AWTException;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -67,8 +68,6 @@ public class MainMovement implements Runnable {
 			IplImage img;
 			DisplayJFrame displayJ = new DisplayJFrame();
 			displayJ.add();
-			JFrame frame = displayJ.getTestFrame();
-			frame.setVisible(true);
 
 			ROIManipulator roi = new ROIManipulator(camera);
 			PropertiesOperations prop = new PropertiesOperations(roi);
@@ -106,6 +105,9 @@ public class MainMovement implements Runnable {
 					display.drawAllROI(roi.getListRoi(), bgResult);
 					display.showImage(display.getMovementFrame(), bgResult);
 
+					//jframe here
+					BufferedImage buff = display.convertMatToBufferedImage(bgResult);
+					displayJ.show(buff);
 				}
 			}
 		} catch (Exception e) {

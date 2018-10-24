@@ -7,7 +7,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -19,7 +21,10 @@ import org.bytedeco.javacpp.opencv_core.Scalar;
 import org.bytedeco.javacpp.opencv_imgproc;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
+import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
+
+import com.github.sarxos.webcam.Webcam;
 
 import bgSubtraction.detector.movementDetector.ROI;
 
@@ -33,6 +38,7 @@ public class Display {
 	private CanvasFrame frame;
 
 	private OpenCVFrameConverter.ToIplImage converter;
+	Java2DFrameConverter c = new Java2DFrameConverter();//for BufferedImage
 
 	public Display() {
 		converter = new OpenCVFrameConverter.ToIplImage();
@@ -51,6 +57,17 @@ public class Display {
 		return frame;
 	}
 
+	public ArrayList<String> getAvailableCameras() {
+		List<Webcam> list = Webcam.getWebcams();
+		ArrayList<String> result = new ArrayList<>();
+
+		for (int i = 0; i < list.size(); i++) {
+			Webcam w = list.get(i);
+			result.add(w.getName());
+		}
+		return result;
+	}
+
 	/**
 	 * Actual
 	 * 
@@ -61,6 +78,11 @@ public class Display {
 		Frame frame = converter.convert(mat);
 		canvasFrame.showImage(frame);
 	}
+	
+	public BufferedImage convertMatToBufferedImage(Mat mat) {
+		Frame frame = converter.convert(mat);
+		return c.convert(frame);
+	}
 
 	/**
 	 * When the title of the frame needs to be updated every frame
@@ -69,16 +91,16 @@ public class Display {
 	 * @param mat
 	 * @param title
 	 */
-	public void showImage(CanvasFrame canvasFrame, Mat mat, String title) {
-		Frame frame = converter.convert(mat);
-		canvasFrame.setTitle(title);
-		canvasFrame.showImage(frame);
-	}
+//	public void showImage(CanvasFrame canvasFrame, Mat mat, String title) {
+//		Frame frame = converter.convert(mat);
+//		canvasFrame.setTitle(title);
+//		canvasFrame.showImage(frame);
+//	}
 
-	public void showImage(CanvasFrame canvasFrame, IplImage img) {
-		Frame frame = converter.convert(img);
-		canvasFrame.showImage(frame);
-	}
+//	public void showImage(CanvasFrame canvasFrame, IplImage img) {
+//		Frame frame = converter.convert(img);
+//		canvasFrame.showImage(frame);
+//	}
 
 	public IplImage convertFromFrameToIplImage(Frame frame) {
 		return converter.convert(frame);
