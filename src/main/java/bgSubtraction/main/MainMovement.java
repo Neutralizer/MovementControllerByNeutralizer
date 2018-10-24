@@ -63,11 +63,6 @@ public class MainMovement implements Runnable {
 		try {
 			IplImage img;
 
-			CanvasFrame frameMovement = display.createNewFrame("Movement",
-					new java.awt.Point(0, 0));
-			frameMovement.setSize(camera.getCameraWidth(), camera.getCameraHeight());
-			// frameMovement.setResizable(false);
-			
 			ROIManipulator roi = new ROIManipulator(camera);
 			PropertiesOperations prop = new PropertiesOperations(roi);
 			
@@ -102,7 +97,7 @@ public class MainMovement implements Runnable {
 					roi.executeAllROI(bgResult);
 
 					display.drawAllROI(roi.getListRoi(), bgResult);
-					display.showImage(frameMovement, bgResult);
+					display.showImage(display.getMovementFrame(), bgResult);
 
 				}
 			}

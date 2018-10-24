@@ -16,7 +16,7 @@ public class TestJFrameGetPoint {
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 
 	    frame.setLayout(new BorderLayout());
-	    frame.setSize(300,200);
+	    frame.setSize(640,480);
 	 
 	    final JTextField text = new JTextField();;
 	    frame.add(text,BorderLayout.SOUTH);

@@ -25,15 +25,24 @@ import bgSubtraction.detector.movementDetector.ROI;
  *
  */
 public class Display {
+	
+	private CanvasFrame frame;
 
 	private OpenCVFrameConverter.ToIplImage converter;
 
 	public Display() {
 		converter = new OpenCVFrameConverter.ToIplImage();
+		frame= createNewFrame("Movement",
+				new java.awt.Point(0, 0));
+		frame.setSize(640, 480);
+	}
+	
+	public CanvasFrame getMovementFrame() {
+		return this.frame;
 	}
 
 	public CanvasFrame createNewFrame(String name, java.awt.Point location) {
-		CanvasFrame frame = new CanvasFrame(name);
+		frame = new CanvasFrame(name);
 		frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(location);
 		return frame;
