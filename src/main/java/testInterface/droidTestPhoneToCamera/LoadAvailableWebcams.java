@@ -23,7 +23,6 @@ public class LoadAvailableWebcams{
 		for (int i = 0; i < list.size(); i++) {
 			Webcam w = list.get(i);
 			System.out.println(w.getName());
-
 		}
 
 	}

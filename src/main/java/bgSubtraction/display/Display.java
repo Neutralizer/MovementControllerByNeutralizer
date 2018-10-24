@@ -29,43 +29,17 @@ import bgSubtraction.detector.movementDetector.ROI;
  *
  */
 public class Display {
-	
+
 	private CanvasFrame frame;
-	private JFrame jFrame = new JFrame();
 
 	private OpenCVFrameConverter.ToIplImage converter;
 
 	public Display() {
 		converter = new OpenCVFrameConverter.ToIplImage();
-		frame= createNewFrame("Movement",
-				new java.awt.Point(0, 0));
+		frame = createNewFrame("Movement", new java.awt.Point(0, 0));
 		frame.setSize(640, 480);
 	}
-	
-	//test
-	public JFrame getTestFrame() {
-		return this.jFrame;
-	}
-	
-	public void add() {
-		jFrame.setSize(600, 400);
-		final JTextField text = new JTextField();
-		jFrame.add(text,BorderLayout.SOUTH);
-		jFrame.addMouseListener(new MouseListener() {
-	        public void mousePressed(MouseEvent me) { }
-	        public void mouseReleased(MouseEvent me) { }
-	        public void mouseEntered(MouseEvent me) { }
-	        public void mouseExited(MouseEvent me) { }
-	        public void mouseClicked(MouseEvent me) { 
-	          int x = me.getX();
-	          int y = me.getY();
-	          text.setText("X:" + x + " Y:" + y); 
-	        }
-	    });
-	}
-	
-	
-	
+
 	public CanvasFrame getMovementFrame() {
 		return this.frame;
 	}
@@ -90,6 +64,7 @@ public class Display {
 
 	/**
 	 * When the title of the frame needs to be updated every frame
+	 * 
 	 * @param canvasFrame
 	 * @param mat
 	 * @param title

@@ -13,6 +13,7 @@ import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.MovementDetector;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.display.Display;
+import bgSubtraction.display.DisplayJFrame;
 import bgSubtraction.keyboardControl.KeyController;
 import bgSubtraction.keyboardControl.KeyPressType;
 import bgSubtraction.keyboardControl.SpecialKey;
@@ -64,9 +65,9 @@ public class MainMovement implements Runnable {
 	public void run() {
 		try {
 			IplImage img;
-			
-			display.add();
-			JFrame frame = display.getTestFrame();
+			DisplayJFrame displayJ = new DisplayJFrame();
+			displayJ.add();
+			JFrame frame = displayJ.getTestFrame();
 			frame.setVisible(true);
 
 			ROIManipulator roi = new ROIManipulator(camera);
