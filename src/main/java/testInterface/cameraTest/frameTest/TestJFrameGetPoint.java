@@ -18,7 +18,7 @@ public class TestJFrameGetPoint {
 	    frame.setLayout(new BorderLayout());
 	    frame.setSize(640,480);
 	 
-	    final JTextField text = new JTextField();;
+	    final JTextField text = new JTextField();
 	    frame.add(text,BorderLayout.SOUTH);
 	 
 	    frame.addMouseListener(new MouseListener() {

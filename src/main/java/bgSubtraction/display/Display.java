@@ -2,11 +2,15 @@ package bgSubtraction.display;
 
 import static org.bytedeco.javacpp.opencv_core.cvFlip;
 
+import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_core.Mat;
@@ -27,6 +31,7 @@ import bgSubtraction.detector.movementDetector.ROI;
 public class Display {
 	
 	private CanvasFrame frame;
+	private JFrame jFrame = new JFrame();
 
 	private OpenCVFrameConverter.ToIplImage converter;
 
@@ -36,6 +41,30 @@ public class Display {
 				new java.awt.Point(0, 0));
 		frame.setSize(640, 480);
 	}
+	
+	//test
+	public JFrame getTestFrame() {
+		return this.jFrame;
+	}
+	
+	public void add() {
+		jFrame.setSize(600, 400);
+		final JTextField text = new JTextField();
+		jFrame.add(text,BorderLayout.SOUTH);
+		jFrame.addMouseListener(new MouseListener() {
+	        public void mousePressed(MouseEvent me) { }
+	        public void mouseReleased(MouseEvent me) { }
+	        public void mouseEntered(MouseEvent me) { }
+	        public void mouseExited(MouseEvent me) { }
+	        public void mouseClicked(MouseEvent me) { 
+	          int x = me.getX();
+	          int y = me.getY();
+	          text.setText("X:" + x + " Y:" + y); 
+	        }
+	    });
+	}
+	
+	
 	
 	public CanvasFrame getMovementFrame() {
 		return this.frame;

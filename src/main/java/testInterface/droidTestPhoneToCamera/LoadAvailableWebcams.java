@@ -11,7 +11,7 @@ import com.github.sarxos.webcam.Webcam;
  * @author Tsvetan "Neutralizer" Trifonov
  *
  */
-public class Droid {
+public class LoadAvailableWebcams{
 
 	private int cameraNum;
 

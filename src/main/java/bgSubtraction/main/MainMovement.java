@@ -3,6 +3,8 @@ package bgSubtraction.main;
 import java.awt.AWTException;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JFrame;
+
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacv.CanvasFrame;
@@ -62,6 +64,10 @@ public class MainMovement implements Runnable {
 	public void run() {
 		try {
 			IplImage img;
+			
+			display.add();
+			JFrame frame = display.getTestFrame();
+			frame.setVisible(true);
 
 			ROIManipulator roi = new ROIManipulator(camera);
 			PropertiesOperations prop = new PropertiesOperations(roi);
