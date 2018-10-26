@@ -41,11 +41,7 @@ public class PropertiesOperations {
 
 			prop.load(input);
 
-			Enumeration<?> e = prop.propertyNames();
-			while (e.hasMoreElements()) {
-				String key = (String) e.nextElement();
-				loadEachROI(key);
-			}
+			loopThroughEachProp();
 			// if 6 - w(custom size); if 4 - regular key; if 3 - special
 
 		} catch (IOException ex) {
@@ -58,6 +54,14 @@ public class PropertiesOperations {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+
+	private void loopThroughEachProp() {
+		Enumeration<?> e = prop.propertyNames();
+		while (e.hasMoreElements()) {
+			String key = (String) e.nextElement();
+			loadEachROI(key);
 		}
 	}
 

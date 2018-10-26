@@ -57,13 +57,14 @@ public class Display {
 		return frame;
 	}
 
-	public ArrayList<String> getAvailableCameras() {
+	//TODO will not be used for now from here
+	public String[] getAvailableCameras() {
 		List<Webcam> list = Webcam.getWebcams();
-		ArrayList<String> result = new ArrayList<>();
+		String[] result = new String[list.size()];
 
 		for (int i = 0; i < list.size(); i++) {
 			Webcam w = list.get(i);
-			result.add(w.getName());
+			result[i] = w.getName();
 		}
 		return result;
 	}
