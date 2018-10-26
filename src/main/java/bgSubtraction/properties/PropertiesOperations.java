@@ -2,6 +2,7 @@ package bgSubtraction.properties;
 
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,9 +27,41 @@ public class PropertiesOperations {
 	// cl.createPropFile("config.properties");
 	// }
 
+	public PropertiesOperations() {
+		
+	}
+	
 	public PropertiesOperations(ROIManipulator roiObj) {
 		super();
 		this.roiObj = roiObj;
+	}
+	
+	//TODO load only ; load prop and get their strings
+	public String[][] loadPropertiesFileStringsOnly(String filename) {
+		try {
+			input = new FileInputStream("c:\\MovementController\\" + filename);
+			if (input == null) {
+				System.err.println("Error - unable to find " + filename);
+				throw new FileNotFoundException("Error - unable to find " + filename);
+			}
+
+			prop.load(input);
+
+			String[][] propResultAsString = getPropResultAsString();
+			return propResultAsString;
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
 	}
 
 	public void loadPropertiesFile(String filename) {
@@ -56,12 +89,12 @@ public class PropertiesOperations {
 			}
 		}
 	}
-
+	
 	private void loopThroughEachProp() {
 		Enumeration<?> e = prop.propertyNames();
 		while (e.hasMoreElements()) {
 			String key = (String) e.nextElement();
-			loadEachROI(key);
+			loadEachSquare(key);
 		}
 	}
 
@@ -70,7 +103,7 @@ public class PropertiesOperations {
 	 * 
 	 * @param propertyKey
 	 */
-	private void loadEachROI(String propertyKey) {
+	private void loadEachSquare(String propertyKey) {
 		String[] result = getPropertyValues(propertyKey);
 		loadROIToListFromProperties(result);
 	}
@@ -80,6 +113,8 @@ public class PropertiesOperations {
 		return result;
 	}
 
+	// TODO change here to be able to be called when the user is ready
+	// you must be able to load the prop without camera and roi objects
 	// TODO change here to percentages
 	private void loadROIToListFromProperties(String[] result) {
 		int resultInt[] = convertToInt(result);
@@ -157,5 +192,38 @@ public class PropertiesOperations {
 			KeyPressType type) {
 		int[] f = new int[] { width, height, sizeWidth, sizeHeight, keyEvent, type.ordinal() };
 		prop.setProperty(key, f[0] + "," + f[1] + "," + f[2] + "," + f[3] + "," + f[4] + "," + f[5] + "");
+	}
+	
+	
+	/**
+	 * gets props as strings for displaying 
+	 * @return
+	 */
+	private String[][] getPropResultAsString() {
+		return loopThroughEachPropStrings();
+	}
+	
+	private String[][] loopThroughEachPropStrings() {
+		Enumeration<?> e = prop.propertyNames();
+		String[][] propStrings = new String[100][100];
+		int i = 0;
+		while (e.hasMoreElements()) {
+			String key = (String) e.nextElement();
+			propStrings[i] = loadEachSquareStrings(key);
+			i++;
+		}//TODO remove 100 100
+		return propStrings;
+	}
+
+	/**
+	 * saves every roi from prop inside the list
+	 * 
+	 * @param propertyKey
+	 * @return 
+	 */
+	private String[] loadEachSquareStrings(String propertyKey) {
+		String[] result = getPropertyValues(propertyKey);
+		return result;
+		//add to list and return
 	}
 }

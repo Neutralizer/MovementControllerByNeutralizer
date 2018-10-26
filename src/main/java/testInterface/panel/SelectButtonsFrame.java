@@ -28,7 +28,6 @@ public class SelectButtonsFrame {
 	Camera camera;
 	ROIManipulator roi;
 	PropertiesOperations prop;
-	private String[] availableCameras;
 	static String[] letters = { "Q", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K",
 			"L", "Z", "X", "C", "V", "B", "N", "M" };
 	// TODO array is from available buttons loaded from prop preset
@@ -40,7 +39,7 @@ public class SelectButtonsFrame {
 	static JButton buttonLoadPreset = new JButton("Load Preset");
 	static JButton selectSquareLocation = new JButton("Select Square Location");
 
-	// TODO load available camera names - in constructor
+	//loads available cameras
 	private JComboBox<String> comboBoxCamera;
 	final static JComboBox<String> comboBoxloadPresets = new JComboBox<String>(choose);
 
@@ -61,20 +60,21 @@ public class SelectButtonsFrame {
 		comboBoxCamera = new JComboBox<String>(cameras);
 	}
 
+	//TODO this currently starts the camera
 	public void initializePropertiesAfterCameraIsLoaded() {
 		Camera camera = new Camera(cameraNum);
 		roi = new ROIManipulator(camera);
 		prop = new PropertiesOperations(roi);
+		//TODO trigger with button press - choose filename from combobox
 		prop.loadPropertiesFile("config.properties");// TODO prop
 	}
 
+	//TODO currently may be creating 2 objects (in prop - roi, camera) - may cause problems  
 	public static void main(String[] args) throws AWTException {
 		SelectButtonsFrame obj = new SelectButtonsFrame();
 		obj.initializeCamera();
 		obj.initializeFrame();
 		obj.start();
-		// initialize camera from buttonstartcamera, but will it be the correct one -
-		// yes for now
 
 		obj.initializePropertiesAfterCameraIsLoaded();
 
@@ -118,22 +118,25 @@ public class SelectButtonsFrame {
 
 		frame.add(panel, BorderLayout.WEST);
 
-		// TODO starts the selected camera
+		// TODO start the camera from the dropdown
+		//TODO camera starts without asking
 		buttonStartCamera.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				String s1 = comboBoxKey1.getSelectedItem().toString();
-				// TODO select camera num selected and pass it to prop-getlastindexInt -movetometod
-				cameraNum = comboBoxKey1.getSelectedItem().toString()
-						.codePointAt(comboBoxKey1.getSelectedItem().toString().length() - 1);
-
-				if (s1.equals("Active")) {
-					boolean temp = true;
-				}
+//				String s1 = comboBoxKey1.getSelectedItem().toString();
+//				System.out.println(s1);
+//				// TODO select camera num selected and pass it to prop-getlastindexInt -movetometod
+//				cameraNum = comboBoxKey1.getSelectedItem().toString()
+//						.codePointAt(comboBoxKey1.getSelectedItem().toString().length() - 1);
+//
+//				if (s1.equals("Active")) {
+//					boolean temp = true;
+//				}
 
 			}
 		});
 
+		//TODO add preset without giving it camera
 		buttonLoadPreset.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
