@@ -29,7 +29,7 @@ public class UtilitiesPanel {
 			return list;
 		}
 
-		//TODO remove sysout
+		// TODO remove sysout
 		for (String file : list) {
 			String temp = new StringBuffer(FILE_DIR).append(File.separator).append(file).toString();
 			System.out.println("file : " + temp);
@@ -60,6 +60,27 @@ public class UtilitiesPanel {
 			result[i] = cameraName.substring(0, cameraName.length() - 2);
 		}
 		return result;
+	}
+
+	/**
+	 * Camera num corresponds to the order of the camera name in the cameras
+	 * array<br>
+	 * Ex: camera num 0 is at the 0 position in the array
+	 * @param cameras 
+	 * 
+	 * @param cameraName
+	 * @return
+	 */
+	protected int getCameraNum(String[] cameras, String cameraName) {
+		if (cameras.length == 0) {
+			throw new IllegalStateException("No connected camera");
+		}
+		for (int i = 0; i < cameras.length; i++) {
+			if (cameraName.equals(cameras[i])) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }
