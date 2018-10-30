@@ -154,8 +154,6 @@ public class PropertiesOperations {
 			output = new FileOutputStream(folderPath + filename);
 
 			addRoiToProperty("F", 600, 0, KeyEvent.VK_F, KeyPressType.PRESS);
-			// addRoiToProperty("W", 100, 440, 450, 40, KeyEvent.VK_W,
-			// KeyPressType.CONSTANT);
 			addRoiToProperty("E", 520, 0, KeyEvent.VK_E, KeyPressType.PRESS);
 
 			prop.store(output, null);

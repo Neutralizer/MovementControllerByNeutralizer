@@ -4,6 +4,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -19,6 +21,8 @@ import bgSubtraction.properties.PropertiesOperations;
 public class MainPanel extends JFrame {
 
 	UtilitiesPanel util = new UtilitiesPanel();
+	Map<String,Integer> cameras = new TreeMap<String, Integer>();
+	String[] cameraNames;
 	int cameraNum;
 	// private JFrame frame;
 	Camera camera;
@@ -54,22 +58,25 @@ public class MainPanel extends JFrame {
 
 	private void loadPresets() {
 		String[] presets = util.listFile(UtilitiesPanel.FILE_DIR, UtilitiesPanel.FILE_TEXT_EXT);
+//		presets = removePresetExt(presets);
 		comboBoxPresets = new JComboBox<String>(presets);
 
 	}
 
+//	private String[] removePresetExt(String[] presets) {
+//		for (int i = 0; i < presets.length; i++) {
+//			presets[i] = presets[i].substring(0, presets[i].length() - 2);
+//		}
+//		return presets; 
+//	}
+
 	public void loadCameras() {
-		String[] cameras = util.getAvailableCameras();
-		cameras = removeCameraNumbers(cameras);
-		comboBoxCamera = new JComboBox<String>(cameras);
+		cameras = util.populateCameraMap();
+		String[] camerasForDisplaying = util.getAvailableCameras();
+//		String[] camerasForDisplaying = removeCameraNumbers(cameraNames);//TODO move to util
+		comboBoxCamera = new JComboBox<String>(camerasForDisplaying);
 	}
 
-	private String[] removeCameraNumbers(String[] cameras) {
-		for (int i = 0; i < cameras.length; i++) {
-			cameras[i] = cameras[i].substring(0, cameras[i].length() - 2);
-		}
-		return cameras;
-	}
 
 	private void createView() {
 		JPanel panelMain = new JPanel();
@@ -112,10 +119,12 @@ public class MainPanel extends JFrame {
 	}
 
 	private int getCameraNum() {
-		String cameraName = comboBoxCamera.getSelectedItem().toString();
-		char camNum = cameraName.charAt(cameraName.length() - 1);
-		int cameraNum = Integer.valueOf(String.valueOf(camNum));
-		return cameraNum;
+		return cameras.get(comboBoxCamera.getSelectedItem().toString());
+		
+//		String cameraName = comboBoxCamera.getSelectedItem().toString();
+//		char camNum = cameraName.charAt(cameraName.length() - 1);
+//		int cameraNum = Integer.valueOf(String.valueOf(camNum));
+//		return cameraNum;
 	}
 
 }

@@ -39,7 +39,7 @@ public class SelectButtonsFrame {
 	static JButton buttonLoadPreset = new JButton("Load Preset");
 	static JButton selectSquareLocation = new JButton("Select Square Location");
 
-	//loads available cameras
+	//loads available cameraNames
 	private JComboBox<String> comboBoxCamera;
 	final static JComboBox<String> comboBoxloadPresets = new JComboBox<String>(availablePresets);
 

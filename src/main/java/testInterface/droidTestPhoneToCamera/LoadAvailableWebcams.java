@@ -7,7 +7,7 @@ import org.bytedeco.javacv.FrameGrabber.Exception;
 import com.github.sarxos.webcam.Webcam;
 
 /**
- * Displays all cameras attached
+ * Displays all cameraNames attached
  * @author Tsvetan "Neutralizer" Trifonov
  *
  */
