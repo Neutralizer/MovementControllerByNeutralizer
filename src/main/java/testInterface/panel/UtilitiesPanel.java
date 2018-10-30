@@ -11,9 +11,9 @@ public class UtilitiesPanel {
 	public static final String FILE_DIR = "c:\\MovementController\\";
 	public static final String FILE_TEXT_EXT = ".properties";
 
-	public String[] listFile(String folder, String ext) {
+	public String[] listFile(String folder) {
 
-		GenericExtFilter filter = new GenericExtFilter(ext);
+		GenericExtFilter filter = new GenericExtFilter(FILE_TEXT_EXT);
 
 		File dir = new File(folder);
 
@@ -25,7 +25,7 @@ public class UtilitiesPanel {
 		String[] list = dir.list(filter);
 
 		if (list.length == 0) {
-			System.out.println("no files end with : " + ext);
+			System.out.println("no files end with : " + FILE_TEXT_EXT);
 			return list;
 		}
 
