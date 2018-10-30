@@ -64,9 +64,9 @@ public class PropertiesOperations {
 		return null;
 	}
 
-	public void loadPropertiesFile(String filename) {
+	public void loadPropertiesFile(String folderPath, String filename) {
 		try {
-			input = new FileInputStream("c:\\MovementController\\" + filename);
+			input = new FileInputStream(folderPath + filename);
 			if (input == null) {
 				System.err.println("Error - unable to find " + filename);
 				return;

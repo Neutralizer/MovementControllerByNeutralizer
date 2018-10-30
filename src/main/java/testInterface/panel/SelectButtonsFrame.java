@@ -31,9 +31,9 @@ public class SelectButtonsFrame {
 	static String[] letters = { "Q", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K",
 			"L", "Z", "X", "C", "V", "B", "N", "M" };
 	// TODO array is from available buttons loaded from prop preset
-	static String[] choose = { "Active", "Disabled" };
+	static String[] availablePresets = { "Active", "Disabled" };
 
-	final static JComboBox<String> comboBoxKey1 = new JComboBox<String>(letters);
+	final static JComboBox<String> comboBoxLetters = new JComboBox<String>(letters);
 
 	static JButton buttonStartCamera = new JButton("Start Camera");
 	static JButton buttonLoadPreset = new JButton("Load Preset");
@@ -41,7 +41,7 @@ public class SelectButtonsFrame {
 
 	//loads available cameras
 	private JComboBox<String> comboBoxCamera;
-	final static JComboBox<String> comboBoxloadPresets = new JComboBox<String>(choose);
+	final static JComboBox<String> comboBoxloadPresets = new JComboBox<String>(availablePresets);
 
 	// final static JLabel label = new JLabel("Choose potions!");
 
@@ -65,8 +65,8 @@ public class SelectButtonsFrame {
 		Camera camera = new Camera(cameraNum);
 		roi = new ROIManipulator(camera);
 		prop = new PropertiesOperations(roi);
-		//TODO trigger with button press - choose filename from combobox
-		prop.loadPropertiesFile("config.properties");// TODO prop
+		//TODO trigger with button press - availablePresets filename from combobox
+		prop.loadPropertiesFile("c:\\MovementController\\","config.properties");// TODO prop
 	}
 
 	//TODO currently may be creating 2 objects (in prop - roi, camera) - may cause problems  
@@ -74,9 +74,7 @@ public class SelectButtonsFrame {
 		SelectButtonsFrame obj = new SelectButtonsFrame();
 		obj.initializeCamera();
 		obj.initializeFrame();
-		obj.start();
-
-		obj.initializePropertiesAfterCameraIsLoaded();
+		obj.startOld();
 
 	}
 
@@ -87,31 +85,31 @@ public class SelectButtonsFrame {
 		throw new IllegalStateException("Camera not initialized");
 	}
 
-	public void start() throws AWTException {
+	public void startOld() throws AWTException {
 
 		JPanel panel = new JPanel(new GridBagLayout());
 		// TODO add constraints dynamically
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.insets = new Insets(10, 10, 10, 10);
+		GridBagConstraints c = new GridBagConstraints();
+		c.insets = new Insets(10, 10, 10, 10);
 
-		constraints.gridx = 0;
-		constraints.gridy = 1;
-		panel.add(comboBoxKey1, constraints);
+		c.gridx = 0;
+		c.gridy = 1;
+		panel.add(comboBoxLetters, c);
 
-		constraints.gridx = 0;
-		constraints.gridy = 2;
+		c.gridx = 0;
+		c.gridy = 2;
 		// panel.add(comboBox2, constraints);
 
-		constraints.gridx = 0;
-		constraints.gridy = 3;
+		c.gridx = 0;
+		c.gridy = 3;
 		// panel.add(comboBox3, constraints);
 
-		constraints.gridx = 0;
-		constraints.gridy = 4;
+		c.gridx = 0;
+		c.gridy = 4;
 		// panel.add(comboBox4, constraints);
 
-		constraints.gridx = 0;
-		constraints.gridy = 5;
+		c.gridx = 0;
+		c.gridy = 5;
 		panel.add(comboBoxCamera);
 		// panel.add(comboBox5, constraints);
 		panel.add(buttonStartCamera);
@@ -123,11 +121,12 @@ public class SelectButtonsFrame {
 		buttonStartCamera.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-//				String s1 = comboBoxKey1.getSelectedItem().toString();
-//				System.out.println(s1);
+				
+				initializePropertiesAfterCameraIsLoaded();
+//				String s1 = comboBoxLetters.getSelectedItem().toString();
 //				// TODO select camera num selected and pass it to prop-getlastindexInt -movetometod
-//				cameraNum = comboBoxKey1.getSelectedItem().toString()
-//						.codePointAt(comboBoxKey1.getSelectedItem().toString().length() - 1);
+//				cameraNum = comboBoxLetters.getSelectedItem().toString()
+//						.codePointAt(comboBoxLetters.getSelectedItem().toString().length() - 1);
 //
 //				if (s1.equals("Active")) {
 //					boolean temp = true;

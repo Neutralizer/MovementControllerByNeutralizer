@@ -75,7 +75,7 @@ public class MainMovement implements Runnable {
 			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
 			roi.addRoiToList(0.16, 0.92, 0.70, 0.08, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
 			roi.addRoiToList(0, 250, wsKey);
-			prop.loadPropertiesFile("config.properties");
+			prop.loadPropertiesFile("c:\\MovementController\\","config.properties");
 
 			/**
 			roi.addRoiToList(100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
