@@ -61,16 +61,8 @@ public class MainPanel extends JFrame {
 
 	public void loadCameras() {
 		cameras = util.getAvailableCameras();
-//		cameras = removeCameraNumbers(cameras); 
 		comboBoxCamera = new JComboBox<String>(cameras);
 	}
-
-//	private String[] removeCameraNumbers(String[] cameras) {
-//		for (int i = 0; i < cameras.length; i++) {
-//			cameras[i] = cameras[i].substring(0, cameras[i].length() - 2);
-//		}
-//		return cameras;
-//	}
 
 	private void createView() {
 		JPanel panelMain = new JPanel();
