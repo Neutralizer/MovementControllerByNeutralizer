@@ -36,6 +36,7 @@ public class PropertiesOperations {
 		this.roiObj = roiObj;
 	}
 	
+	@Deprecated
 	//TODO load only ; load prop and get their strings
 	public String[][] loadPropertiesFileStringsOnly(String filename) {
 		try {
@@ -147,10 +148,10 @@ public class PropertiesOperations {
 		return cameraNum;
 	}
 
-	public void createPropFile(String filename) {
+	public void createPropFile(String folderPath,String filename) {
 		try {
 
-			output = new FileOutputStream("c:\\MovementController\\" + filename);
+			output = new FileOutputStream(folderPath + filename);
 
 			addRoiToProperty("F", 600, 0, KeyEvent.VK_F, KeyPressType.PRESS);
 			// addRoiToProperty("W", 100, 440, 450, 40, KeyEvent.VK_W,
@@ -161,7 +162,7 @@ public class PropertiesOperations {
 
 		} catch (IOException io) {
 			io.printStackTrace();
-		} finally {
+		} finally {  
 			if (output != null) {
 				try {
 					output.close();
@@ -194,7 +195,7 @@ public class PropertiesOperations {
 		prop.setProperty(key, f[0] + "," + f[1] + "," + f[2] + "," + f[3] + "," + f[4] + "," + f[5] + "");
 	}
 	
-	
+	@Deprecated
 	/**
 	 * gets props as strings for displaying 
 	 * @return
@@ -203,6 +204,7 @@ public class PropertiesOperations {
 		return loopThroughEachPropStrings();
 	}
 	
+	@Deprecated
 	private String[][] loopThroughEachPropStrings() {
 		Enumeration<?> e = prop.propertyNames();
 		String[][] propStrings = new String[100][100];
@@ -215,6 +217,7 @@ public class PropertiesOperations {
 		return propStrings;
 	}
 
+	@Deprecated
 	/**
 	 * saves every roi from prop inside the list
 	 * 
