@@ -60,7 +60,7 @@ public class MainPanel extends JFrame {
 
 	public void loadCameras() {
 		String[] cameras = util.getAvailableCameras();
-		cameras = removeCameraNumbers(cameras);
+		cameras = removeCameraNumbers(cameras); 
 		comboBoxCamera = new JComboBox<String>(cameras);
 	}
 
