@@ -114,7 +114,7 @@ public class MainPanel extends JFrame {
 
 	/**
 	 * Camera num corresponds to the order of the camera name in the cameras array<br>
-	 * Ex: camera num 0 is at the 0 position in the array
+	 * Ex: camera num 0 is at the 0 position in the array 
 	 * @param cameraName
 	 * @return
 	 */
