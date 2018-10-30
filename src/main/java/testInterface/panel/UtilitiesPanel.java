@@ -56,7 +56,8 @@ public class UtilitiesPanel {
 
 		for (int i = 0; i < list.size(); i++) {
 			Webcam w = list.get(i);
-			result[i] = w.getName();
+			String cameraName = w.getName();
+			result[i] = cameraName.substring(0, cameraName.length() - 2);
 		}
 		return result;
 	}

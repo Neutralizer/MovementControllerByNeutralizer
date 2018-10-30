@@ -19,6 +19,7 @@ import bgSubtraction.properties.PropertiesOperations;
 public class MainPanel extends JFrame {
 
 	UtilitiesPanel util = new UtilitiesPanel();
+	String[] cameras;//TODO move to util maybe
 	int cameraNum;
 	// private JFrame frame;
 	Camera camera;
@@ -59,17 +60,17 @@ public class MainPanel extends JFrame {
 	}
 
 	public void loadCameras() {
-		String[] cameras = util.getAvailableCameras();
-		cameras = removeCameraNumbers(cameras); 
+		cameras = util.getAvailableCameras();
+//		cameras = removeCameraNumbers(cameras); 
 		comboBoxCamera = new JComboBox<String>(cameras);
 	}
 
-	private String[] removeCameraNumbers(String[] cameras) {
-		for (int i = 0; i < cameras.length; i++) {
-			cameras[i] = cameras[i].substring(0, cameras[i].length() - 2);
-		}
-		return cameras;
-	}
+//	private String[] removeCameraNumbers(String[] cameras) {
+//		for (int i = 0; i < cameras.length; i++) {
+//			cameras[i] = cameras[i].substring(0, cameras[i].length() - 2);
+//		}
+//		return cameras;
+//	}
 
 	private void createView() {
 		JPanel panelMain = new JPanel();
@@ -104,18 +105,29 @@ public class MainPanel extends JFrame {
 	}
 
 	public void initializePropertiesAfterCameraIsLoaded() {
-		int cameraNum = getCameraNum();
+		int cameraNum = getCameraNum(comboBoxCamera.getSelectedItem().toString());
 		Camera camera = new Camera(cameraNum);
 		roi = new ROIManipulator(camera);
 		prop = new PropertiesOperations(roi);
 		prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, comboBoxPresets.getSelectedItem().toString());
 	}
 
-	private int getCameraNum() {
-		String cameraName = comboBoxCamera.getSelectedItem().toString();
-		char camNum = cameraName.charAt(cameraName.length() - 1);
-		int cameraNum = Integer.valueOf(String.valueOf(camNum));
-		return cameraNum;
+	/**
+	 * Camera num corresponds to the order of the camera name in the cameras array<br>
+	 * Ex: camera num 0 is at the 0 position in the array
+	 * @param cameraName
+	 * @return
+	 */
+	private int getCameraNum(String cameraName) {
+		if(cameras.length == 0) {
+			throw new IllegalStateException("No connected camera");
+		}
+		for (int i = 0; i < cameras.length; i++) {
+			if(cameraName.equals(cameras[i])) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }
