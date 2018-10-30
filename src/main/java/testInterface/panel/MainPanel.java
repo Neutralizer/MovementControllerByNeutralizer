@@ -20,7 +20,6 @@ public class MainPanel extends JFrame {
 
 	UtilitiesPanel util = new UtilitiesPanel();
 	private String[] cameras;
-//	int cameraNum;
 	// private JFrame frame;
 	Camera camera;
 	ROIManipulator roi;
