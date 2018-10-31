@@ -1,13 +1,11 @@
 package bgSubtraction.detector.movementDetector;
 
 import java.awt.Point;
-import java.util.ArrayList;
 
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.Rect;
 
 import bgSubtraction.keyboardControl.Key;
-import bgSubtraction.keyboardControl.KeyPressType;
 
 /**
  * 
@@ -24,7 +22,6 @@ public class ROI {
 	private Rect roi;
 	private Key key;
 	private MovementDetector movementDetector = new MovementDetector();
-	private static ArrayList<ROI> listRoi = new ArrayList<>();
 	
 	public ROI(Point coordinate, Key key) {
 		percentageToDetect = 20;//normal detection //10 for night mode ; 50 for normal mode
