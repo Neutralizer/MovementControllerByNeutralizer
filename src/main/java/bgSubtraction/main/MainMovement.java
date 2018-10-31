@@ -19,6 +19,7 @@ import bgSubtraction.keyboardControl.KeyController;
 import bgSubtraction.keyboardControl.KeyPressType;
 import bgSubtraction.keyboardControl.SpecialKey;
 import bgSubtraction.properties.PropertiesOperations;
+import testInterface.panel.UtilitiesPanel;
 
 /**
  * 
@@ -30,12 +31,14 @@ public class MainMovement implements Runnable {
 	private Display display;
 	private MovementDetector movementDetector;
 	private KeyController keyController;
+	private static String selectedPropertiesFile;//TODO make it not static
 
-	public static void main(String[] args) throws AWTException {
+	public static void startAlgorithm(int cameraNum, String selectedPropFile) throws AWTException {
 		Camera camera = new Camera(0);
 		Display display = new Display();
 		MovementDetector movementDetector = new MovementDetector();
 		KeyController keyController = new KeyController();
+		selectedPropertiesFile = selectedPropFile;
 		MainMovement movementDetectorMain = new MainMovement(camera, display,
 				movementDetector, keyController);
 		Thread th = new Thread(movementDetectorMain);
@@ -75,7 +78,7 @@ public class MainMovement implements Runnable {
 			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
 			roi.addRoiToList(0.16, 0.92, 0.70, 0.08, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
 			roi.addRoiToList(0, 250, wsKey);
-			prop.loadPropertiesFile("c:\\MovementController\\","config.properties");
+			prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR,selectedPropertiesFile);//"config.properties"
 
 			/**
 			roi.addRoiToList(100, 440, 450, 40, KeyEvent.VK_W, KeyPressType.CONSTANT);//must be 1st
@@ -88,7 +91,7 @@ public class MainMovement implements Runnable {
 //			roi.addRoiToList(0.20, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 //			roi.addRoiToList(0, 440, KeyEvent.VK_CONTROL, KeyPressType.PRESS);
 			*/
-			Thread.sleep(500);//delay for camera
+//			Thread.sleep(500);//delay for camera
 			while (true) {
 				img = display.convertFromFrameToIplImage(camera.getFrame());
 				if (img != null) {

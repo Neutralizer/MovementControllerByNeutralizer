@@ -1,5 +1,6 @@
 package testInterface.panel;
 
+import java.awt.AWTException;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
+import bgSubtraction.main.MainMovement;
 import bgSubtraction.properties.PropertiesOperations;
 
 @SuppressWarnings("serial")
@@ -88,11 +90,25 @@ public class MainPanel extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
-				initializePropertiesAfterCameraIsLoaded();
+//				initializePropertiesAfterCameraIsLoaded();
+				startAlgorithm();
 
 			}
+
 		});
 
+	}
+	
+	private void startAlgorithm() {
+		int cameraNum = util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString());
+		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
+		try {
+			MainMovement.startAlgorithm(cameraNum, selectedPropFile);
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void initializePropertiesAfterCameraIsLoaded() {
