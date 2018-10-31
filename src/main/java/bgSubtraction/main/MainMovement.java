@@ -69,8 +69,8 @@ public class MainMovement implements Runnable {
 	public void run() {
 		try {
 			IplImage img;
-			DisplayJFrame displayJ = new DisplayJFrame();
-			displayJ.add();
+//			DisplayJFrame displayJ = new DisplayJFrame();
+//			displayJ.add();
 
 			ROIManipulator roi = new ROIManipulator(camera);
 			PropertiesOperations prop = new PropertiesOperations(roi);
@@ -91,7 +91,7 @@ public class MainMovement implements Runnable {
 //			roi.addRoiToList(0.20, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 //			roi.addRoiToList(0, 440, KeyEvent.VK_CONTROL, KeyPressType.PRESS);
 			*/
-//			Thread.sleep(500);//delay for camera
+			Thread.sleep(500);//delay for camera
 			while (true) {
 				img = display.convertFromFrameToIplImage(camera.getFrame());
 				if (img != null) {
@@ -109,8 +109,8 @@ public class MainMovement implements Runnable {
 					display.showImage(display.getMovementFrame(), bgResult);
 
 					//jframe here
-					BufferedImage buff = display.convertMatToBufferedImage(bgResult);
-					displayJ.show(buff);
+//					BufferedImage buff = display.convertMatToBufferedImage(bgResult);
+//					displayJ.show(buff);
 				}
 			}
 		} catch (Exception e) {
