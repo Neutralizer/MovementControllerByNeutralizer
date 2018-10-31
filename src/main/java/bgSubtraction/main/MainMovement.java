@@ -32,6 +32,7 @@ public class MainMovement implements Runnable {
 	private MovementDetector movementDetector;
 	private KeyController keyController;
 	private static String selectedPropertiesFile;//TODO make it not static
+	private static BufferedImage buff = null;//TODO make it not static
 
 	public static void startAlgorithm(int cameraNum, String selectedPropFile) throws AWTException {
 		Camera camera = new Camera(0);
@@ -109,7 +110,7 @@ public class MainMovement implements Runnable {
 					display.showImage(display.getMovementFrame(), bgResult);
 
 					//jframe here
-//					BufferedImage buff = display.convertMatToBufferedImage(bgResult);
+//					buff = display.convertMatToBufferedImage(bgResult);
 //					displayJ.show(buff);
 				}
 			}
