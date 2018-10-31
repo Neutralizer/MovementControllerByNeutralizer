@@ -89,12 +89,9 @@ public class MainPanel extends JFrame {
 		buttonStartCamera.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-
-//				initializePropertiesAfterCameraIsLoaded();
 				startAlgorithm();
 
 			}
-
 		});
 
 	}
@@ -105,12 +102,12 @@ public class MainPanel extends JFrame {
 		try {
 			MainMovement.startAlgorithm(cameraNum, selectedPropFile);
 		} catch (AWTException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 
+	@Deprecated
 	public void initializePropertiesAfterCameraIsLoaded() {
 		int cameraNum = util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString());
 		Camera camera = new Camera(cameraNum);

@@ -18,14 +18,14 @@ public class UtilitiesPanel {
 		File dir = new File(folder);
 
 		if (dir.isDirectory() == false) {
-			System.out.println("Directory does not exists : " + FILE_DIR);
+			//dir does not exist
 			return new String[0];
 		}
 
 		String[] list = dir.list(filter);
 
 		if (list.length == 0) {
-			System.out.println("no files end with : " + FILE_TEXT_EXT);
+			//no files found
 			return list;
 		}
 
