@@ -46,9 +46,9 @@ public class Display {
 		frame.setSize(640, 480);
 	}
 
-	public CanvasFrame getMovementFrame() {
-		return this.frame;
-	}
+//	public CanvasFrame getMovementFrame() {
+//		return this.frame;
+//	}
 
 	public CanvasFrame createNewFrame(String name, java.awt.Point location) {
 		frame = new CanvasFrame(name);
@@ -58,19 +58,19 @@ public class Display {
 	}
 
 	//TODO will not be used for now from here
-	public String[] getAvailableCameras() {
-		List<Webcam> list = Webcam.getWebcams();
-		String[] result = new String[list.size()];
-
-		for (int i = 0; i < list.size(); i++) {
-			Webcam w = list.get(i);
-			result[i] = w.getName();
-		}
-		return result;
-	}
+//	public String[] getAvailableCameras() {
+//		List<Webcam> list = Webcam.getWebcams();
+//		String[] result = new String[list.size()];
+//
+//		for (int i = 0; i < list.size(); i++) {
+//			Webcam w = list.get(i);
+//			result[i] = w.getName();
+//		}
+//		return result;
+//	}
 
 	/**
-	 * Actual
+	 * Actual - the original one
 	 * 
 	 * @param canvasFrame
 	 * @param mat
@@ -78,6 +78,15 @@ public class Display {
 	public void showImage(CanvasFrame canvasFrame, Mat mat) {
 		Frame frame = converter.convert(mat);
 		canvasFrame.showImage(frame);
+	}
+	
+	/**
+	 * uses internally CanvasFrame
+	 * @param mat
+	 */
+	public void showImage(Mat mat) {
+		Frame frameForDisplay = converter.convert(mat);
+		frame.showImage(frameForDisplay);
 	}
 	
 	public BufferedImage convertMatToBufferedImage(Mat mat) {

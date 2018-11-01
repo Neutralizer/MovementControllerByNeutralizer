@@ -33,7 +33,7 @@ public class MainMovement implements Runnable {
 	private KeyController keyController;
 	private static String selectedPropertiesFile;//TODO make it not static
 	private static BufferedImage buff = null;//TODO make it not static
-
+	
 	public static void startAlgorithm(int cameraNum, String selectedPropFile) throws AWTException {
 		Camera camera = new Camera(cameraNum);
 		Display display = new Display();
@@ -107,7 +107,8 @@ public class MainMovement implements Runnable {
 					roi.executeAllROI(bgResult);
 
 					display.drawAllROI(roi.getListRoi(), bgResult);
-					display.showImage(display.getMovementFrame(), bgResult);
+					display.showImage(bgResult);
+//					display.showImage(display.getMovementFrame(), bgResult);
 
 					//jframe here
 //					buff = display.convertMatToBufferedImage(bgResult);
