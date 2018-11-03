@@ -31,7 +31,7 @@ public class ROI {
 	}
 	
 	public ROI(Point coordinate, int size1, int size2, Key key) {
-		percentageToDetect = 5;//very high detection
+		percentageToDetect = 2;//very high detection//5 originally
 		this.coordinate = coordinate;
 		roi = new Rect(coordinate.x, coordinate.y, size1, size2);
 		this.key = key;
