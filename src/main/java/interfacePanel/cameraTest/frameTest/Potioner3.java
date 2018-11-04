@@ -1,4 +1,4 @@
-package testInterface.cameraTest.frameTest;
+package interfacePanel.cameraTest.frameTest;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;

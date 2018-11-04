@@ -1,4 +1,4 @@
-package testInterface.panel;
+package interfacePanel.panel;
 
 import java.awt.AWTException;
 import java.awt.GridBagConstraints;

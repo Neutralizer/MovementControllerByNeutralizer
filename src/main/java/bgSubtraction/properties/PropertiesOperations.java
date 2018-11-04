@@ -12,7 +12,7 @@ import java.util.Properties;
 
 import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.keyboardControl.KeyPressType;
-import testInterface.panel.UtilitiesPanel;
+import interfacePanel.panel.UtilitiesPanel;
 
 public class PropertiesOperations {
 

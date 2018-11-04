@@ -19,7 +19,7 @@ import bgSubtraction.keyboardControl.KeyController;
 import bgSubtraction.keyboardControl.KeyPressType;
 import bgSubtraction.keyboardControl.SpecialKey;
 import bgSubtraction.properties.PropertiesOperations;
-import testInterface.panel.UtilitiesPanel;
+import interfacePanel.panel.UtilitiesPanel;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package testInterface.panel;
+package interfacePanel.panel;
 
 import java.io.File;
 import java.io.FilenameFilter;
