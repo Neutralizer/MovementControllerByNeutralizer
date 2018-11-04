@@ -80,7 +80,7 @@ public class PropertiesOperations {
 	
 	public void loadPropertiesFile(String folderPath, String filename) {
 		try {
-			input = new FileInputStream(folderPath + filename);
+			input = new FileInputStream(folderPath + "\\"+ filename);
 			if (input == null) {
 				System.err.println("Error - unable to find " + filename);
 				return;

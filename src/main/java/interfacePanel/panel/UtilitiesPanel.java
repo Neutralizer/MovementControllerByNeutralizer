@@ -8,7 +8,7 @@ import com.github.sarxos.webcam.Webcam;
 
 public class UtilitiesPanel {
 
-	public static final String FILE_DIR = "c:\\MovementController\\";
+	public static final String FILE_DIR = System.getProperty("user.dir");//--"c:\\MovementController\\";
 	public static final String FILE_TEXT_EXT = ".properties";
 
 	public String[] listFile(String folder) {
