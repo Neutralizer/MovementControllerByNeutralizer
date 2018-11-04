@@ -15,6 +15,16 @@
 			<groupId>org.bytedeco</groupId>
 			<artifactId>javacv-platform</artifactId>
 			<version>${javacv.version}</version>
+
+			<exclusions>
+				<exclusion>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>artoolkitplus</artifactId>
+				</exclusion>
+				<exclusion>
+				
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
