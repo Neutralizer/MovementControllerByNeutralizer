@@ -8,15 +8,14 @@ import com.github.sarxos.webcam.Webcam;
 
 public class UtilitiesPanel {
 
-	public static final File FILE_DIR = new File("").getAbsoluteFile();
+	public static final String FILE_DIR = "c:\\MovementController\\";
 	public static final String FILE_TEXT_EXT = ".properties";
 
-	public String[] listPropertiesFiles() {
+	public String[] listFile(String folder) {
 
 		GenericExtFilter filter = new GenericExtFilter(FILE_TEXT_EXT);
 
-		File dir = FILE_DIR;
-
+		File dir = new File(folder);
 
 		if (dir.isDirectory() == false) {
 			//dir does not exist
@@ -31,10 +30,10 @@ public class UtilitiesPanel {
 		}
 
 		// TODO remove sysout
-//		for (String file : list) {
-//			String temp = new StringBuffer(FILE_DIR).append(File.separator).append(file).toString();
-//			System.out.println("file : " + temp);
-//		}
+		for (String file : list) {
+			String temp = new StringBuffer(FILE_DIR).append(File.separator).append(file).toString();
+			System.out.println("file : " + temp);
+		}
 		return list;
 	}
 

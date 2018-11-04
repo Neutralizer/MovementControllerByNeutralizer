@@ -1,7 +1,6 @@
 package bgSubtraction.properties;
 
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -79,9 +78,9 @@ public class PropertiesOperations {
 		prop.setProperty(key, f[0] + "," + f[1] + "," + f[2] + "," + f[3] + "," + f[4] + "," + f[5] + "");
 	}
 	
-	public void loadPropertiesFile(File file, String filename) {
+	public void loadPropertiesFile(String folderPath, String filename) {
 		try {
-			input = new FileInputStream(file.getAbsolutePath() + filename);
+			input = new FileInputStream(folderPath + filename);
 			if (input == null) {
 				System.err.println("Error - unable to find " + filename);
 				return;
