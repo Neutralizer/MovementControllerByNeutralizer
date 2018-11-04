@@ -45,6 +45,14 @@
 					<groupId>org.bytedeco.javacpp-presets</groupId>
 					<artifactId>libfreenect2-platform</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>libdc1394-platform</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>flycapture-platform</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
