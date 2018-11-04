@@ -22,7 +22,28 @@
 					<artifactId>artoolkitplus</artifactId>
 				</exclusion>
 				<exclusion>
-				
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>artoolkitplus-platform</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>flandmark-platform</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>librealsense-platform</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>libfreenect-platform</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>libfreenect2</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>libfreenect2-platform</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
