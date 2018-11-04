@@ -47,7 +47,7 @@ public class MainMovement implements Runnable {
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
-				
+
 			}
 		});
 	}
@@ -108,7 +108,7 @@ public class MainMovement implements Runnable {
 
 					display.drawAllROI(roi.getListRoi(), bgResult);
 					display.showImage(bgResult);
-//					display.showImage(display.getMovementFrame(), bgResult);
+//					display.showImage(display.getMovementFrame(), bgResult);//TODO remove
 
 					//jframe here
 //					buff = display.convertMatToBufferedImage(bgResult);

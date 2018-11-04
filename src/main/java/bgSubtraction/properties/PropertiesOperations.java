@@ -14,6 +14,11 @@ import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.keyboardControl.KeyPressType;
 import interfacePanel.panel.UtilitiesPanel;
 
+/**
+ * 
+ * @author Tsvetan "Neutralizer" Trifonov
+ *
+ */
 public class PropertiesOperations {
 
 	private InputStream input = null;

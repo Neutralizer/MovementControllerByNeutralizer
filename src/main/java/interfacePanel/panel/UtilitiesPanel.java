@@ -6,6 +6,11 @@ import java.util.List;
 
 import com.github.sarxos.webcam.Webcam;
 
+/**
+ * 
+ * @author Tsvetan "Neutralizer" Trifonov
+ *
+ */
 public class UtilitiesPanel {
 
 	public static final String FILE_DIR = System.getProperty("user.dir");//--"c:\\MovementController\\";
@@ -29,11 +34,6 @@ public class UtilitiesPanel {
 			return list;
 		}
 
-		// TODO remove sysout
-		for (String file : list) {
-			String temp = new StringBuffer(FILE_DIR).append(File.separator).append(file).toString();
-			System.out.println("file : " + temp);
-		}
 		return list;
 	}
 

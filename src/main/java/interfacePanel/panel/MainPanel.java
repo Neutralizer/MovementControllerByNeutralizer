@@ -17,6 +17,11 @@ import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.main.MainMovement;
 import bgSubtraction.properties.PropertiesOperations;
 
+/**
+ * 
+ * @author Tsvetan "Neutralizer" Trifonov
+ *
+ */
 @SuppressWarnings("serial")
 public class MainPanel extends JFrame {
 
