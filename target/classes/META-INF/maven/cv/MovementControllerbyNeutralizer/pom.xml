@@ -53,6 +53,10 @@
 					<groupId>org.bytedeco.javacpp-presets</groupId>
 					<artifactId>flycapture-platform</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.bytedeco.javacpp-presets</groupId>
+					<artifactId>ffmpeg-platform</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
