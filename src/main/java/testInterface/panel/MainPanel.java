@@ -55,7 +55,7 @@ public class MainPanel extends JFrame {
 	}
 
 	private void loadPresets() {
-		String[] presets = util.listFile(UtilitiesPanel.FILE_DIR);
+		String[] presets = util.listPropertiesFiles();
 		comboBoxPresets = new JComboBox<String>(presets);
 
 	}
