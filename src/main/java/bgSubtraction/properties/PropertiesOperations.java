@@ -86,13 +86,14 @@ public class PropertiesOperations {
 	public void loadPropertiesFile(String folderPath, String filename) {
 		try {
 			input = new FileInputStream(folderPath + "\\"+ filename);
+//			input = new FileInputStream("REMOVEME.properties");//TODO for prop inside jar
 			if (input == null) {
 				System.err.println("Error - unable to find " + filename);
 				return;
 			}
-
+			
 			prop.load(input);
-
+			
 			loopThroughEachProp();
 			// if 6 - w(custom size); if 4 - regular key; if 3 - special
 
