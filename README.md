@@ -19,6 +19,6 @@ How do I install java? - go to java official site and download it - https://www.
 ### Running the program and how to use a program, that is in Alpha state
 While there is currently a very mediocre GUI, You can select a camera and a preset from it. After starting the program and several(no more than 5) seconds pass, a black window will appear, which should detect your movement if it is not very dark in Your room. If nothing happens, then check the F.A.Q. <br>
 Insert picture here.<br>
-When You move Your hand in a square on the camera, the program will press that key. Open a notepad and move your hands in the detection range of the camera, to see how the buttons are being pressed.<br>
+When You move Your hand in a square on the camera, the program will press the respective key. Open a notepad and move your hands in the detection range of the camera, to see how the buttons are being pressed.<br>
 When you are comfortable with the controls, alt tab to your game and enjoy.<br>
 Insert tutorial video here<br>
