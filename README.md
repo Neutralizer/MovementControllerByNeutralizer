@@ -12,7 +12,7 @@ The <a href="https://github.com/Neutralizer/MovementControllerByNeutralizer/rele
 1. In order to be able to run this program you need java installed: <br>
 Do I have java installed already? - If you can run the executable jar - then you don't need to install it.<br>
 How do I install java? - go to java official site and download it - https://www.java.com/en/download/ . <br>
-2. After downloading the executable jar You need the .properties files, which are templates of the regions, that when detect movement are pressing the keyboard buttons. For now they are hardcoded, but in the future they will be manipulated via GUI.
+2. After downloading the executable jar You need the .properties files, which are templates of the regions, which press the keys when movement is detected. For now they are hardcoded, but in the future they will be manipulated via GUI.
 3. Put the jar executable file and the .properties files in a folder and start the program.
 4. You need a web camera, in order for the whole "computer vision" magic to work.<br>
 4.1 Make sure that You have drivers for Your web camera.<br>
