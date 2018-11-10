@@ -6,13 +6,14 @@ This program is designed with the idea of losing weight while playing computer g
 The program is still in its ALPHA state and is quite unfinished. Please do not use it for online competitive games, because since it uses game bot technology, You may be detected as a cheater. Use it in single player FPS or TPS games for now, while this is under development.
 ## Getting Started
 What should I do to run this alpha miracle:
-### Installing
+### Download
+The Releases page holds the current version and presets
+### Preparation
 1. In order to be able to run this program you need java installed: <br>
 Do I have java installed already? - If you can run the executable jar - then you don't need to install it.<br>
 How do I install java? - go to java official site and download it - https://www.java.com/en/download/ . <br>
 2. After downloading the executable jar You need the .properties files, which are templates of the regions, that when detect movement are pressing the keyboard buttons. For now they are hardcoded, but in the future they will be manipulated via GUI.
 3. Put the jar executable file and the .properties files in a folder and start the program.
-### Final preparation
 4. You need a web camera, in order for the whole "computer vision" magic to work.<br>
 4.1 Make sure that You have drivers for Your web camera.<br>
 4.2 If You do not have a web camera, you can convert your smartphone's camera to a computer web camera with additional software - I tried  DroidCam and it works.
