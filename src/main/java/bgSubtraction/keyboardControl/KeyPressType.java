@@ -7,17 +7,17 @@ package bgSubtraction.keyboardControl;
  */
 public enum KeyPressType {
 
-	CONSTANT, TOGGLE, PRESS, SPECIAL;
+	CONSTANT, PRESS, TOGGLE, SPECIAL;
 
 	public static KeyPressType getType(int type) {
 		if(type == 0) {
 			return CONSTANT;
 		}
 		if(type == 1) {
-			return TOGGLE;
+			return PRESS;
 		}
 		if(type == 2) {
-			return PRESS;
+			return TOGGLE;
 		}
 		if(type == 3) {
 			return SPECIAL;
