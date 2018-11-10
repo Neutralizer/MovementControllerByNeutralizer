@@ -7,7 +7,7 @@ The program is still in its ALPHA state and is quite unfinished. Please do not u
 ## Getting Started
 What should I do to run this alpha miracle:
 ### Download
-The Releases page holds the current version and presets
+The <a href="https://github.com/Neutralizer/MovementControllerByNeutralizer/releases">Releases</a> page holds the current version and presets
 ### Preparation
 1. In order to be able to run this program you need java installed: <br>
 Do I have java installed already? - If you can run the executable jar - then you don't need to install it.<br>
