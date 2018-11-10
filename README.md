@@ -5,7 +5,7 @@ This program is designed with the idea of losing weight while playing computer g
 ## Disclaimer
 The program is still in its ALPHA state and is quite unfinished. Please do not use it for online competitive games, because since it uses game bot technology, You may be detected as a cheater. Use it in single player FPS or TPS games for now, while this is under development.
 ## Getting Started
-What should I do to run this alpha miracle:
+What should I do to run this alpha concoction:
 ### Download
 The <a href="https://github.com/Neutralizer/MovementControllerByNeutralizer/releases">Releases</a> page holds the current version and presets
 ### Preparation
@@ -17,9 +17,10 @@ How do I install java? - go to java official site and download it - https://www.
 4. You need a web camera, in order for the whole "computer vision" magic to work.<br>
 4.1 Make sure that You have drivers for Your web camera.<br>
 4.2 If You do not have a web camera, you can convert your smartphone's camera to a computer web camera with additional software - I tried  DroidCam and it works.
-### Running the program and how to use a program, that is in Alpha state
+### Running the program
 While there is currently a very mediocre GUI, You can select a camera and a preset from it. After starting the program and several(no more than 5) seconds pass, a black window will appear, which should detect your movement if it is not very dark in Your room. If nothing happens, then check the F.A.Q. <br>
 Insert picture here.<br>
 When You move Your hand in a square on the camera, the program will press the respective key. Open a notepad and move your hands in the detection range of the camera, to see how the buttons are being pressed.<br>
 When you are comfortable with the controls, alt tab to your game and enjoy.<br>
 Insert tutorial video here<br>
+## History
