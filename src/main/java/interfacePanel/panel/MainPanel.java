@@ -27,7 +27,7 @@ public class MainPanel extends JFrame {
 
 	UtilitiesPanel util = new UtilitiesPanel();
 	private String[] cameras;
-	// private JFrame frame;
+	// private JFrame frame;//TODO to be removed
 	Camera camera;
 	ROIManipulator roi;
 	PropertiesOperations prop;
