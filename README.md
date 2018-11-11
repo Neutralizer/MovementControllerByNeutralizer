@@ -24,3 +24,5 @@ When You move Your hand in a square on the camera, the program will press the re
 When you are comfortable with the controls, alt tab to your game and enjoy.<br>
 Insert tutorial video here<br>
 ## History
+
+### F.A.Q.
