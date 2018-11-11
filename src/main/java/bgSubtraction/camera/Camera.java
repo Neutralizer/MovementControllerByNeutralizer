@@ -20,7 +20,14 @@ public class Camera {
 
 	public Camera(int cameraNum) {
 		this.cameraNum = cameraNum;
-		VideoCapture v = new VideoCapture(cameraNum);
+		
+		VideoCapture v = new VideoCapture();
+		boolean openingSuccessful = v.open(cameraNum);
+		if(!openingSuccessful) {
+			v.close();
+			throw new IllegalStateException("Camera is busy or unavailable");
+		}
+		
 		cameraWidth = (int) v.get(3);
 		cameraHeight = (int) v.get(4);
 		if (isCameraBiggerThan640()) {
