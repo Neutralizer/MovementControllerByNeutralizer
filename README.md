@@ -9,20 +9,17 @@ What should I do to run this alpha concoction:
 ### Download
 The <a href="https://github.com/Neutralizer/MovementControllerByNeutralizer/releases">Releases</a> page holds the current version and presets
 ### Preparation
-1. In order to be able to run this program you need java installed: <br>
-Do I have java installed already? - If you can run the executable jar - then you don't need to install it.<br>
-How do I install java? - go to java official site and download it - https://www.java.com/en/download/ . <br>
-2. After downloading the executable jar You need the .properties files, which are templates of the regions, which press the keys when movement is detected. For now they are hardcoded, but in the future they will be manipulated via GUI.
-3. Put the jar executable file and the .properties files in a folder and start the program.
-4. You need a web camera, in order for the whole "computer vision" magic to work.<br>
-4.1 Make sure that You have drivers for Your web camera.<br>
+1. In order to be able to run this program You need java installed: If You can not run the executable jar go to java official site and download it - https://www.java.com/en/download/ . <br>
+2. The .properties files hold predefined regions, which press their respective keys when movement is detected. For now they are hardcoded, but in the future they will be manipulated via GUI.
+3. You need a web camera in order for the whole "computer vision" magic to work (Make sure that You have drivers for Your web camera).<br>
 ### Running the program
-While there is currently a very mediocre GUI, You can select a camera and a preset from it. After starting the program and several(no more than 5) seconds pass, a black window will appear, which should detect your movement if it is not very dark in Your room. If nothing happens, then check the F.A.Q. <br>
+While there is currently a very mediocre GUI, You can select a camera and a preset(.properties file) from it. After starting the program and several(no more than 5) seconds pass, a black window will appear, which should detect Your movement if it is not very dark in Your room. If nothing happens, then check the F.A.Q. <br>
 Insert picture here.<br>
-When You move Your hand in a square on the camera, the program will press the respective key. Open a notepad and move your hands in the detection range of the camera, to see how the buttons are being pressed.<br>
-When you are comfortable with the controls, alt tab to your game and enjoy.<br>
+When You move Your hand in a square(region of interest) on the camera, the program will press the respective key. Open a notepad and move Your hands in the detection range of the camera, to see how the buttons are being pressed.<br>
+When You are comfortable with the controls, alt tab to Your game and enjoy.<br>
 Insert tutorial video here<br>
 ## History
 
-### F.A.Q.
-Virtual web camera - has issues - phone camera is a virtual camera and has a lot of issues
+## F.A.Q.
+### Q. Can I use my smartphone as a web camera? <br>
+A. You can via software, but unfortunately this creates a flickering input and is not good for detection.
