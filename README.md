@@ -16,7 +16,6 @@ How do I install java? - go to java official site and download it - https://www.
 3. Put the jar executable file and the .properties files in a folder and start the program.
 4. You need a web camera, in order for the whole "computer vision" magic to work.<br>
 4.1 Make sure that You have drivers for Your web camera.<br>
-4.2 If You do not have a web camera, you can convert your smartphone's camera to a computer web camera with additional software - I tried  DroidCam and it works.
 ### Running the program
 While there is currently a very mediocre GUI, You can select a camera and a preset from it. After starting the program and several(no more than 5) seconds pass, a black window will appear, which should detect your movement if it is not very dark in Your room. If nothing happens, then check the F.A.Q. <br>
 Insert picture here.<br>
@@ -26,3 +25,4 @@ Insert tutorial video here<br>
 ## History
 
 ### F.A.Q.
+Virtual web camera - has issues - phone camera is a virtual camera and has a lot of issues
