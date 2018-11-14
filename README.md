@@ -18,7 +18,9 @@ When You move Your hand in a square(region of interest) on the camera, the progr
 When You are comfortable with the controls, alt tab to Your game and enjoy.<br>
 Insert tutorial video here<br>
 ## History
+### The idea
 
+### The realisation
 ## F.A.Q.
 ### Q. Can I use my smartphone as a web camera? <br>
 A. You can via software, but unfortunately this creates a flickering input and is not good for detection. All virtual cameras have the same problem.
