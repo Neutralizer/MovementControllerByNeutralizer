@@ -9,7 +9,7 @@ What should I do to run this alpha concoction:
 ### Download
 The <a href="https://github.com/Neutralizer/MovementControllerByNeutralizer/releases">Releases</a> page holds the current version and presets
 ### Preparation
-1. In order to be able to run this program You need java installed: If You can not run the executable jar go to java official site and download it - https://www.java.com/en/download/ . <br>
+1. In order to be able to run this program You need java installed: If You can't run the executable jar go to java official site and download - https://www.java.com/en/download/ . <br>
 2. You need a web camera in order for the whole "computer vision" magic to work (Make sure that You have drivers for Your web camera).<br>
 ### Running the program
 While there is currently a very mediocre GUI, You can select a camera and a preset(.properties file) from it. The .properties files hold predefined regions, which press their respective keys when movement is detected. For now they are hardcoded, but in the future they will be manipulated via GUI. After starting the program and several(no more than 5) seconds pass, a black window will appear, which should detect Your movement if it is not very dark in Your room. If nothing happens, then check the F.A.Q. <br>
