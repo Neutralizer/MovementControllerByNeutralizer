@@ -19,7 +19,7 @@ When You are comfortable with the controls, alt tab to Your game and enjoy.<br>
 Insert tutorial video here<br>
 ## History
 ### The idea
-
+I wanted to create a project that will motivate me to lose weight, while doing the thing I love - playing games. The goal of the project was for it to be as cheap as possible, as easy to use as possible and to be accessible to others also. Currently the dominant lifestyle is very passive and one may sit at work and at home in front of the computer all day. With a program such as this one, You are motivated to exercise in your home, without worrying about bad weather, without having extra space taken for exercise equipment, without the problem of being bored - you can just change the game. Find excuse to skip exercising is also a problem - I am lazy to go out, I am too tired from work, I don't have someone to go out with and so on. With this program you will have to find an excuse not to play a game.
 ### The realisation
 ## F.A.Q.
 ### Q. Can I use my smartphone as a web camera? <br>
