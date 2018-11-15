@@ -32,9 +32,11 @@ With the mouse problems solved by using the actual mouse the need to customise k
 ## Known Issues
 
 ## F.A.Q.
-### Q. Can I use my smartphone as a web camera? <br>
+### Q. Can I use my smartphone as a web camera?
 A. You can via software, but unfortunately this creates a flickering input and is not good for detection. All virtual cameras have the same problem.
-### Q. Will this be useful in VR?<br>
-A. I think it would be great for VR - You just need a simple web camera. I have not tested it for VR, because I do not own one.
-### Q. How do I determine the effect of the exercise?<br>
+### Q. Will this be useful in VR?
+A. I think it would be great for VR - You just need a simple web camera. I have not tested it for VR, because I do not have one.
+### Q. How do I determine the effect of the exercise?
 A. The faster it makes you sweat, the more efficient is the exercise. Note that with time your body will adapt to constant exercise and You will not be sweating so easily.
+### Q. Why First person and third person games (FPS) and not RTS (real time strategy) and strategy games?
+A. 1st and 3rd person games let you take on the view of the soldier/warrior/ and is more immercive and intuitive - You move your feet - the avatar moves; you move your hand for the reload button - the avatar executes the reload animation with his hands. On the other side in RTS you play a commander, which is delegating the tough job of fighting to his subordinates, so basically he just shouts orders - go there, attack that, build this. I personally like very much strategy games and if I can make this program work for them I will be very happy.
