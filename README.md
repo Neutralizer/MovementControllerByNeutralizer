@@ -1,7 +1,9 @@
 # MovementControllerByNeutralizer
 
 ## Introduction
-This program is designed with the idea of losing weight while playing computer games. It is based on 2 technologies - computer vision and game bot command issuing(automation testing): Movement is detected in specific regions via a web camera and when it is detected, the respective keyboard key attached to that region is being pressed. There are 2 limitations - the illumination must be good for the computer vision part and You should not have anyone else moving in the camera view, or they will also press the buttons.
+This program is designed with the idea of losing weight while playing computer games. It is based on 2 technologies - computer vision and game bot command issuing(automation testing): Movement is detected in specific regions via a web camera and when it is detected, the respective keyboard key attached to that region is being pressed. 
+## Limitations
+There are 2 main limitations - the illumination must be good for the computer vision part and You should not have anyone else moving in the camera view, or they will also press the buttons. It appears that being dressed in white clothes helps detecting movement more precisely.
 ## Disclaimer
 The program is still in its ALPHA state and is quite unfinished. Please do not use it for online competitive games, because since it uses game bot technology, You may be detected as a cheater. Use it in single player FPS or TPS games for now, while this is under development.
 ## Getting Started
