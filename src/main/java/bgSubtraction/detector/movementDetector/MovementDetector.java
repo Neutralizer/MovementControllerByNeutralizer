@@ -21,19 +21,22 @@ import bgSubtraction.detector.Detector;
 public class MovementDetector implements Detector {
 
 	private static final int[] WHITE = { 255, 255, 255 };
-	Mat kernel;
+	Mat firstKernelErode;
+	Mat secondKernelDilate;
 	BackgroundSubtractorMOG2 fgbg;
 
 	public MovementDetector() {
-		this.kernel = opencv_imgproc.getStructuringElement(opencv_imgproc.MORPH_RECT, new Size(5, 5));// 5.5
-		this.fgbg = opencv_video.createBackgroundSubtractorMOG2(1, 16, false);// 1,16,false for 1.4;1,100,false for1.4.2
+		this.firstKernelErode = opencv_imgproc.getStructuringElement(opencv_imgproc.MORPH_RECT, new Size(5, 5));// 5.5
+		secondKernelDilate = opencv_imgproc.getStructuringElement(opencv_imgproc.MORPH_RECT, new Size(21, 21));// 5.5
+		this.fgbg = opencv_video.createBackgroundSubtractorMOG2(5, 16, false);// 1,16,false for 1.4;1,100,false for1.4.2
 
 	}
 
 	public void processImage(IplImage img, Mat bgResult) {
 		fgbg.apply(new Mat(img), bgResult);
 
-		opencv_imgproc.erode(bgResult, bgResult, kernel);
+		opencv_imgproc.erode(bgResult, bgResult, firstKernelErode);
+		opencv_imgproc.dilate(bgResult, bgResult, secondKernelDilate);//TODO new addition since 001
 	}
 
 	/**
