@@ -90,7 +90,7 @@ public class MainPanel extends JFrame {
 		c.gridx = 1;
 		c.gridy = 0;
 		panelForm.add(buttonStartCamera, c);
-
+		
 		buttonStartCamera.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -107,7 +107,7 @@ public class MainPanel extends JFrame {
 		try {
 			MainMovement.startAlgorithm(cameraNum, selectedPropFile);
 		} catch (AWTException e) {
-			e.printStackTrace();
+			e.printStackTrace();//TODO show which is the error
 		}
 		
 	}
