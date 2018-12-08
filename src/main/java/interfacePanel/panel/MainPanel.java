@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 
 import bgSubtraction.camera.Camera;
@@ -38,6 +40,9 @@ public class MainPanel extends JFrame {
 	// new String[] { "config.properties", "quake.properties" });
 	private JButton buttonStartCamera = new JButton("Start Camera");
 	// private JButton buttonLoadPreset= new JButton("Load Preset");
+	JSlider sliderErode1 = new JSlider(1, 15, 5);
+	JSlider sliderDilate2 = new JSlider(1, 15, 1);
+	JSlider sliderTest;
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -84,9 +89,23 @@ public class MainPanel extends JFrame {
 		panelForm.add(comboBoxCamera, c);
 		c.gridy++;
 		panelForm.add(comboBoxPresets, c);
-
+		
+		c.gridy++;
+		c.anchor = GridBagConstraints.ABOVE_BASELINE;
+		JLabel sliderLabel = new JLabel("Erode");
+		panelForm.add(sliderLabel,c);
+		c.gridy++;
+		sliderErode1.setMajorTickSpacing(2);
+		sliderErode1.setMinorTickSpacing(1);
+		sliderErode1.setPaintTicks(true);
+		sliderErode1.setPaintLabels(true);
+		panelForm.add(sliderErode1,c);
+		
+		
+		
+		// 2nd column
 		c.anchor = GridBagConstraints.LINE_START;
-
+		
 		c.gridx = 1;
 		c.gridy = 0;
 		panelForm.add(buttonStartCamera, c);
