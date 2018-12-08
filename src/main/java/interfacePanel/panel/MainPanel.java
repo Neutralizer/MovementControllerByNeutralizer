@@ -13,8 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.plaf.basic.BasicBorders.MarginBorder;
 
 import bgSubtraction.camera.Camera;
+import bgSubtraction.detector.movementDetector.MovementDetector;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.main.MainMovement;
 import bgSubtraction.properties.PropertiesOperations;
@@ -25,9 +29,10 @@ import bgSubtraction.properties.PropertiesOperations;
  *
  */
 @SuppressWarnings("serial")
-public class MainPanel extends JFrame {
+public class MainPanel extends JFrame{
 
 	UtilitiesPanel util = new UtilitiesPanel();
+	private MovementDetector detector = new MovementDetector();//TODO this should not be here
 	private String[] cameras;
 	// private JFrame frame;//TODO to be removed
 	Camera camera;
@@ -42,7 +47,8 @@ public class MainPanel extends JFrame {
 	// private JButton buttonLoadPreset= new JButton("Load Preset");
 	JSlider sliderErode1 = new JSlider(1, 15, 5);
 	JSlider sliderDilate2 = new JSlider(1, 15, 1);
-	JSlider sliderTest;
+	JSlider sliderHistory = new JSlider(1, 50, 1);
+	JSlider sliderThresh = new JSlider(1, 100, 16);
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -59,7 +65,7 @@ public class MainPanel extends JFrame {
 		createView();
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(400, 200);
+		setSize(400, 400);
 		setLocationRelativeTo(null);
 		setResizable(false);
 	}
@@ -90,16 +96,64 @@ public class MainPanel extends JFrame {
 		c.gridy++;
 		panelForm.add(comboBoxPresets, c);
 		
-		c.gridy++;
-		c.anchor = GridBagConstraints.ABOVE_BASELINE;
-		JLabel sliderLabel = new JLabel("Erode");
-		panelForm.add(sliderLabel,c);
-		c.gridy++;
-		sliderErode1.setMajorTickSpacing(2);
-		sliderErode1.setMinorTickSpacing(1);
-		sliderErode1.setPaintTicks(true);
-		sliderErode1.setPaintLabels(true);
-		panelForm.add(sliderErode1,c);
+		sliderTemplate(panelForm, c,sliderErode1,"Erode",2,1);
+		sliderTemplate(panelForm, c,sliderDilate2,"Dilate",2,1);
+		sliderTemplate(panelForm, c,sliderHistory,"History",10,1);
+		sliderTemplate(panelForm, c,sliderThresh,"Threshold",10,1);
+		detector.changeErode(1);//TODO does not work/ or is overriden from movement detector object in mainpanel
+
+		
+		sliderErode1.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if (!source.getValueIsAdjusting()) {
+					int erodeValue = (int)source.getValue();
+					detector.changeErode(erodeValue);
+				}
+			}
+		});
+		
+		sliderDilate2.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if (!source.getValueIsAdjusting()) {
+					int dilateValue = (int)source.getValue();
+					detector.changeDilate(dilateValue);
+
+				}
+			}
+		});
+		
+		sliderHistory.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if (!source.getValueIsAdjusting()) {
+					int historyValue = (int)source.getValue();
+					detector.changeDilate(historyValue);
+				}
+			}
+		});
+		
+		sliderThresh.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if (!source.getValueIsAdjusting()) {
+					int threshValue = (int)source.getValue();
+					detector.changeDilate(threshValue);
+				}
+			}
+		});
+		
+
+		
 		
 		
 		
@@ -114,10 +168,22 @@ public class MainPanel extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				startAlgorithm();
-
 			}
 		});
 
+	}
+
+	private void sliderTemplate(JPanel panelForm, GridBagConstraints c,JSlider slider, String labelName,int majorSpacing,int minorSpacing) {
+		c.gridy++;
+		c.anchor = GridBagConstraints.ABOVE_BASELINE;
+		JLabel sliderLabel = new JLabel(labelName);
+		panelForm.add(sliderLabel,c);
+		c.gridy++;
+		slider.setMajorTickSpacing(majorSpacing);
+		slider.setMinorTickSpacing(minorSpacing);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		panelForm.add(slider,c);
 	}
 	
 	private void startAlgorithm() {

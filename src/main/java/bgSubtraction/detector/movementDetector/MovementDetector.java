@@ -24,10 +24,10 @@ public class MovementDetector implements Detector {
 	Mat firstKernelErode;
 	Mat secondKernelDilate;
 	BackgroundSubtractorMOG2 fgbg;
-	int firstKernelErodeSize = 5;
-	int secondKernelDilateSize = 5;// even number above 0 - 1 = no effect
-	int subtractorHistoryLength = 1;// not 0
-	int subractorThreshold = 16;
+	int firstKernelErodeSize = 5;//5
+	int secondKernelDilateSize = 1;//1; even number above 0 - 1 = no effect
+	int subtractorHistoryLength = 1;//1; not 0
+	int subractorThreshold = 16;//16
 
 	public MovementDetector() {
 		this.firstKernelErode = opencv_imgproc.getStructuringElement(opencv_imgproc.MORPH_RECT,
@@ -75,6 +75,8 @@ public class MovementDetector implements Detector {
 
 		opencv_imgproc.erode(bgResult, bgResult, firstKernelErode);
 		opencv_imgproc.dilate(bgResult, bgResult, secondKernelDilate);// TODO new addition since 001
+		
+//		System.out.println(firstKernelErodeSize);//TODO remove
 	}
 
 	/**
