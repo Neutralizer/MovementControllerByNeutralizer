@@ -33,7 +33,6 @@ public class MainPanel extends JFrame{
 	UtilitiesPanel util = new UtilitiesPanel();
 	MovementDetector detector = new MovementDetector();
 	private String[] cameras;
-	// private JFrame frame;//TODO to be removed
 	Camera camera;
 	ROIManipulator roi;
 	PropertiesOperations prop;
@@ -44,6 +43,12 @@ public class MainPanel extends JFrame{
 	// new String[] { "config.properties", "quake.properties" });
 	private JButton buttonStartCamera = new JButton("Start Camera");
 	// private JButton buttonLoadPreset= new JButton("Load Preset");
+	String buttonCameraHover = "Starts the camera and the controller";
+	String boxCameraHover = "Shows available cameras";
+	String erodeHover = "Remove noise from camera input";
+	String dilateHover = "Makes found pixels bigger";
+	String historyHover = "Creates trail from detected pixels";
+	String threshHover = "Controls main detection - more means less detection";
 	JSlider sliderErode1 = new JSlider(1, 15, 5);
 	JSlider sliderDilate2 = new JSlider(1, 15, 1);
 	JSlider sliderHistory = new JSlider(1, 50, 1);
@@ -91,16 +96,15 @@ public class MainPanel extends JFrame{
 
 		c.anchor = GridBagConstraints.LINE_END;
 
+		comboBoxCamera.setToolTipText(boxCameraHover);
 		panelForm.add(comboBoxCamera, c);
 		c.gridy++;
 		panelForm.add(comboBoxPresets, c);
 		
-		sliderTemplate(panelForm, c,sliderErode1,"Erode",2,1);
-		sliderTemplate(panelForm, c,sliderDilate2,"Dilate",2,1);
-		sliderTemplate(panelForm, c,sliderHistory,"History",10,1);
-		sliderTemplate(panelForm, c,sliderThresh,"Threshold",10,1);
-//		detector.changeErode(1);//TODO does not work/ or is overriden from movement detector object in mainpanel
-
+		sliderTemplate(panelForm, c,sliderErode1,"Erode", erodeHover,2,1);
+		sliderTemplate(panelForm, c,sliderDilate2,"Dilate",dilateHover,2,1);
+		sliderTemplate(panelForm, c,sliderHistory,"History",historyHover,10,1);
+		sliderTemplate(panelForm, c,sliderThresh,"Threshold",threshHover,10,1);
 		
 		sliderErode1.addChangeListener(new ChangeListener() {
 			
@@ -151,16 +155,12 @@ public class MainPanel extends JFrame{
 			}
 		});
 		
-
-		
-		
-		
-		
 		// 2nd column
 		c.anchor = GridBagConstraints.LINE_START;
 		
 		c.gridx = 1;
 		c.gridy = 0;
+		buttonStartCamera.setToolTipText(buttonCameraHover);
 		panelForm.add(buttonStartCamera, c);
 		
 		buttonStartCamera.addActionListener(new ActionListener() {
@@ -172,10 +172,11 @@ public class MainPanel extends JFrame{
 
 	}
 
-	private void sliderTemplate(JPanel panelForm, GridBagConstraints c,JSlider slider, String labelName,int majorSpacing,int minorSpacing) {
+	private void sliderTemplate(JPanel panelForm, GridBagConstraints c,JSlider slider, String labelName, String tooltip, int majorSpacing,int minorSpacing) {
 		c.gridy++;
 		c.anchor = GridBagConstraints.ABOVE_BASELINE;
 		JLabel sliderLabel = new JLabel(labelName);
+		sliderLabel.setToolTipText(tooltip);
 		panelForm.add(sliderLabel,c);
 		c.gridy++;
 		slider.setMajorTickSpacing(majorSpacing);

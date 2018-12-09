@@ -38,7 +38,7 @@ public class MainMovement implements Runnable {
 		Camera camera = new Camera(cameraNum);
 		Display display = new Display();
 		MovementDetector movementDetector = detector;
-		KeyController keyController = new KeyController();
+		KeyController keyController = new KeyController();//TODO may be moved to mpanel to access keys and roi creation
 		selectedPropertiesFile = selectedPropFile;
 		MainMovement movementDetectorMain = new MainMovement(camera, display,
 				movementDetector, keyController);
