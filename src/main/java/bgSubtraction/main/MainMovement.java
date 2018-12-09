@@ -34,10 +34,10 @@ public class MainMovement implements Runnable {
 	private static String selectedPropertiesFile;//TODO make it not static
 	private static BufferedImage buff = null;//TODO make it not static
 	
-	public static void startAlgorithm(int cameraNum, String selectedPropFile) throws AWTException {
+	public static void startAlgorithm(int cameraNum, String selectedPropFile, MovementDetector detector) throws AWTException {
 		Camera camera = new Camera(cameraNum);
 		Display display = new Display();
-		MovementDetector movementDetector = new MovementDetector();
+		MovementDetector movementDetector = detector;
 		KeyController keyController = new KeyController();
 		selectedPropertiesFile = selectedPropFile;
 		MainMovement movementDetectorMain = new MainMovement(camera, display,

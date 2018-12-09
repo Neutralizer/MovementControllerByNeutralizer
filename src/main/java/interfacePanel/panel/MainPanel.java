@@ -15,7 +15,6 @@ import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.basic.BasicBorders.MarginBorder;
 
 import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.MovementDetector;
@@ -32,7 +31,7 @@ import bgSubtraction.properties.PropertiesOperations;
 public class MainPanel extends JFrame{
 
 	UtilitiesPanel util = new UtilitiesPanel();
-	private MovementDetector detector = new MovementDetector();//TODO this should not be here
+	MovementDetector detector = new MovementDetector();
 	private String[] cameras;
 	// private JFrame frame;//TODO to be removed
 	Camera camera;
@@ -100,7 +99,7 @@ public class MainPanel extends JFrame{
 		sliderTemplate(panelForm, c,sliderDilate2,"Dilate",2,1);
 		sliderTemplate(panelForm, c,sliderHistory,"History",10,1);
 		sliderTemplate(panelForm, c,sliderThresh,"Threshold",10,1);
-		detector.changeErode(1);//TODO does not work/ or is overriden from movement detector object in mainpanel
+//		detector.changeErode(1);//TODO does not work/ or is overriden from movement detector object in mainpanel
 
 		
 		sliderErode1.addChangeListener(new ChangeListener() {
@@ -109,8 +108,8 @@ public class MainPanel extends JFrame{
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if (!source.getValueIsAdjusting()) {
-					int erodeValue = (int)source.getValue();
-					detector.changeErode(erodeValue);
+					int value = (int)source.getValue();
+					detector.changeErode(value);
 				}
 			}
 		});
@@ -121,8 +120,8 @@ public class MainPanel extends JFrame{
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if (!source.getValueIsAdjusting()) {
-					int dilateValue = (int)source.getValue();
-					detector.changeDilate(dilateValue);
+					int value = (int)source.getValue();
+					detector.changeDilate(value);
 
 				}
 			}
@@ -134,8 +133,8 @@ public class MainPanel extends JFrame{
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if (!source.getValueIsAdjusting()) {
-					int historyValue = (int)source.getValue();
-					detector.changeDilate(historyValue);
+					int value = (int)source.getValue();
+					detector.changeHistory(value);
 				}
 			}
 		});
@@ -146,8 +145,8 @@ public class MainPanel extends JFrame{
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if (!source.getValueIsAdjusting()) {
-					int threshValue = (int)source.getValue();
-					detector.changeDilate(threshValue);
+					int value = (int)source.getValue();
+					detector.changeSubTresh(value);
 				}
 			}
 		});
@@ -190,7 +189,7 @@ public class MainPanel extends JFrame{
 		int cameraNum = util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString());
 		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
 		try {
-			MainMovement.startAlgorithm(cameraNum, selectedPropFile);
+			MainMovement.startAlgorithm(cameraNum, selectedPropFile,detector);
 		} catch (AWTException e) {
 			e.printStackTrace();//TODO show which is the error
 		}
