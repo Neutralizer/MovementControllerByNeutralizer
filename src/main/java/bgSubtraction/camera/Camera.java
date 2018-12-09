@@ -17,7 +17,10 @@ public class Camera {
 	private int cameraHeight;
 	private final int cameraNum;
 	private FrameGrabber grabber;
-
+	private long startTime = System.currentTimeMillis();
+	private int fps = 0;
+	private int currentfps = 0;
+	
 	public Camera(int cameraNum) {
 		this.cameraNum = cameraNum;
 		
@@ -64,12 +67,25 @@ public class Camera {
 	 * @return
 	 */
 	public Frame getFrame() {
+		getFps();
 		try {
 			return grabber.grab();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private void getFps() {
+		//get current time milis - if 1 second has passed - check a counter++ value and return the fps - set the current time
+		//as the start time
+		long currentTime = System.currentTimeMillis();
+		currentfps++;
+		if((currentTime - startTime) > 1000) {
+			fps = currentfps;
+			currentfps = 0;
+			startTime = currentTime;
+		}
 	}
 
 	public int getCameraWidth() {
@@ -86,6 +102,10 @@ public class Camera {
 
 	public int getCameraNum() {
 		return cameraNum;
+	}
+	
+	public int getFPS() {
+		return fps;
 	}
 
 }

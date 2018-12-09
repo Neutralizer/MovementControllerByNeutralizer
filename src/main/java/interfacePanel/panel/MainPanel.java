@@ -33,7 +33,7 @@ public class MainPanel extends JFrame{
 	UtilitiesPanel util = new UtilitiesPanel();
 	MovementDetector detector = new MovementDetector();
 	private String[] cameras;
-	Camera camera;
+//	Camera camera;
 	ROIManipulator roi;
 	PropertiesOperations prop;
 
@@ -169,6 +169,8 @@ public class MainPanel extends JFrame{
 				startAlgorithm();
 			}
 		});
+		
+//		this.setTitle(Integer.toString(camera.getFPS()));
 
 	}
 

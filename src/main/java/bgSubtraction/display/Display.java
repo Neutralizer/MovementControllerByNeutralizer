@@ -93,6 +93,10 @@ public class Display {
 		Frame frame = converter.convert(mat);
 		return c.convert(frame);
 	}
+	
+	public void setTitle(String title) {
+		frame.setTitle(title);
+	}
 
 	/**
 	 * When the title of the frame needs to be updated every frame
