@@ -41,7 +41,7 @@ public class Key {
 	 */
 	public void executeAction(boolean detected) {
 		if (this.keyPressType == KeyPressType.CONSTANT) {
-			startTimer = keyController.pressAndReleaseKey(detected, keyCode, startTimer, 10, false);
+			startTimer = keyController.pressAndReleaseKey(detected, keyCode, startTimer, 100, false);
 		}
 		if (this.keyPressType == KeyPressType.PRESS) {
 			startTimer = keyController.pressAndReleaseKey(detected, keyCode, startTimer, 500, true);
