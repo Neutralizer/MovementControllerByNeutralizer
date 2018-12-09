@@ -112,7 +112,7 @@ public class MainMovement implements Runnable {
 					// display.showImage(display.getMovementFrame(), bgResult);//TODO remove
 
 					display.setTitle("Resolution: " + camera.getCameraWidthAndHeight() + "; FPS: "
-							+ Integer.toString(camera.getFPS()));//TODO move to mainPanel maybe
+							+ Integer.toString(camera.getFPS()));//TODO move to mainPanel maybe 
 
 					// jframe here
 					// buff = display.convertMatToBufferedImage(bgResult);
