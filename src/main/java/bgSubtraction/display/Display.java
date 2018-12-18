@@ -2,17 +2,11 @@ package bgSubtraction.display;
 
 import static org.bytedeco.javacpp.opencv_core.cvFlip;
 
-import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
 
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_core.Mat;
@@ -23,8 +17,6 @@ import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
-
-import com.github.sarxos.webcam.Webcam;
 
 import bgSubtraction.detector.movementDetector.ROI;
 
@@ -38,7 +30,7 @@ public class Display {
 	private CanvasFrame frame;
 
 	private OpenCVFrameConverter.ToIplImage converter;
-	Java2DFrameConverter c = new Java2DFrameConverter();//for BufferedImage
+	Java2DFrameConverter c = new Java2DFrameConverter();// for BufferedImage
 
 	public Display() {
 		converter = new OpenCVFrameConverter.ToIplImage();
@@ -46,28 +38,12 @@ public class Display {
 		frame.setSize(640, 480);
 	}
 
-//	public CanvasFrame getMovementFrame() {
-//		return this.frame;
-//	}
-
 	public CanvasFrame createNewFrame(String name, java.awt.Point location) {
 		frame = new CanvasFrame(name);
 		frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(location);
 		return frame;
 	}
-
-	//TODO will not be used for now from here
-//	public String[] getAvailableCameras() {
-//		List<Webcam> list = Webcam.getWebcams();
-//		String[] result = new String[list.size()];
-//
-//		for (int i = 0; i < list.size(); i++) {
-//			Webcam w = list.get(i);
-//			result[i] = w.getName();
-//		}
-//		return result;
-//	}
 
 	/**
 	 * Actual - the original one
@@ -79,42 +55,25 @@ public class Display {
 		Frame frame = converter.convert(mat);
 		canvasFrame.showImage(frame);
 	}
-	
+
 	/**
 	 * uses internally CanvasFrame
+	 * 
 	 * @param mat
 	 */
 	public void showImage(Mat mat) {
 		Frame frameForDisplay = converter.convert(mat);
 		frame.showImage(frameForDisplay);
 	}
-	
+
 	public BufferedImage convertMatToBufferedImage(Mat mat) {
 		Frame frame = converter.convert(mat);
 		return c.convert(frame);
 	}
-	
+
 	public void setTitle(String title) {
 		frame.setTitle(title);
 	}
-
-	/**
-	 * When the title of the frame needs to be updated every frame
-	 * 
-	 * @param canvasFrame
-	 * @param mat
-	 * @param title
-	 */
-//	public void showImage(CanvasFrame canvasFrame, Mat mat, String title) {
-//		Frame frame = converter.convert(mat);
-//		canvasFrame.setTitle(title);
-//		canvasFrame.showImage(frame);
-//	}
-
-//	public void showImage(CanvasFrame canvasFrame, IplImage img) {
-//		Frame frame = converter.convert(img);
-//		canvasFrame.showImage(frame);
-//	}
 
 	public IplImage convertFromFrameToIplImage(Frame frame) {
 		return converter.convert(frame);
@@ -125,56 +84,33 @@ public class Display {
 		return img;
 	}
 
-	/**
-	 * when the canvasFrame is in the correct thread, this will work<br>
-	 * uses mouse listener
-	 * 
-	 * @param frame
-	 * @return
-	 */
-	public Point testGetCoordinatesOfMouseClickedInFrame(CanvasFrame frame) {
-
-		frame.addMouseListener(new MouseListener() {
-			public void mousePressed(MouseEvent me) {
+	public void attachMouseListener() {
+		frame.getCanvas().addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
 			}
 
-			public void mouseReleased(MouseEvent me) {
+			@Override
+			public void mousePressed(MouseEvent e) {
 			}
 
-			public void mouseEntered(MouseEvent me) {
+			@Override
+			public void mouseExited(MouseEvent e) {
 			}
 
-			public void mouseExited(MouseEvent me) {
+			@Override
+			public void mouseEntered(MouseEvent e) {
 			}
 
-			public void mouseClicked(MouseEvent me) {
-				int x = me.getX();
-				int y = me.getY();
-				System.out.println("X:" + x + " Y:" + y);
-			}
-		});
-
-		return null;
-
-	}
-
-	/**
-	 * when the canvasFrame is in the correct thread, this will work<br>
-	 * uses mouseAdapter
-	 * 
-	 * @param frame
-	 * @return
-	 */
-	public Point testClick(CanvasFrame frame) {
-		frame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
+				System.out.println("enters");
 				System.out.println("X:" + x + " Y:" + y);
+				frame.setTitle("X:" + x + " Y:" + y);
 			}
 		});
-		return null;
 	}
 
 	public void drawAllROI(ArrayList<ROI> listRoi, Mat bgResult) {

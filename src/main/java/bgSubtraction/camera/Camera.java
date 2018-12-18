@@ -31,9 +31,10 @@ public class Camera {
 			throw new IllegalStateException("Camera is busy or unavailable");
 		}
 		
+//		v.set(5,24);//TODO FPS limiter
 		cameraWidth = (int) v.get(3);
 		cameraHeight = (int) v.get(4);
-		//v.set(37, 0);//TODO testing disable autofocus - opens camera settings panel
+//		v.set(37, 0);//TODO testing disable autofocus - opens camera settings panel
 		if (isCameraBiggerThan640()) {
 			v.set(3,640);
 			v.set(4,480);

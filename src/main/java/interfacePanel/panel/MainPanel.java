@@ -170,8 +170,6 @@ public class MainPanel extends JFrame{
 			}
 		});
 		
-//		this.setTitle(Integer.toString(camera.getFPS()));
-
 	}
 
 	private void sliderTemplate(JPanel panelForm, GridBagConstraints c,JSlider slider, String labelName, String tooltip, int majorSpacing,int minorSpacing) {

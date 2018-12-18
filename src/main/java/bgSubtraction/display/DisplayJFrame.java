@@ -23,9 +23,10 @@ public class DisplayJFrame extends JFrame {
 
 	// TODO put the img in jpanel and the panel into the frame
 	public DisplayJFrame() {
-		jFrame = new JFrame("Movement");
+		jFrame = new JFrame("MovementJ");
 		jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		jFrame.setSize(640, 480);
+//		jFrame.setVisible(true);//new
 		// jFrame.pack();
 	}
 

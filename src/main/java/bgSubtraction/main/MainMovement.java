@@ -63,15 +63,13 @@ public class MainMovement implements Runnable {
 			throw new IllegalStateException("Camera not detected (tududu duuummm)");
 		}
 
-		// TODO test
-		System.out.println("Camera width and height " + camera.getCameraWidthAndHeight());
 	}
 
 	public void run() {
 		try {
 			IplImage img;
-			// DisplayJFrame displayJ = new DisplayJFrame();
-			// displayJ.add();
+//			 DisplayJFrame displayJ = new DisplayJFrame();
+//			 displayJ.add();
 
 			ROIManipulator roi = new ROIManipulator(camera);
 			PropertiesOperations prop = new PropertiesOperations(roi);
@@ -114,9 +112,10 @@ public class MainMovement implements Runnable {
 					display.setTitle("Resolution: " + camera.getCameraWidthAndHeight() + "; FPS: "
 							+ Integer.toString(camera.getFPS()));//TODO move to mainPanel maybe 
 
+//					display.attachMouseListener();//TODO attaches mouse listener
 					// jframe here
-					// buff = display.convertMatToBufferedImage(bgResult);
-					// displayJ.show(buff);
+//					 buff = display.convertMatToBufferedImage(bgResult);
+//					 displayJ.show(buff);
 				}
 			}
 		} catch (Exception e) {
