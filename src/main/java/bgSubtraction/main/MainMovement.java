@@ -4,17 +4,13 @@ import java.awt.AWTException;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JFrame;
-
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_core.Mat;
-import org.bytedeco.javacv.CanvasFrame;
 
 import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.MovementDetector;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.display.Display;
-import bgSubtraction.display.DisplayJFrame;
 import bgSubtraction.keyboardControl.KeyController;
 import bgSubtraction.keyboardControl.KeyPressType;
 import bgSubtraction.keyboardControl.SpecialKey;
@@ -32,7 +28,6 @@ public class MainMovement implements Runnable {
 	private MovementDetector movementDetector;
 	private KeyController keyController;
 	private static String selectedPropertiesFile;// TODO make it not static
-	private static BufferedImage buff = null;// TODO make it not static
 
 	public static void startAlgorithm(int cameraNum, String selectedPropFile, MovementDetector detector)
 			throws AWTException {
@@ -68,8 +63,6 @@ public class MainMovement implements Runnable {
 	public void run() {
 		try {
 			IplImage img;
-//			 DisplayJFrame displayJ = new DisplayJFrame();
-//			 displayJ.add();
 
 			ROIManipulator roi = new ROIManipulator(camera);
 			PropertiesOperations prop = new PropertiesOperations(roi);
@@ -107,15 +100,11 @@ public class MainMovement implements Runnable {
 
 					display.drawAllROI(roi.getListRoi(), bgResult);
 					display.showImage(bgResult);
-					// display.showImage(display.getMovementFrame(), bgResult);//TODO remove
 
 					display.setTitle("Resolution: " + camera.getCameraWidthAndHeight() + "; FPS: "
-							+ Integer.toString(camera.getFPS()));//TODO move to mainPanel maybe 
+							+ Integer.toString(camera.getFPS()));
 
 //					display.attachMouseListener();//TODO attaches mouse listener
-					// jframe here
-//					 buff = display.convertMatToBufferedImage(bgResult);
-//					 displayJ.show(buff);
 				}
 			}
 		} catch (Exception e) {
