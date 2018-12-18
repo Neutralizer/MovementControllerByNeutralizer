@@ -36,9 +36,10 @@ public class Display {
 		converter = new OpenCVFrameConverter.ToIplImage();
 		frame = createNewFrame("Movement", new java.awt.Point(0, 0));
 		frame.setSize(640, 480);
+		attachMouseListener();
 	}
 
-	public CanvasFrame createNewFrame(String name, java.awt.Point location) {
+	private CanvasFrame createNewFrame(String name, java.awt.Point location) {
 		frame = new CanvasFrame(name);
 		frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(location);
