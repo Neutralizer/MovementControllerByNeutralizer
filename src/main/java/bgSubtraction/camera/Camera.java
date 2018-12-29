@@ -34,7 +34,7 @@ public class Camera {
 //		v.set(5,24);//TODO FPS limiter
 		cameraWidth = (int) v.get(3);
 		cameraHeight = (int) v.get(4);
-//		v.set(37, 0);//TODO testing disable autofocus - opens camera settings panel
+//		v.set(37, 1);//TODO testing disable autofocus - opens camera settings panel-setting prop after opening the cam
 		if (isCameraBiggerThan640()) {
 			v.set(3,640);
 			v.set(4,480);

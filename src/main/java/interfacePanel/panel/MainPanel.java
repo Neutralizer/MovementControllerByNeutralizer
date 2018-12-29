@@ -16,6 +16,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.bytedeco.javacpp.opencv_videoio.VideoCapture;
+
 import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.MovementDetector;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
@@ -42,7 +44,9 @@ public class MainPanel extends JFrame{
 	// = new JComboBox<String>(
 	// new String[] { "config.properties", "quake.properties" });
 	private JButton buttonStartCamera = new JButton("Start Camera");
+	private JButton buttonCameraProperties = new JButton("Camera Properties");
 	// private JButton buttonLoadPreset= new JButton("Load Preset");
+	String buttonCameraPropertiesHover = "Opens current camera properties - Experimental - works only when focus is unmodifiable";
 	String buttonCameraHover = "Starts the camera and the controller";
 	String boxCameraHover = "Shows available cameras";
 	String erodeHover = "Remove noise from camera input";
@@ -69,7 +73,7 @@ public class MainPanel extends JFrame{
 		createView();
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(400, 400);
+		setSize(400, 600);
 		setLocationRelativeTo(null);
 		setResizable(false);
 	}
@@ -166,9 +170,29 @@ public class MainPanel extends JFrame{
 		buttonStartCamera.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				startAlgorithm();
+				startExecution();
 			}
 		});
+		
+		c.gridy++;
+		buttonCameraProperties.setToolTipText(buttonCameraPropertiesHover);
+		panelForm.add(buttonCameraProperties,c);
+		
+		buttonCameraProperties.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				VideoCapture v = null;
+				try {
+					v = new VideoCapture(util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString()));
+					v.set(37, 1);
+					//TODO check if next javacv version removes the crash 
+				} catch (java.lang.Exception ex) {
+				} finally {
+					v.close();
+				}
+			}
+		});
+		
 		
 	}
 
@@ -186,7 +210,7 @@ public class MainPanel extends JFrame{
 		panelForm.add(slider,c);
 	}
 	
-	private void startAlgorithm() {
+	private void startExecution() {
 		int cameraNum = util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString());
 		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
 		try {
