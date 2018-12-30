@@ -31,10 +31,10 @@ public class Camera {
 			throw new IllegalStateException("Camera is busy or unavailable");
 		}
 		
-//		v.set(5,24);//TODO FPS limiter
+//		v.set(5,24);//TODO FPS limiter - video capture is not used actually
 		cameraWidth = (int) v.get(3);
 		cameraHeight = (int) v.get(4);
-//		v.set(37, 1);//TODO testing disable autofocus - opens camera settings panel-setting prop after opening the cam
+//		v.set(37, 1);//TODO testing camera settings panel-setting prop after opening the cam
 		if (isCameraBiggerThan640()) {
 			v.set(3,640);
 			v.set(4,480);

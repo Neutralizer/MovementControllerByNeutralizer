@@ -44,9 +44,9 @@ public class MainPanel extends JFrame{
 	// = new JComboBox<String>(
 	// new String[] { "config.properties", "quake.properties" });
 	private JButton buttonStartCamera = new JButton("Start Camera");
-	private JButton buttonCameraProperties = new JButton("Camera Properties");
+	private JButton buttonCameraProperties = new JButton("Experimental:Camera Properties");
 	// private JButton buttonLoadPreset= new JButton("Load Preset");
-	String buttonCameraPropertiesHover = "Opens current camera properties - Experimental - works only when focus is unmodifiable";
+	String buttonCameraPropertiesHover = "Opens current camera properties - Experimental";
 	String buttonCameraHover = "Starts the camera and the controller";
 	String boxCameraHover = "Shows available cameras";
 	String erodeHover = "Remove noise from camera input";
@@ -73,7 +73,7 @@ public class MainPanel extends JFrame{
 		createView();
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(400, 600);
+		setSize(500, 600);
 		setLocationRelativeTo(null);
 		setResizable(false);
 	}
@@ -159,6 +159,8 @@ public class MainPanel extends JFrame{
 			}
 		});
 		
+		
+		
 		// 2nd column
 		c.anchor = GridBagConstraints.LINE_START;
 		
@@ -185,10 +187,10 @@ public class MainPanel extends JFrame{
 				try {
 					v = new VideoCapture(util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString()));
 					v.set(37, 1);
-					//TODO check if next javacv version removes the crash 
+					
 				} catch (java.lang.Exception ex) {
 				} finally {
-					v.close();
+//					v.close();
 				}
 			}
 		});
