@@ -13,7 +13,7 @@ public class Key {
 	protected KeyController keyController = new KeyController();
 
 	/**
-	 * types of button - CONSTANT press with refreshing, TOGGLE, PRESS
+	 * types of button - CONSTANT press with refreshing, TOGGLE, PRESS //TODO may be changed
 	 * 
 	 * @param keyCode
 	 *            KeyEvent.VK_W ex
