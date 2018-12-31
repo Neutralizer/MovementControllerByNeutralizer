@@ -1,3 +1,6 @@
+### 0.0.3 - 31.12.2018
+* Added camera properties button - crashes sometimes
+
 ### 0.0.2 - 09.12.2018
 * Added 4 sliders to customize preprocessing
 * Added hover tooltips 
