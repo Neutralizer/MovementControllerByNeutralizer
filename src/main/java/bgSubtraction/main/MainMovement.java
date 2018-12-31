@@ -26,17 +26,19 @@ public class MainMovement implements Runnable {
 	private Camera camera;
 	private Display display;
 	private MovementDetector movementDetector;
-	private KeyController keyController;
-	private static String selectedPropertiesFile;// TODO make it not static
+	ROIManipulator roi;//TODO new addition
+//	private KeyController keyController;
+//	private static String selectedPropertiesFile;// TODO make it not static
 
-	public static void startAlgorithm(int cameraNum, String selectedPropFile, MovementDetector detector)
+	public static void startAlgorithm(Camera camera, String selectedPropFile, MovementDetector detector, ROIManipulator roi)
 			throws AWTException {
-		Camera camera = new Camera(cameraNum);
 		Display display = new Display();
 		MovementDetector movementDetector = detector;
-		KeyController keyController = new KeyController();// TODO may be moved to mpanel to access keys and roi creation
-		selectedPropertiesFile = selectedPropFile;
-		MainMovement movementDetectorMain = new MainMovement(camera, display, movementDetector, keyController);
+//		KeyController keyController = new KeyController();// TODO may be moved to mpanel to access keys and roi creation
+//		selectedPropertiesFile = selectedPropFile;//TODO moved
+		MainMovement movementDetectorMain = new MainMovement(camera, display, movementDetector, roi
+//				, keyController
+				);
 		Thread th = new Thread(movementDetectorMain);
 		th.start();
 
@@ -47,12 +49,14 @@ public class MainMovement implements Runnable {
 		});
 	}
 
-	public MainMovement(Camera camera, Display display, MovementDetector movementDetector,
-			KeyController keyController) {
+	public MainMovement(Camera camera, Display display, MovementDetector movementDetector, ROIManipulator roi
+//			,KeyController keyController
+			) {
 		this.camera = camera;
 		this.display = display;
 		this.movementDetector = movementDetector;
-		this.keyController = keyController;
+		this.roi = roi;//TODO new addition
+//		this.keyController = keyController;
 
 		if (!camera.isDetected()) {
 			throw new IllegalStateException("Camera not detected (tududu duuummm)");
@@ -64,12 +68,13 @@ public class MainMovement implements Runnable {
 		try {
 			IplImage img;
 
-			ROIManipulator roi = new ROIManipulator(camera);
-			PropertiesOperations prop = new PropertiesOperations(roi);
+//			ROIManipulator roi = new ROIManipulator(camera);//TODO move initialization to frame
+//			PropertiesOperations prop = new PropertiesOperations(roi);
 
+//			prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, selectedPropertiesFile);// "config.properties"
+			//TODO if wscombo active here
+			KeyController keyController = new KeyController();
 			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
-			
-			prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, selectedPropertiesFile);// "config.properties"
 			roi.addRoiToList(0, 0.52, wsKey);
 			roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be 1st
 
@@ -94,6 +99,7 @@ public class MainMovement implements Runnable {
 					Mat bgResult = new Mat();
 					movementDetector.processImage(img, bgResult);
 
+					//TODO if wscombo active here
 					int keyWS = keyController.switchKeyToBePressed(wsKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
 					roi.getListRoi().get(roi.getListRoi().size()-1).getKey().setKeyCode(keyWS);
 

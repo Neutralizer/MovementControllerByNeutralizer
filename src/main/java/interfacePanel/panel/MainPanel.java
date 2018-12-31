@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,6 +22,9 @@ import org.bytedeco.javacpp.opencv_videoio.VideoCapture;
 import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.MovementDetector;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
+import bgSubtraction.keyboardControl.KeyController;
+import bgSubtraction.keyboardControl.KeyPressType;
+import bgSubtraction.keyboardControl.SpecialKey;
 import bgSubtraction.main.MainMovement;
 import bgSubtraction.properties.PropertiesOperations;
 
@@ -206,6 +210,8 @@ public class MainPanel extends JFrame{
 			}
 		});
 		
+		//TODO insert tick check for ws combo - boolean isAcive
+		
 		
 	}
 
@@ -232,8 +238,22 @@ public class MainPanel extends JFrame{
 	private void startExecution() {
 		int cameraNum = util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString());
 		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
+		Camera camera = new Camera(cameraNum);
+		roi = new ROIManipulator(camera);
+		prop = new PropertiesOperations(roi);
+		prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, selectedPropFile);// "config.properties"
+
+//		KeyController keyController = new KeyController();// TODO moved
+//		SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
+//		roi.addRoiToList(0, 0.52, wsKey);
+//		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
+		
+//		int keyWS = keyController.switchKeyToBePressed(wsKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
+//		roi.getListRoi().get(roi.getListRoi().size()-1).getKey().setKeyCode(keyWS);
+		
+		
 		try {
-			MainMovement.startAlgorithm(cameraNum, selectedPropFile,detector);
+			MainMovement.startAlgorithm(camera, selectedPropFile,detector, roi);
 		} catch (AWTException e) {
 			e.printStackTrace();//TODO show which is the error
 		}

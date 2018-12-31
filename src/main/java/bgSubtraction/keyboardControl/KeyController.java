@@ -184,7 +184,7 @@ public class KeyController {
 	 */
 	public static void unpressAllRoiButtons(ArrayList<ROI> listRoi) {
 		for (ROI roi : listRoi) {
-			System.out.println("releasing " + roi.getKey().getKeyCode());
+			System.out.println("releasing " + roi.getKey().getKeyCode());//TODO test sysout
 			r.keyRelease(roi.getKey().getKeyCode());
 		}
 	}
