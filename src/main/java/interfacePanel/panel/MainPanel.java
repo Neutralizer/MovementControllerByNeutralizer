@@ -44,11 +44,12 @@ public class MainPanel extends JFrame{
 	// = new JComboBox<String>(
 	// new String[] { "config.properties", "quake.properties" });
 	private JButton buttonStartCamera = new JButton("Start Camera");
-	private JButton buttonCameraProperties = new JButton("Experimental:Camera Properties");
+	private JButton buttonCameraProperties = new JButton("Unstable:Camera Properties");
 	// private JButton buttonLoadPreset= new JButton("Load Preset");
 	String buttonCameraPropertiesHover = "Opens current camera properties - Experimental";
 	String buttonCameraHover = "Starts the camera and the controller";
 	String boxCameraHover = "Shows available cameras";
+	String boxPropertiesHover = "Shows available presets as .properties files in current folder";
 	String erodeHover = "Remove noise from camera input";
 	String dilateHover = "Makes found pixels bigger";
 	String historyHover = "Creates trail from detected pixels";
@@ -94,7 +95,7 @@ public class MainPanel extends JFrame{
 		getContentPane().add(panelMain);
 		JPanel panelForm = new JPanel(new GridBagLayout());
 		panelMain.add(panelForm);
-		GridBagConstraints c = new GridBagConstraints();
+		final GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
 
@@ -103,7 +104,17 @@ public class MainPanel extends JFrame{
 		comboBoxCamera.setToolTipText(boxCameraHover);
 		panelForm.add(comboBoxCamera, c);
 		c.gridy++;
+		comboBoxPresets.setToolTipText(boxPropertiesHover);
 		panelForm.add(comboBoxPresets, c);
+		
+		//when preset is changed fire this
+		comboBoxPresets.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
+				populateKeyTable(c,selectedPropFile); //gridy 6
+			}
+		});
 		
 		sliderTemplate(panelForm, c,sliderErode1,"Erode", erodeHover,2,1);
 		sliderTemplate(panelForm, c,sliderDilate2,"Dilate",dilateHover,2,1);
@@ -195,6 +206,12 @@ public class MainPanel extends JFrame{
 			}
 		});
 		
+		
+	}
+
+	protected void populateKeyTable( GridBagConstraints c, String selectedPropFile) {
+		c.gridx = 0;
+		c.gridy = 6;
 		
 	}
 

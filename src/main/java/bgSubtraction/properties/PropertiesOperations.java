@@ -88,7 +88,7 @@ public class PropertiesOperations {
 			input = new FileInputStream(folderPath + "\\"+ filename);
 //			input = new FileInputStream("REMOVEME.properties");//TODO for prop inside jar
 			if (input == null) {
-				System.err.println("Error - unable to find " + filename);
+				System.err.println("Error - unable to find " + filename);//TODO throw for future displaying of err
 				return;
 			}
 			
