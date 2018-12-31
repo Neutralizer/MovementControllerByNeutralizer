@@ -68,9 +68,10 @@ public class MainMovement implements Runnable {
 			PropertiesOperations prop = new PropertiesOperations(roi);
 
 			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
-			roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be 1st
-			roi.addRoiToList(0, 0.52, wsKey);
+			
 			prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, selectedPropertiesFile);// "config.properties"
+			roi.addRoiToList(0, 0.52, wsKey);
+			roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be 1st
 
 			/**
 			 * roi.addRoiToList(100, 440, 450, 40, KeyEvent.VK_W,
@@ -94,7 +95,7 @@ public class MainMovement implements Runnable {
 					movementDetector.processImage(img, bgResult);
 
 					int keyWS = keyController.switchKeyToBePressed(wsKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
-					roi.getListRoi().get(0).getKey().setKeyCode(keyWS);
+					roi.getListRoi().get(roi.getListRoi().size()-1).getKey().setKeyCode(keyWS);
 
 					roi.executeAllROI(bgResult);
 
