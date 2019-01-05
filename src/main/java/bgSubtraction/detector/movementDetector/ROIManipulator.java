@@ -37,6 +37,7 @@ public class ROIManipulator {
 		list.add(new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
 	}
 
+	//TODO uses 40 size hardcoded value
 	/**
 	 * percentage overload
 	 * 

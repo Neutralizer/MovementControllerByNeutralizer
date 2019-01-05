@@ -1,6 +1,7 @@
 package interfacePanel.panel;
 
 import java.awt.AWTException;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSlider;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -42,6 +45,8 @@ public class MainPanel extends JFrame{
 //	Camera camera;
 	ROIManipulator roi;
 	PropertiesOperations prop;
+	
+	KeyTable kt;
 
 	private JComboBox<String> comboBoxCamera;
 	private JComboBox<String> comboBoxPresets;
@@ -62,6 +67,7 @@ public class MainPanel extends JFrame{
 	JSlider sliderDilate2 = new JSlider(1, 15, 1);
 	JSlider sliderHistory = new JSlider(1, 50, 1);
 	JSlider sliderThresh = new JSlider(1, 100, 16);
+	private boolean started = false;
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -95,9 +101,9 @@ public class MainPanel extends JFrame{
 	}
 
 	private void createView() {
-		JPanel panelMain = new JPanel();
+		final JPanel panelMain = new JPanel();
 		getContentPane().add(panelMain);
-		JPanel panelForm = new JPanel(new GridBagLayout());
+		final JPanel panelForm = new JPanel(new GridBagLayout());
 		panelMain.add(panelForm);
 		final GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
@@ -115,8 +121,8 @@ public class MainPanel extends JFrame{
 		comboBoxPresets.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
-				populateKeyTable(c,selectedPropFile); //gridy 6
+//				String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
+//				populateKeyTable(selectedPropFile,c,panelForm); //gridy 6
 			}
 		});
 		
@@ -211,13 +217,37 @@ public class MainPanel extends JFrame{
 		});
 		
 		//TODO insert tick check for ws combo - boolean isAcive
-		
+		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
+		populateKeyTable(selectedPropFile, c, panelForm);
 		
 	}
 
-	protected void populateKeyTable( GridBagConstraints c, String selectedPropFile) {
-		c.gridx = 0;
-		c.gridy = 6;
+	protected void populateKeyTable(String selectedPropFile,GridBagConstraints c, JPanel panelForm) {
+		
+		
+//		if(started) {
+			c.gridx = 0;
+			c.gridy = 10;
+//			kt.fill(selectedPropFile,c,panelForm);
+			String[] columnNames = new String[] {"Keyboard Key", "Square Location", "Key Type"};
+			JTable table;
+			Object[][] data = {
+				    {"R", "150,250",
+				     "Press"},
+				    {"T", "250,250",
+				     "Press"},
+				    {"C", "0,100",
+				     "Press"}
+				};
+			
+			table = new JTable(data, columnNames);
+			table.setPreferredScrollableViewportSize(new Dimension(200, 100));
+			table.setFillsViewportHeight(true);
+			
+			JScrollPane jsp = new JScrollPane(table);
+			
+			panelForm.add(jsp, c);
+//		}
 		
 	}
 
@@ -243,14 +273,13 @@ public class MainPanel extends JFrame{
 		prop = new PropertiesOperations(roi);
 		prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, selectedPropFile);// "config.properties"
 
-//		KeyController keyController = new KeyController();// TODO moved
-//		SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
-//		roi.addRoiToList(0, 0.52, wsKey);
-//		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
+		SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
+		roi.addRoiToList(0, 0.52, wsKey);
+		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
 		
-//		int keyWS = keyController.switchKeyToBePressed(wsKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
-//		roi.getListRoi().get(roi.getListRoi().size()-1).getKey().setKeyCode(keyWS);
-		
+//		KeyTable table = new KeyTable(roi);//TODO will container be added
+		kt = new KeyTable(roi);
+		started  = true;
 		
 		try {
 			MainMovement.startAlgorithm(camera, selectedPropFile,detector, roi);

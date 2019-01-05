@@ -8,7 +8,10 @@ package bgSubtraction.keyboardControl;
  */
 public class SpecialKey extends Key {
 
-	private boolean switched;
+	/**
+	 * changed to static, because there is only 1 special key
+	 */
+	private static boolean switched;
 	private long startTimer;
 	private int keyLimiter;
 
@@ -45,8 +48,8 @@ public class SpecialKey extends Key {
 		this.keyLimiter = 1000;
 	}
 
-	public boolean getSwitched() {
-		return this.switched;
+	public static boolean getSwitched() {
+		return switched;
 	}
 
 	/**

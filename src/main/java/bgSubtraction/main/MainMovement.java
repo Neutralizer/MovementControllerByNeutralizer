@@ -72,11 +72,11 @@ public class MainMovement implements Runnable {
 //			PropertiesOperations prop = new PropertiesOperations(roi);
 
 //			prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, selectedPropertiesFile);// "config.properties"
-			//TODO if wscombo active here
 			KeyController keyController = new KeyController();
-			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
-			roi.addRoiToList(0, 0.52, wsKey);
-			roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be 1st
+//			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
+//			//TODO if wscombo active here - remove roi when ws combo is false
+//			roi.addRoiToList(0, 0.52, wsKey);
+//			roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be 1st
 
 			/**
 			 * roi.addRoiToList(100, 440, 450, 40, KeyEvent.VK_W,
@@ -100,7 +100,7 @@ public class MainMovement implements Runnable {
 					movementDetector.processImage(img, bgResult);
 
 					//TODO if wscombo active here
-					int keyWS = keyController.switchKeyToBePressed(wsKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
+					int keyWS = keyController.switchKeyToBePressed(SpecialKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
 					roi.getListRoi().get(roi.getListRoi().size()-1).getKey().setKeyCode(keyWS);
 
 					roi.executeAllROI(bgResult);
