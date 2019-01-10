@@ -68,6 +68,10 @@ public class MainPanel extends JFrame{
 	JSlider sliderHistory = new JSlider(1, 50, 1);
 	JSlider sliderThresh = new JSlider(1, 100, 16);
 	private boolean started = false;
+	GridBagConstraints c;
+	JPanel panelMain;
+	JPanel panelForm;
+	
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -101,11 +105,11 @@ public class MainPanel extends JFrame{
 	}
 
 	private void createView() {
-		final JPanel panelMain = new JPanel();
+		panelMain = new JPanel();
 		getContentPane().add(panelMain);
-		final JPanel panelForm = new JPanel(new GridBagLayout());
+		panelForm = new JPanel(new GridBagLayout());
 		panelMain.add(panelForm);
-		final GridBagConstraints c = new GridBagConstraints();
+		c= new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
 
@@ -217,39 +221,44 @@ public class MainPanel extends JFrame{
 		});
 		
 		//TODO insert tick check for ws combo - boolean isAcive
-		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
-		populateKeyTable(selectedPropFile, c, panelForm);
-		
+//		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
+//		populateKeyTable(selectedPropFile);
+
 	}
 
-	protected void populateKeyTable(String selectedPropFile,GridBagConstraints c, JPanel panelForm) {
-		
-		
-//		if(started) {
-			c.gridx = 0;
-			c.gridy = 10;
-//			kt.fill(selectedPropFile,c,panelForm);
-			String[] columnNames = new String[] {"Keyboard Key", "Square Location", "Key Type"};
-			JTable table;
-			Object[][] data = {
-				    {"R", "150,250",
-				     "Press"},
-				    {"T", "250,250",
-				     "Press"},
-				    {"C", "0,100",
-				     "Press"}
-				};
-			
-			table = new JTable(data, columnNames);
-			table.setPreferredScrollableViewportSize(new Dimension(200, 100));
-			table.setFillsViewportHeight(true);
-			
-			JScrollPane jsp = new JScrollPane(table);
-			
-			panelForm.add(jsp, c);
-//		}
-		
-	}
+//	protected void populateKeyTable(String selectedPropFile) {
+//		
+//		
+////		if(started) {
+//			c.gridx = 0;
+//			c.gridy = 10;
+////			kt.fill(selectedPropFile,c,panelForm);
+//			String[] columnNames = new String[] {"Keyboard Key", "Square Location", "Key Type"};
+//			JTable table;
+//			Object[][] data = {
+//				    {"R", "150,250",
+//				     "Press"},
+//				    {"T", "250,250",
+//				     "Press"},
+//				    {"C", "0,100",
+//				     "Press"}
+//				};
+//			
+//			table = new JTable(data, columnNames);
+//			table.setPreferredScrollableViewportSize(new Dimension(200, 100));
+//			table.setFillsViewportHeight(true);
+//			
+//			JScrollPane jsp = new JScrollPane(table);
+////			table = new JTable(2, 2);
+//			
+//			panelForm.add(jsp, c);
+//			this.pack();
+////			panelForm.remove(jsp);
+////			panelForm.add(new JScrollPane(table), c);
+//
+////		}
+//		
+//	}
 
 	private void sliderTemplate(JPanel panelForm, GridBagConstraints c,JSlider slider, String labelName, String tooltip, int majorSpacing,int minorSpacing) {
 		c.gridy++;
@@ -277,9 +286,10 @@ public class MainPanel extends JFrame{
 		roi.addRoiToList(0, 0.52, wsKey);
 		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
 		
-//		KeyTable table = new KeyTable(roi);//TODO will container be added
 		kt = new KeyTable(roi);
-		started  = true;
+		
+		kt.fill(selectedPropFile, c, panelForm);
+		this.pack();
 		
 		try {
 			MainMovement.startAlgorithm(camera, selectedPropFile,detector, roi);

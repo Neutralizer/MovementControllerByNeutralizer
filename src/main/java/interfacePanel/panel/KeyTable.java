@@ -15,7 +15,8 @@ import bgSubtraction.detector.movementDetector.ROIManipulator;
  * @author Tsvetan "Neutralizer" Trifonov
  *
  */
-public class KeyTable {
+@SuppressWarnings("serial")
+public class KeyTable extends JTable{
 	
 	String[] columnNames;
 	ROIManipulator roi;
@@ -27,6 +28,9 @@ public class KeyTable {
 	}
 	
 	public void fill(String selectedPropFile, GridBagConstraints c, JPanel panelForm) {
+//		c.anchor = GridBagConstraints.CENTER;
+		c.gridx = 0;
+		c.gridy = 10;
 		
 		Object[][] data = {
 			    {"R", "150,250",
