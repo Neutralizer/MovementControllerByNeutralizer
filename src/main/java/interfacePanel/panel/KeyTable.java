@@ -2,12 +2,14 @@ package interfacePanel.panel;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 
+import bgSubtraction.detector.movementDetector.ROI;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
 
 /**
@@ -31,6 +33,8 @@ public class KeyTable extends JTable{
 //		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 0;
 		c.gridy = 10;
+		
+		ArrayList<ROI> listRoi = roi.getListRoi();
 		
 		Object[][] data = {
 			    {"R", "150,250",

@@ -27,16 +27,17 @@ public class MainMovement implements Runnable {
 	private Display display;
 	private MovementDetector movementDetector;
 	ROIManipulator roi;//TODO new addition
+	boolean useWS;//TODO new addition ws
 //	private KeyController keyController;
 //	private static String selectedPropertiesFile;// TODO make it not static
 
-	public static void startAlgorithm(Camera camera, String selectedPropFile, MovementDetector detector, ROIManipulator roi)
+	public static void startAlgorithm(Camera camera, String selectedPropFile, MovementDetector detector, ROIManipulator roi, boolean useWS)
 			throws AWTException {
 		Display display = new Display();
 		MovementDetector movementDetector = detector;
 //		KeyController keyController = new KeyController();// TODO may be moved to mpanel to access keys and roi creation
 //		selectedPropertiesFile = selectedPropFile;//TODO moved
-		MainMovement movementDetectorMain = new MainMovement(camera, display, movementDetector, roi
+		MainMovement movementDetectorMain = new MainMovement(camera, display, movementDetector, roi, useWS
 //				, keyController
 				);
 		Thread th = new Thread(movementDetectorMain);
@@ -49,7 +50,7 @@ public class MainMovement implements Runnable {
 		});
 	}
 
-	public MainMovement(Camera camera, Display display, MovementDetector movementDetector, ROIManipulator roi
+	public MainMovement(Camera camera, Display display, MovementDetector movementDetector, ROIManipulator roi, boolean useWS
 //			,KeyController keyController
 			) {
 		this.camera = camera;
@@ -100,9 +101,10 @@ public class MainMovement implements Runnable {
 					movementDetector.processImage(img, bgResult);
 
 					//TODO if wscombo active here
+					if(useWS) {
 					int keyWS = keyController.switchKeyToBePressed(SpecialKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
 					roi.getListRoi().get(roi.getListRoi().size()-1).getKey().setKeyCode(keyWS);
-
+					}
 					roi.executeAllROI(bgResult);
 
 					display.drawAllROI(roi.getListRoi(), bgResult);

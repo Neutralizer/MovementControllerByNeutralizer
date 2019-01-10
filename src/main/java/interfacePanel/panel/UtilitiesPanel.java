@@ -14,6 +14,7 @@ import com.github.sarxos.webcam.Webcam;
 public class UtilitiesPanel {
 
 	public static final String FILE_DIR = System.getProperty("user.dir");//--"c:\\MovementController\\";
+	//TODO filedir may not be used - remove when folder loading is finalized
 	public static final String FILE_TEXT_EXT = ".properties";
 
 	public String[] listFile(String folder) {
@@ -37,7 +38,7 @@ public class UtilitiesPanel {
 		return list;
 	}
 
-	public class GenericExtFilter implements FilenameFilter {
+	private class GenericExtFilter implements FilenameFilter {
 
 		private String ext;
 

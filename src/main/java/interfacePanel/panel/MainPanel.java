@@ -71,6 +71,7 @@ public class MainPanel extends JFrame{
 	GridBagConstraints c;
 	JPanel panelMain;
 	JPanel panelForm;
+	private boolean useWS = true;//TODO not dynamically changed
 	
 
 	public static void main(String[] args) {
@@ -282,17 +283,18 @@ public class MainPanel extends JFrame{
 		prop = new PropertiesOperations(roi);
 		prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, selectedPropFile);// "config.properties"
 
+		if(useWS) {
 		SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
 		roi.addRoiToList(0, 0.52, wsKey);
 		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
-		
+		}
 		kt = new KeyTable(roi);
 		
 		kt.fill(selectedPropFile, c, panelForm);
 		this.pack();
 		
 		try {
-			MainMovement.startAlgorithm(camera, selectedPropFile,detector, roi);
+			MainMovement.startAlgorithm(camera, selectedPropFile,detector, roi, useWS);
 		} catch (AWTException e) {
 			e.printStackTrace();//TODO show which is the error
 		}

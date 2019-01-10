@@ -32,8 +32,9 @@ public class PropertiesOperations {
 //	 // cl.loadPropertiesFile("config.properties");
 //	 cl.createPropFile(UtilitiesPanel.FILE_DIR,"config.properties");
 //	 }
-
-	public PropertiesOperations() {
+	
+	//TODO should not be used 
+	private PropertiesOperations() {
 		
 	}
 	
@@ -83,6 +84,12 @@ public class PropertiesOperations {
 		prop.setProperty(key, f[0] + "," + f[1] + "," + f[2] + "," + f[3] + "," + f[4] + "," + f[5] + "");
 	}
 	
+	
+	/**
+	 * Loads properties file and populates given ROIManipulator object with values from the prop file
+	 * @param folderPath
+	 * @param filename
+	 */
 	public void loadPropertiesFile(String folderPath, String filename) {
 		try {
 			input = new FileInputStream(folderPath + "\\"+ filename);
