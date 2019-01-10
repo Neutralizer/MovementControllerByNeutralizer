@@ -146,11 +146,11 @@ public class ROIManipulator {
 		int heightLength = point2 + point4;
 		
 		if (!isWithinCameraRangeWidth(widthLength)) {
-			throw new IllegalStateException("ROI Width (Vertical) length is not in range");
+			throw new IllegalStateException("ROI Width (Horisontal) length is not in range");
 		}
 
 		if (!isWithinCameraRangeHeight(heightLength)) {
-			throw new IllegalStateException("ROI Height (Horisontal) length is not in range");
+			throw new IllegalStateException("ROI Height (Vertical) length is not in range");
 		}
 	}
 

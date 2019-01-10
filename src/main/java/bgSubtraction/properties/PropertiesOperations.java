@@ -33,11 +33,6 @@ public class PropertiesOperations {
 //	 cl.createPropFile(UtilitiesPanel.FILE_DIR,"config.properties");
 //	 }
 	
-	//TODO should not be used 
-	private PropertiesOperations() {
-		
-	}
-	
 	public PropertiesOperations(ROIManipulator roiObj) {
 		super();
 		this.roiObj = roiObj;
@@ -90,7 +85,7 @@ public class PropertiesOperations {
 	 * @param folderPath
 	 * @param filename
 	 */
-	public void loadPropertiesFile(String folderPath, String filename) {
+	public void loadPropertiesFileIntoInternalRoiManipulator(String folderPath, String filename) {
 		try {
 			input = new FileInputStream(folderPath + "\\"+ filename);
 //			input = new FileInputStream("REMOVEME.properties");//TODO for prop inside jar

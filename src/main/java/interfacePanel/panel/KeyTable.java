@@ -29,7 +29,7 @@ public class KeyTable extends JTable{
 		this.roi = roi; 
 	}
 	
-	public void fill(String selectedPropFile, GridBagConstraints c, JPanel panelForm) {
+	public void fill(GridBagConstraints c, JPanel panelForm) {
 //		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 0;
 		c.gridy = 10;

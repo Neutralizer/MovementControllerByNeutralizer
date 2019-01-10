@@ -280,8 +280,8 @@ public class MainPanel extends JFrame{
 		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
 		Camera camera = new Camera(cameraNum);
 		roi = new ROIManipulator(camera);
-		prop = new PropertiesOperations(roi);
-		prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, selectedPropFile);// "config.properties"
+		prop = new PropertiesOperations(roi);//cpp way - give obj and populate it
+		prop.loadPropertiesFileIntoInternalRoiManipulator(UtilitiesPanel.FILE_DIR, selectedPropFile);// "config.properties"
 
 		if(useWS) {
 		SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
@@ -290,7 +290,7 @@ public class MainPanel extends JFrame{
 		}
 		kt = new KeyTable(roi);
 		
-		kt.fill(selectedPropFile, c, panelForm);
+		kt.fill(c, panelForm);
 		this.pack();
 		
 		try {
@@ -307,7 +307,7 @@ public class MainPanel extends JFrame{
 		Camera camera = new Camera(cameraNum);
 		roi = new ROIManipulator(camera);
 		prop = new PropertiesOperations(roi);
-		prop.loadPropertiesFile(UtilitiesPanel.FILE_DIR, comboBoxPresets.getSelectedItem().toString());
+		prop.loadPropertiesFileIntoInternalRoiManipulator(UtilitiesPanel.FILE_DIR, comboBoxPresets.getSelectedItem().toString());
 	}
 
 }
