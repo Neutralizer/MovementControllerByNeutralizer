@@ -87,7 +87,8 @@ public class KeyController {
 	 *            - how long should the key be pressed for
 	 * @param isToggle
 	 *            - is the button meant to be pressed as toggle - SHIFT in a game
-	 *            for ex;
+	 *            for ex; 
+	 *            //TODO REDESIGNED - toggle key logic is in keyController.pressHoldAndRelease
 	 * 
 	 * @return the time when the key was pressed - 0 if not pressed
 	 */

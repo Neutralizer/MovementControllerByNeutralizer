@@ -71,7 +71,7 @@ public class MainPanel extends JFrame{
 	GridBagConstraints c;
 	JPanel panelMain;
 	JPanel panelForm;
-	private boolean useWS = true;//TODO not dynamically changed
+	private boolean useWS = false;//TODO not dynamically changed
 	
 
 	public static void main(String[] args) {
@@ -288,7 +288,7 @@ public class MainPanel extends JFrame{
 		roi.addRoiToList(0, 0.52, wsKey);
 		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
 		}
-		kt = new KeyTable(roi);
+		kt = new KeyTable(roi,selectedPropFile);
 		
 		kt.fill(c, panelForm);
 		this.pack();

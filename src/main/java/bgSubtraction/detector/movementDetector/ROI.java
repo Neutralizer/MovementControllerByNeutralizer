@@ -23,6 +23,11 @@ public class ROI {
 	private Key key;
 	private MovementDetector movementDetector = new MovementDetector();
 	
+	/**
+	 * square size - 40 x 40 px 
+	 * @param coordinate
+	 * @param key
+	 */
 	public ROI(Point coordinate, Key key) {
 		percentageToDetect = 20;//normal detection //10 for night mode ; 50 for normal mode
 		this.coordinate = coordinate;

@@ -5,6 +5,10 @@ package bgSubtraction.keyboardControl;
  * @author Tsvetan "Neutralizer" Trifonov
  *
  */
+/**
+ * @author Tsvetan "Neutralizer" Trifonov
+ *
+ */
 public class Key {
 
 	protected int keyCode;
@@ -31,6 +35,14 @@ public class Key {
 
 	public void setKeyCode(int keyCode) {
 		this.keyCode = keyCode;
+	}
+	
+	public KeyPressType getKeyPressType() {
+		return keyPressType;
+	}
+
+	public void setKeyPressType(KeyPressType keyPressType) {
+		this.keyPressType = keyPressType;
 	}
 
 	/**
