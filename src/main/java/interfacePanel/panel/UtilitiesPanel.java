@@ -32,7 +32,7 @@ public class UtilitiesPanel {
 
 		if (list.length == 0) {
 			//no files found
-			return list;
+			return list;//TODO throw 
 		}
 
 		return list;
