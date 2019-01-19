@@ -73,7 +73,7 @@ public class KeyTable extends JTable {
         
         table.setBackground(Color.LIGHT_GRAY);
         table.setForeground(Color.black);
-        Font font = new Font("",1,22);
+        Font font = new Font("",1,12);//TODO choose appropriate font and size
         table.setFont(font);
         table.setRowHeight(30);
         
@@ -81,6 +81,9 @@ public class KeyTable extends JTable {
         final JComboBox<String> keyDropdown = comboBoxKeyName;//TODO remove final
 
         final JTextField locText= new JTextField();
+        
+//        JButton locText = new JButton("Choose Location");//TODO change variable
+        
 //      final JTextField typeText = new JTextField();
         final JComboBox<String> typeDropdown = comboBoxKeyType;//TODO remove final
 

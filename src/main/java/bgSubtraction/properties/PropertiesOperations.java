@@ -148,6 +148,11 @@ public class PropertiesOperations {
 		}
 	}
 	
+	/**
+	 * if percentage values are used
+	 * @param result
+	 * @return
+	 */
 	private float[] convertToFloat(String[] result) {
 		float resultInt[] = new float[result.length];
 		for (int i = 0; i < resultInt.length; i++) {
@@ -156,6 +161,11 @@ public class PropertiesOperations {
 		return resultInt;
 	}
 
+	/**
+	 * if no percentage values are used
+	 * @param result
+	 * @return
+	 */
 	private int[] convertToInt(String[] result) {
 		int resultInt[] = new int[result.length];
 		for (int i = 0; i < resultInt.length; i++) {
