@@ -135,7 +135,7 @@ public class KeyTable extends JTable {
         
         JScrollPane pane = new JScrollPane(table);
         
-        locText.setPreferredSize(new Dimension(70, 20));//TODO make it look better
+        locText.setPreferredSize(new Dimension(70, 20));//TODO make it look bette r
         locText.setEditable(false);
         locText.setToolTipText(locationSelectionTooltip );
         
