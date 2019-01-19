@@ -290,7 +290,8 @@ public class MainPanel extends JFrame{
 		}
 		kt = new KeyTable(roi,selectedPropFile);
 		
-		kt.fill(c, panelForm);
+//		kt.fill(c, panelForm);
+		kt.createTable(c,panelForm);
 		this.pack();
 		
 		try {
