@@ -76,17 +76,11 @@ public class KeyTable extends JTable {
         Font font = new Font("",1,12);//TODO choose appropriate font and size
         table.setFont(font);
         table.setRowHeight(30);
-        
-//        final JTextField keyText = new JTextField();
-        final JComboBox<String> keyDropdown = comboBoxKeyName;//TODO remove final
 
         final JTextField locText= new JTextField();
         
 //        JButton locText = new JButton("Choose Location");//TODO change variable
         
-//      final JTextField typeText = new JTextField();
-        final JComboBox<String> typeDropdown = comboBoxKeyType;//TODO remove final
-
         JButton btnAdd = new JButton("Add");
         JButton btnDelete = new JButton("Delete");
         JButton btnUpdate = new JButton("Update");   
@@ -99,7 +93,7 @@ public class KeyTable extends JTable {
         
         c.gridx = 0;
 		c.gridy = 15;
-        frame.add(keyDropdown,c);
+        frame.add(comboBoxKeyName,c);
         
         c.gridx = 0;
 		c.gridy = 16;
@@ -107,7 +101,7 @@ public class KeyTable extends JTable {
         
         c.gridx = 0;
 		c.gridy = 17;
-        frame.add(typeDropdown,c);
+        frame.add(comboBoxKeyType,c);
     
         // add JButtons to the jframe
         
@@ -131,7 +125,7 @@ public class KeyTable extends JTable {
             public void actionPerformed(ActionEvent e) {
              
 //                row[0] = keyText.getText();
-            	row[0] = keyDropdown.getSelectedItem().toString();
+            	row[0] = comboBoxKeyName.getSelectedItem().toString();
             	
                 row[1] = locText.getText();
 //                row[2] = typeText.getText();//TODO check if next works
@@ -169,11 +163,11 @@ public class KeyTable extends JTable {
             int i = table.getSelectedRow();
             if(i >= 0) {
 //            keyText.setText(model.getValueAt(i, 0).toString());
-            keyDropdown.setSelectedItem(model.getValueAt(i, 0));
+            comboBoxKeyName.setSelectedItem(model.getValueAt(i, 0));
             	
             locText.setText(model.getValueAt(i, 1).toString());
 //            typeText.setText(model.getValueAt(i, 2).toString());//TODO check if next works
-            typeDropdown.setSelectedItem(model.getValueAt(i, 2));
+            comboBoxKeyType.setSelectedItem(model.getValueAt(i, 2));
             }
         }
         });
@@ -189,10 +183,10 @@ public class KeyTable extends JTable {
                 if(i >= 0) {
 //                   model.setValueAt(keyText.getText(), i, 0);
                 	
-                	model.setValueAt(keyDropdown.getSelectedItem().toString(), i, 0);
+                	model.setValueAt(comboBoxKeyName.getSelectedItem().toString(), i, 0);
                    model.setValueAt(locText.getText(), i, 1);
 //                   model.setValueAt(typeText.getText(), i, 2);//TODO check if next works
-                   model.setValueAt(typeDropdown.getSelectedItem().toString(), i, 2);
+                   model.setValueAt(comboBoxKeyType.getSelectedItem().toString(), i, 2);
                 }
                 else{
                     System.out.println("Update Error");
