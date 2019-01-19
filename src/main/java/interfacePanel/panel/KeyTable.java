@@ -77,9 +77,12 @@ public class KeyTable extends JTable {
         table.setFont(font);
         table.setRowHeight(30);
         
-        final JTextField keyText = new JTextField();
+//        final JTextField keyText = new JTextField();
+        final JComboBox<String> keyDropdown = comboBoxKeyName;//TODO remove final
+
         final JTextField locText= new JTextField();
-        final JTextField typeText = new JTextField();
+//      final JTextField typeText = new JTextField();
+        final JComboBox<String> typeDropdown = comboBoxKeyType;//TODO remove final
 
         JButton btnAdd = new JButton("Add");
         JButton btnDelete = new JButton("Delete");
@@ -87,15 +90,13 @@ public class KeyTable extends JTable {
         
         JScrollPane pane = new JScrollPane(table);
         
-        keyText.setSize(new Dimension(50,20));
-        
-//      frame.setLayout(null);//TODO maybe will look better?
+//        keyText.setPreferredSize(new Dimension(40, 20));
         
         frame.add(pane,c);
         
         c.gridx = 0;
 		c.gridy = 15;
-        frame.add(keyText,c);
+        frame.add(keyDropdown,c);
         
         c.gridx = 0;
 		c.gridy = 16;
@@ -103,7 +104,7 @@ public class KeyTable extends JTable {
         
         c.gridx = 0;
 		c.gridy = 17;
-        frame.add(typeText,c);
+        frame.add(typeDropdown,c);
     
         // add JButtons to the jframe
         
@@ -126,9 +127,12 @@ public class KeyTable extends JTable {
             @Override
             public void actionPerformed(ActionEvent e) {
              
-                row[0] = keyText.getText();
+//                row[0] = keyText.getText();
+            	row[0] = keyDropdown.getSelectedItem().toString();
+            	
                 row[1] = locText.getText();
-                row[2] = typeText.getText();
+//                row[2] = typeText.getText();//TODO check if next works
+                row[2] = comboBoxKeyType.getSelectedItem().toString();//get name or arr index
                 
                 // add row to the model
                 model.addRow(row);
@@ -161,9 +165,12 @@ public class KeyTable extends JTable {
             // i = the index of the selected row
             int i = table.getSelectedRow();
             if(i >= 0) {
-            keyText.setText(model.getValueAt(i, 0).toString());
+//            keyText.setText(model.getValueAt(i, 0).toString());
+            keyDropdown.setSelectedItem(model.getValueAt(i, 0));
+            	
             locText.setText(model.getValueAt(i, 1).toString());
-            typeText.setText(model.getValueAt(i, 2).toString());
+//            typeText.setText(model.getValueAt(i, 2).toString());//TODO check if next works
+            typeDropdown.setSelectedItem(model.getValueAt(i, 2));
             }
         }
         });
@@ -177,9 +184,12 @@ public class KeyTable extends JTable {
                 int i = table.getSelectedRow();
                 
                 if(i >= 0) {
-                   model.setValueAt(keyText.getText(), i, 0);
+//                   model.setValueAt(keyText.getText(), i, 0);
+                	
+                	model.setValueAt(keyDropdown.getSelectedItem().toString(), i, 0);
                    model.setValueAt(locText.getText(), i, 1);
-                   model.setValueAt(typeText.getText(), i, 2);
+//                   model.setValueAt(typeText.getText(), i, 2);//TODO check if next works
+                   model.setValueAt(typeDropdown.getSelectedItem().toString(), i, 2);
                 }
                 else{
                     System.out.println("Update Error");

@@ -106,6 +106,7 @@ public class MainPanel extends JFrame{
 	}
 
 	private void createView() {
+//      frame.setLayout(null);//TODO maybe will look better?
 		panelMain = new JPanel();
 		getContentPane().add(panelMain);
 		panelForm = new JPanel(new GridBagLayout());
