@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,8 +22,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import org.bytedeco.javacv.CanvasFrame;
+
 import bgSubtraction.detector.movementDetector.ROI;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
+import bgSubtraction.display.Display;
 import bgSubtraction.keyboardControl.Key;
 import bgSubtraction.keyboardControl.KeyPressType;
 
@@ -34,17 +38,31 @@ import bgSubtraction.keyboardControl.KeyPressType;
 @SuppressWarnings("serial")
 public class KeyTable extends JTable {
 
+	Display display;
+	java.awt.Point clicked = null;
 	AllowedKeys allowedKeysObject;
 	String[] columnNames;
-	// KeyPressType[] keyPressType;
 	ROIManipulator roi;
 	String currentPropFile;
 	JTable table;
+	
 	JComboBox<String> comboBoxKeyName;
 	JComboBox<String> comboBoxKeyType;
+	JTextField locText;
+	JButton btnAdd;
+	JButton btnDelete;
+	JButton btnUpdate;
+	private String locationSelectionTooltip = "Click on the video feed to select square location";
 
-	public KeyTable(ROIManipulator roi, String currentPropFile) {
+	/**
+	 * 
+	 * @param display - needed to get the coordinates from display for roi square manipulation
+	 * @param roi
+	 * @param currentPropFile
+	 */
+	public KeyTable(Display display, ROIManipulator roi, String currentPropFile) {
 
+		this.display = display;
 		allowedKeysObject = new AllowedKeys();
 		comboBoxKeyName = new JComboBox<String>(allowedKeysObject.getAllowedKeys());
 		columnNames = new String[] { "Keyboard Key", "Square Location", "Key Type" };
@@ -52,10 +70,42 @@ public class KeyTable extends JTable {
 		this.currentPropFile = currentPropFile;
 		comboBoxKeyType = new JComboBox<String>(new String[] { KeyPressType.CONSTANT.toString(),
 				KeyPressType.PRESS.toString(), KeyPressType.TOGGLE.toString() });
-		// keyPressType = new KeyPressType[] { KeyPressType.CONSTANT,
-		// KeyPressType.PRESS, KeyPressType.TOGGLE };
-		// TODO get its index and transform for key creation
+		attachMouseListener(display.getFrame());
 
+	}
+	
+	/**
+	 * attaches listener to get square location from video feed frame
+	 * @param frame
+	 */
+	public void attachMouseListener(CanvasFrame frame) {
+		frame.getCanvas().addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int x = e.getX();
+				int y = e.getY();
+				clicked = new java.awt.Point(x, y);
+				locText.setText(clicked.x + "," + clicked.y);
+				System.out.println("enters");//TOOD debug test
+				System.out.println("X:" + x + " Y:" + y);
+			}
+		});
 	}
 
 	
@@ -77,17 +127,17 @@ public class KeyTable extends JTable {
         table.setFont(font);
         table.setRowHeight(30);
 
-        final JTextField locText= new JTextField();
+        locText = new JTextField();
         
-//        JButton locText = new JButton("Choose Location");//TODO change variable
-        
-        JButton btnAdd = new JButton("Add");
-        JButton btnDelete = new JButton("Delete");
-        JButton btnUpdate = new JButton("Update");   
+        btnAdd = new JButton("Add");
+        btnDelete = new JButton("Delete");
+        btnUpdate = new JButton("Update");   
         
         JScrollPane pane = new JScrollPane(table);
         
-//        keyText.setPreferredSize(new Dimension(40, 20));
+        locText.setPreferredSize(new Dimension(70, 20));//TODO make it look better
+        locText.setEditable(false);
+        locText.setToolTipText(locationSelectionTooltip );
         
         frame.add(pane,c);
         
@@ -97,7 +147,7 @@ public class KeyTable extends JTable {
         
         c.gridx = 0;
 		c.gridy = 16;
-        frame.add(locText,c); // TODO replace with key to get the loc
+        frame.add(locText,c); 
         
         c.gridx = 0;
 		c.gridy = 17;
@@ -124,10 +174,14 @@ public class KeyTable extends JTable {
             @Override
             public void actionPerformed(ActionEvent e) {
              
-//                row[0] = keyText.getText();
             	row[0] = comboBoxKeyName.getSelectedItem().toString();
             	
-                row[1] = locText.getText();
+            	
+            	if(clicked != null) {
+            		row[1] = locText.getText();
+            	}
+                
+                
 //                row[2] = typeText.getText();//TODO check if next works
                 row[2] = comboBoxKeyType.getSelectedItem().toString();//get name or arr index
                 
@@ -184,7 +238,10 @@ public class KeyTable extends JTable {
 //                   model.setValueAt(keyText.getText(), i, 0);
                 	
                 	model.setValueAt(comboBoxKeyName.getSelectedItem().toString(), i, 0);
-                   model.setValueAt(locText.getText(), i, 1);
+                	if(clicked != null) {
+                        model.setValueAt(locText.getText(), i, 1);
+
+                	}
 //                   model.setValueAt(typeText.getText(), i, 2);//TODO check if next works
                    model.setValueAt(comboBoxKeyType.getSelectedItem().toString(), i, 2);
                 }

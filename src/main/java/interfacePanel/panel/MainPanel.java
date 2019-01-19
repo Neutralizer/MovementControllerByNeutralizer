@@ -25,6 +25,7 @@ import org.bytedeco.javacpp.opencv_videoio.VideoCapture;
 import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.MovementDetector;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
+import bgSubtraction.display.Display;
 import bgSubtraction.keyboardControl.KeyController;
 import bgSubtraction.keyboardControl.KeyPressType;
 import bgSubtraction.keyboardControl.SpecialKey;
@@ -228,40 +229,6 @@ public class MainPanel extends JFrame{
 
 	}
 
-//	protected void populateKeyTable(String selectedPropFile) {
-//		
-//		
-////		if(started) {
-//			c.gridx = 0;
-//			c.gridy = 10;
-////			kt.fill(selectedPropFile,c,panelForm);
-//			String[] columnNames = new String[] {"Keyboard Key", "Square Location", "Key Type"};
-//			JTable table;
-//			Object[][] data = {
-//				    {"R", "150,250",
-//				     "Press"},
-//				    {"T", "250,250",
-//				     "Press"},
-//				    {"C", "0,100",
-//				     "Press"}
-//				};
-//			
-//			table = new JTable(data, columnNames);
-//			table.setPreferredScrollableViewportSize(new Dimension(200, 100));
-//			table.setFillsViewportHeight(true);
-//			
-//			JScrollPane jsp = new JScrollPane(table);
-////			table = new JTable(2, 2);
-//			
-//			panelForm.add(jsp, c);
-//			this.pack();
-////			panelForm.remove(jsp);
-////			panelForm.add(new JScrollPane(table), c);
-//
-////		}
-//		
-//	}
-
 	private void sliderTemplate(JPanel panelForm, GridBagConstraints c,JSlider slider, String labelName, String tooltip, int majorSpacing,int minorSpacing) {
 		c.gridy++;
 		c.anchor = GridBagConstraints.ABOVE_BASELINE;
@@ -280,6 +247,7 @@ public class MainPanel extends JFrame{
 		int cameraNum = util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString());
 		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
 		Camera camera = new Camera(cameraNum);
+		Display display = new Display();
 		roi = new ROIManipulator(camera);
 		prop = new PropertiesOperations(roi);//cpp way - give obj and populate it
 		prop.loadPropertiesFileIntoInternalRoiManipulator(UtilitiesPanel.FILE_DIR, selectedPropFile);// "config.properties"
@@ -289,14 +257,14 @@ public class MainPanel extends JFrame{
 		roi.addRoiToList(0, 0.52, wsKey);
 		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
 		}
-		kt = new KeyTable(roi,selectedPropFile);
+		kt = new KeyTable(display,roi,selectedPropFile);
 		
 //		kt.fill(c, panelForm);
 		kt.createTable(c,panelForm);
 		this.pack();
 		
 		try {
-			MainMovement.startAlgorithm(camera, selectedPropFile,detector, roi, useWS);
+			MainMovement.startAlgorithm(camera, display, selectedPropFile,detector, roi, useWS);
 		} catch (AWTException e) {
 			e.printStackTrace();//TODO show which is the error
 		}

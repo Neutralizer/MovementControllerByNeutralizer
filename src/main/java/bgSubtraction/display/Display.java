@@ -36,7 +36,15 @@ public class Display {
 		converter = new OpenCVFrameConverter.ToIplImage();
 		frame = createNewFrame("Movement", new java.awt.Point(0, 0));
 		frame.setSize(640, 480);
-		attachMouseListener();
+//		attachMouseListener();//TODO moved in jtable to get square location
+	}
+
+	/**
+	 * passed to jtable to get square location info easily
+	 * @return
+	 */
+	public CanvasFrame getFrame() {
+		return frame;
 	}
 
 	private CanvasFrame createNewFrame(String name, java.awt.Point location) {
@@ -85,34 +93,34 @@ public class Display {
 		return img;
 	}
 
-	public void attachMouseListener() {
-		frame.getCanvas().addMouseListener(new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int x = e.getX();
-				int y = e.getY();
-				System.out.println("enters");
-				System.out.println("X:" + x + " Y:" + y);
-				frame.setTitle("X:" + x + " Y:" + y);
-			}
-		});
-	}
+//	public void attachMouseListener() {
+//		frame.getCanvas().addMouseListener(new MouseListener() {
+//			@Override
+//			public void mouseReleased(MouseEvent e) {
+//			}
+//
+//			@Override
+//			public void mousePressed(MouseEvent e) {
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//			}
+//
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//			}
+//
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				int x = e.getX();
+//				int y = e.getY();
+//				clicked = new java.awt.Point(x, y);
+//				System.out.println("enters");
+//				System.out.println("X:" + x + " Y:" + y);
+//			}
+//		});
+//	}
 
 	public void drawAllROI(ArrayList<ROI> listRoi, Mat bgResult) {
 		for (ROI roi : listRoi) {

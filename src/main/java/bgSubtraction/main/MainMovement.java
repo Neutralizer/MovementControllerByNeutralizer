@@ -31,9 +31,9 @@ public class MainMovement implements Runnable {
 //	private KeyController keyController;
 //	private static String selectedPropertiesFile;// TODO make it not static
 
-	public static void startAlgorithm(Camera camera, String selectedPropFile, MovementDetector detector, ROIManipulator roi, boolean useWS)
+	public static void startAlgorithm(Camera camera, Display display, String selectedPropFile, MovementDetector detector, ROIManipulator roi, boolean useWS)
 			throws AWTException {
-		Display display = new Display();
+//		Display display = new Display();
 		MovementDetector movementDetector = detector;
 //		KeyController keyController = new KeyController();// TODO may be moved to mpanel to access keys and roi creation
 //		selectedPropertiesFile = selectedPropFile;//TODO moved
