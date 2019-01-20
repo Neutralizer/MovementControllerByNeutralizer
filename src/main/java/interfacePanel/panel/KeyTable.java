@@ -12,7 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -267,37 +266,9 @@ public class KeyTable extends JTable {
         loadTableDataFromListRoi();
 	}
 	
-//	public void fill(GridBagConstraints c, JPanel panelForm) {
-////		c.anchor = GridBagConstraints.SOUTH;
-//		c.gridx = 0;
-//		c.gridy = 10;
-//
-//		Object[][] tableData = loadTableDataFromListRoi();
-//		table = new JTable(tableData, columnNames);
-//		table.setPreferredScrollableViewportSize(new Dimension(200, 100));
-//		table.setFillsViewportHeight(true);
-//
-//		JScrollPane jsp = new JScrollPane(table);
-//
-//		panelForm.add(jsp, c);// TODO remove the old table?
-//	}
-
 	private void loadTableDataFromListRoi() {
 		populateMatrixDropdown(roi.getListRoi());
 	}
-
-//	private Object[][] populateMatrix(ArrayList<ROI> listRoi) {
-//		Object[][] result = new Object[listRoi.size()][columnNames.length];
-//		for (int i = 0; i < listRoi.size(); i++) {
-//			int code = listRoi.get(i).getKey().getKeyCode();
-//			result[i][0] = KeyEvent.getKeyText(code);
-//
-//			Point loc = listRoi.get(i).getCoordinate();
-//			result[i][1] = loc.x + ", " + loc.y;
-//			result[i][2] = listRoi.get(i).getKey().getKeyPressType();
-//		}
-//		return result;
-//	}
 
 	/**
 	 * 
