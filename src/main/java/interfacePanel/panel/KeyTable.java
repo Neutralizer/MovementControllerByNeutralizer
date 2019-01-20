@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import org.bytedeco.javacv.CanvasFrame;
@@ -45,6 +46,7 @@ public class KeyTable extends JTable {
 	ROIManipulator roi;
 	String currentPropFile;
 	JTable table;
+	DefaultTableModel model;
 	
 	JComboBox<String> comboBoxKeyName;
 	JComboBox<String> comboBoxKeyType;
@@ -74,7 +76,9 @@ public class KeyTable extends JTable {
 
 	}
 	
+	//TODO maybe use observer pattern
 	/**
+	 *
 	 * attaches listener to get square location from video feed frame
 	 * @param frame
 	 */
@@ -107,7 +111,7 @@ public class KeyTable extends JTable {
 			}
 		});
 	}
-
+	
 	
 	public void createTable(GridBagConstraints c,JPanel frame) {
 		c.gridx = 0;
@@ -116,7 +120,16 @@ public class KeyTable extends JTable {
         table.setPreferredScrollableViewportSize(new Dimension(400, 100));
 		table.setFillsViewportHeight(true);
         
-        final DefaultTableModel model = new DefaultTableModel();
+		/**
+		 * anonymously overriding only 1 method
+		 */
+		model = new DefaultTableModel() {
+
+			   @Override
+			   public boolean isCellEditable(int row, int column) {
+			       return false;
+			   }
+		};
         model.setColumnIdentifiers(columnNames);
         
         table.setModel(model);
@@ -218,8 +231,9 @@ public class KeyTable extends JTable {
             if(i >= 0) {
 //            keyText.setText(model.getValueAt(i, 0).toString());
             comboBoxKeyName.setSelectedItem(model.getValueAt(i, 0));
-            	
-            locText.setText(model.getValueAt(i, 1).toString());
+            	if(model.getValueAt(i, 1) != null) {
+                    locText.setText(model.getValueAt(i, 1).toString());
+            	}
 //            typeText.setText(model.getValueAt(i, 2).toString());//TODO check if next works
             comboBoxKeyType.setSelectedItem(model.getValueAt(i, 2));
             }
