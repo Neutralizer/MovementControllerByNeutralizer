@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import org.bytedeco.javacv.CanvasFrame;
@@ -265,53 +264,41 @@ public class KeyTable extends JTable {
             }
         });
         
+        loadTableDataFromListRoi();
 	}
 	
-	public void fill(GridBagConstraints c, JPanel panelForm) {
-//		c.anchor = GridBagConstraints.SOUTH;
-		c.gridx = 0;
-		c.gridy = 10;
+//	public void fill(GridBagConstraints c, JPanel panelForm) {
+////		c.anchor = GridBagConstraints.SOUTH;
+//		c.gridx = 0;
+//		c.gridy = 10;
+//
+//		Object[][] tableData = loadTableDataFromListRoi();
+//		table = new JTable(tableData, columnNames);
+//		table.setPreferredScrollableViewportSize(new Dimension(200, 100));
+//		table.setFillsViewportHeight(true);
+//
+//		JScrollPane jsp = new JScrollPane(table);
+//
+//		panelForm.add(jsp, c);// TODO remove the old table?
+//	}
 
-		Object[][] tableData = loadTableDataFromListRoi();
-		table = new JTable(tableData, columnNames);
-		table.setPreferredScrollableViewportSize(new Dimension(200, 100));
-		table.setFillsViewportHeight(true);
-
-		JScrollPane jsp = new JScrollPane(table);
-
-		panelForm.add(jsp, c);// TODO remove the old table?
+	private void loadTableDataFromListRoi() {
+		populateMatrixDropdown(roi.getListRoi());
 	}
 
-	private Object[][] loadTableDataFromListRoi() {
+//	private Object[][] populateMatrix(ArrayList<ROI> listRoi) {
+//		Object[][] result = new Object[listRoi.size()][columnNames.length];
+//		for (int i = 0; i < listRoi.size(); i++) {
+//			int code = listRoi.get(i).getKey().getKeyCode();
+//			result[i][0] = KeyEvent.getKeyText(code);
+//
+//			Point loc = listRoi.get(i).getCoordinate();
+//			result[i][1] = loc.x + ", " + loc.y;
+//			result[i][2] = listRoi.get(i).getKey().getKeyPressType();
+//		}
+//		return result;
+//	}
 
-		ArrayList<ROI> listRoi = roi.getListRoi();
-		System.out.println(Arrays.asList(listRoi.get(0).getCoordinate()));// TODO debug
-		System.out.println(Arrays.asList(listRoi.get(0).getKey().getKeyCode()));// TODO debug
-		System.out.println(Arrays.asList(listRoi.get(0).getKey().getKeyPressType()));// TODO debug
-
-		Object[][] data = populateMatrixDropdown(listRoi);
-
-		// Object[][] data = { { "R", "150,250", "Press" }, { "T", "250,250", "Press" },
-		// { "C", "0,100", "Press" } };
-
-		return data;
-	}
-
-	private Object[][] populateMatrix(ArrayList<ROI> listRoi) {
-		Object[][] result = new Object[listRoi.size()][columnNames.length];
-		for (int i = 0; i < listRoi.size(); i++) {
-			int code = listRoi.get(i).getKey().getKeyCode();
-			result[i][0] = KeyEvent.getKeyText(code);
-
-			Point loc = listRoi.get(i).getCoordinate();
-			result[i][1] = loc.x + ", " + loc.y;
-			result[i][2] = listRoi.get(i).getKey().getKeyPressType();
-		}
-		return result;
-	}
-
-	
-	
 	/**
 	 * 
 	 * @param listRoi {@link bgSubtraction.detector.movementDetector.ROI#ROI(Point coordinate, Key key)}
@@ -319,21 +306,21 @@ public class KeyTable extends JTable {
 	 * {@link bgSubtraction.keyboardControl.Key#Key(int keyCode, KeyPressType keyPressType)}
 	 * @return
 	 */
-	private Object[][] populateMatrixDropdown(ArrayList<ROI> listRoi) {
-		Object[][] result = new Object[listRoi.size()][columnNames.length];
+	private void populateMatrixDropdown(ArrayList<ROI> listRoi) {
 		for (int i = 0; i < listRoi.size(); i++) {
-			int code = listRoi.get(i).getKey().getKeyCode();
-			String currentKey = KeyEvent.getKeyText(code);
-			//TODO perform check if key is valid here	
-			JComboBox<String> comboBox = new JComboBox<String>(allowedKeysObject.getAllowedKeys());
-//			comboBox.setSelectedItem(currentKey);
-			result[i][0] = comboBox;
-
+			Object[] row = new Object[3];
+			
+			int keyCode = listRoi.get(i).getKey().getKeyCode();
+			String currentKey = KeyEvent.getKeyText(keyCode);
+			row[0] = currentKey;
+        	
 			Point loc = listRoi.get(i).getCoordinate();
-			result[i][1] = loc.x + ", " + loc.y;
-			result[i][2] = listRoi.get(i).getKey().getKeyPressType();
+        	row[1] = loc.x + "," + loc.y;
+            
+            row[2] = listRoi.get(i).getKey().getKeyPressType();
+            
+            // add row to the model
+            model.addRow(row);
 		}
-		return result;
-	}//TODO set the combobox to letter from roi - for location - hidden
-	//TODO new combobox in array for every cell
+	}
 }
