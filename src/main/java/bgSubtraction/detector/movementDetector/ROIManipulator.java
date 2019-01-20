@@ -102,6 +102,16 @@ public class ROIManipulator {
 		isSizeWithinCameraRange(point1, point2, 40, 40);
 		list.add(new ROI(new Point(point1, point2), key));
 	}
+	
+	public void updateRoiFromList(int index,int point1, int point2, int keyEvent, KeyPressType keyPressType) {
+		isCoordinateWithinCameraRange(point1, point2);
+		isSizeWithinCameraRange(point1, point2, 40, 40);
+		list.set(index, new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
+	}
+	
+	public void removeRoiFromList(int index) {
+		list.remove(index);
+	}
 
 	public void executeAllROI(Mat bgResult) {
 		for (ROI roi : list) {
