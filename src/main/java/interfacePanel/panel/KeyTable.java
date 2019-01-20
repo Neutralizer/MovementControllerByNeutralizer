@@ -45,6 +45,7 @@ public class KeyTable extends JTable {
 	String currentPropFile;
 	JTable table;
 	DefaultTableModel model;
+	Object[] row;
 	
 	JComboBox<String> comboBoxKeyName;
 	JComboBox<String> comboBoxKeyType;
@@ -178,7 +179,7 @@ public class KeyTable extends JTable {
 		c.gridy = 20;
         frame.add(btnUpdate,c);
         
-        final Object[] row = new Object[3];
+        row = new Object[3];
         
         btnAdd.addActionListener(new ActionListener(){
 
@@ -198,6 +199,13 @@ public class KeyTable extends JTable {
                 
                 // add row to the model
                 model.addRow(row);
+                
+                //will add roi only if location is selected
+            	if(clicked != null) {
+            	int keyCode = allowedKeysObject.getKeyCode(row[0].toString());
+            		
+                roi.addRoiToList(clicked.x, clicked.y, new Key(keyCode, KeyPressType.valueOf(row[2].toString())));
+            	}
             }
         });
         
