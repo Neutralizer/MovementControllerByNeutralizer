@@ -257,7 +257,7 @@ public class MainPanel extends JFrame{
 		roi.addRoiToList(0, 0.52, wsKey);
 		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
 		}
-		kt = new KeyTable(display,roi,selectedPropFile);
+		kt = new KeyTable(display,roi,prop,selectedPropFile);
 		
 //		kt.fill(c, panelForm);
 		kt.createTable(c,panelForm);

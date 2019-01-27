@@ -38,6 +38,10 @@ public class PropertiesOperations {
 		this.roiObj = roiObj;
 	}
 	
+	public void saveRoiToProperties() {
+		
+	}
+	
 	public void createPropFile(String folderPath,String filename) {
 		try {
 

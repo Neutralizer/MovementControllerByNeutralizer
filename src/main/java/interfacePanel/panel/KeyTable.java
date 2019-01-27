@@ -28,6 +28,7 @@ import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.display.Display;
 import bgSubtraction.keyboardControl.Key;
 import bgSubtraction.keyboardControl.KeyPressType;
+import bgSubtraction.properties.PropertiesOperations;
 
 /**
  * 
@@ -42,6 +43,7 @@ public class KeyTable extends JTable {
 	AllowedKeys allowedKeysObject;
 	String[] columnNames;
 	ROIManipulator roi;
+	PropertiesOperations prop;
 	String currentPropFile;
 	JTable table;
 	DefaultTableModel model;
@@ -53,6 +55,7 @@ public class KeyTable extends JTable {
 	JButton btnAdd;
 	JButton btnDelete;
 	JButton btnUpdate;
+	JButton btnSave;
 	private String locationSelectionTooltip = "Click on the video feed to select square location";
 
 	/**
@@ -61,15 +64,17 @@ public class KeyTable extends JTable {
 	 *            - needed to get the coordinates from display for roi square
 	 *            manipulation
 	 * @param roi
+	 * @param prop 
 	 * @param currentPropFile
 	 */
-	public KeyTable(Display display, ROIManipulator roi, String currentPropFile) {
+	public KeyTable(Display display, ROIManipulator roi, PropertiesOperations prop, String currentPropFile) {
 
 		this.display = display;
 		allowedKeysObject = new AllowedKeys();
 		comboBoxKeyName = new JComboBox<String>(allowedKeysObject.getAllowedKeys());
 		columnNames = new String[] { "Keyboard Key", "Square Location", "Key Type" };
 		this.roi = roi;
+		this.prop = prop;
 		this.currentPropFile = currentPropFile;
 		comboBoxKeyType = new JComboBox<String>(new String[] { KeyPressType.CONSTANT.toString(),
 				KeyPressType.PRESS.toString(), KeyPressType.TOGGLE.toString() });
@@ -146,6 +151,8 @@ public class KeyTable extends JTable {
 		btnAdd = new JButton("Add");
 		btnDelete = new JButton("Delete");
 		btnUpdate = new JButton("Update");
+		btnSave = new JButton("Save");
+
 
 		JScrollPane pane = new JScrollPane(table);
 
@@ -180,6 +187,10 @@ public class KeyTable extends JTable {
 		c.gridx = 0;
 		c.gridy = 20;
 		frame.add(btnUpdate, c);
+		
+		c.gridx = 0;
+		c.gridy = 21;
+		frame.add(btnSave, c);
 
 		row = new Object[3];
 
@@ -272,6 +283,16 @@ public class KeyTable extends JTable {
 				} else {
 					System.out.println("Update Error");
 				}
+			}
+		});
+		
+		btnSave.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				prop.saveRoiToProperties();
+				
 			}
 		});
 
