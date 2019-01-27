@@ -1,6 +1,7 @@
 package bgSubtraction.properties;
 
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -44,6 +45,10 @@ public class PropertiesOperations {
 	public void saveRoiToPropFile(String folderPath, String currentPropFile) {
 		try {
 
+			File file = new File(folderPath + "\\" + currentPropFile);
+			if (!file.delete()) {
+				throw new IllegalStateException("File cound not be cleaned before saving");
+			} 
 			output = new FileOutputStream(folderPath + "\\" + currentPropFile);
 
 			//TODO make unique intermediary check with map
