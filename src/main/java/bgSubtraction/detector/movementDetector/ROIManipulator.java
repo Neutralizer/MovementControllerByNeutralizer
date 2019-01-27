@@ -115,10 +115,10 @@ public class ROIManipulator {
 
 	// TODO reduce with 0.01-0.02 percent if out of bounds when saving with high res
 	// and loading at low res
-	public double[] convertToPercentage(Point location) {
-		double[] percentagePoints = new double[2];
-		percentagePoints[0] = ((double) location.x / (double) currentCameraWidth);
-		percentagePoints[1] = ((double) location.y / (double) currentCameraHeight);
+	public float[] convertToPercentage(Point location) {
+		float[] percentagePoints = new float[2];
+		percentagePoints[0] = ((float) location.x / (float) currentCameraWidth);
+		percentagePoints[1] = ((float) location.y / (float) currentCameraHeight);
 		return percentagePoints;
 	}
 

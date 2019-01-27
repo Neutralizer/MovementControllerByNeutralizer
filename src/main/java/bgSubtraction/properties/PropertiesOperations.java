@@ -54,7 +54,7 @@ public class PropertiesOperations {
 			//TODO make unique intermediary check with map
 			for (ROI roi : roiManipulator.getListRoi()) {
 				String keyName = KeyEvent.getKeyText(roi.getKey().getKeyCode());
-				double percentage[] = roiManipulator.convertToPercentage(roi.getCoordinate());
+				float percentage[] = roiManipulator.convertToPercentage(roi.getCoordinate());
 				addRoiToProperty(keyName, percentage[0], percentage[1], roi.getKey().getKeyCode(),
 						roi.getKey().getKeyPressType());
 			}
