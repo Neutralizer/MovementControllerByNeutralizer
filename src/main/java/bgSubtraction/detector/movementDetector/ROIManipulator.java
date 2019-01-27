@@ -153,14 +153,14 @@ public class ROIManipulator {
 	}
 
 	/**
-	 * Throws exception when the parameters are not in camera range
+	 * Throws exception when the constructed roi size is outside of camera bounds
 	 * 
 	 * @param point1
 	 * @param point2
 	 * @param point3
 	 * @param point4
 	 */
-	private void isSizeWithinCameraRange(int point1, int point2, int point3, int point4) {
+	public void isSizeWithinCameraRange(int point1, int point2, int point3, int point4) {
 		// from point1 starts point 3 and from point 2 starts point 4
 		int widthLength = point1 + point3;
 		int heightLength = point2 + point4;

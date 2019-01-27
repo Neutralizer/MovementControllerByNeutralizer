@@ -115,7 +115,16 @@ public class KeyTable extends JTable {
 				int x = e.getX();
 				int y = e.getY();
 				clicked = new java.awt.Point(x, y);
-				locText.setText(clicked.x + "," + clicked.y);
+				
+				//TODO set only if point within range
+				try {
+					roi.isSizeWithinCameraRange(x, y, 40, 40);
+					locText.setText(clicked.x + "," + clicked.y);
+				} catch (IllegalStateException exception) {
+					// TODO: handle exception
+				}
+				
+				
 				System.out.println("enters");// TOOD debug test
 				System.out.println("X:" + x + " Y:" + y);
 			}
