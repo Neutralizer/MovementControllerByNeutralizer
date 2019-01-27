@@ -1,6 +1,7 @@
 package bgSubtraction.detector.movementDetector;
 
 import java.awt.Point;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import org.bytedeco.javacpp.opencv_core.Mat;
@@ -115,10 +116,13 @@ public class ROIManipulator {
 
 	// TODO reduce with 0.01-0.02 percent if out of bounds when saving with high res
 	// and loading at low res
-	public float[] convertToPercentage(Point location) {
-		float[] percentagePoints = new float[2];
-		percentagePoints[0] = ((float) location.x / (float) currentCameraWidth);
-		percentagePoints[1] = ((float) location.y / (float) currentCameraHeight);
+	public double[] convertToPercentage(Point location) {
+		double[] percentagePoints = new double[2];
+		double x = ((double) location.x / (double) currentCameraWidth);
+		double y = ((double) location.y / (double) currentCameraHeight);
+		DecimalFormat df = new DecimalFormat("#.##");//TODO find another way and remove this ugly thing
+		percentagePoints[0] = Double.parseDouble(df.format(x));
+		percentagePoints[1] = Double.parseDouble(df.format(y));
 		return percentagePoints;
 	}
 

@@ -56,7 +56,7 @@ public class PropertiesOperations {
 			for (ROI roi : roiManipulator.getListRoi()) {
 				String keyName = KeyEvent.getKeyText(roi.getKey().getKeyCode());
 				String modifiedKeyName = modifyKeyNameToAvoidDuplicates(duplicates,keyName);
-				float percentageLoc[] = roiManipulator.convertToPercentage(roi.getCoordinate());
+				double percentageLoc[] = roiManipulator.convertToPercentage(roi.getCoordinate());
 				addRoiToProperty(modifiedKeyName, percentageLoc[0], percentageLoc[1], roi.getKey().getKeyCode(),
 						roi.getKey().getKeyPressType());
 			}
