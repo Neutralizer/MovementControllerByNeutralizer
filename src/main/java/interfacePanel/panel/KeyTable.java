@@ -44,6 +44,7 @@ public class KeyTable extends JTable {
 	String[] columnNames;
 	ROIManipulator roi;
 	PropertiesOperations prop;
+	String folderPath;
 	String currentPropFile;
 	JTable table;
 	DefaultTableModel model;
@@ -66,8 +67,9 @@ public class KeyTable extends JTable {
 	 * @param roi
 	 * @param prop 
 	 * @param currentPropFile
+	 * @param selectedPropFile 
 	 */
-	public KeyTable(Display display, ROIManipulator roi, PropertiesOperations prop, String currentPropFile) {
+	public KeyTable(Display display, ROIManipulator roi, PropertiesOperations prop, String folderPath, String selectedPropFile) {
 
 		this.display = display;
 		allowedKeysObject = new AllowedKeys();
@@ -75,7 +77,8 @@ public class KeyTable extends JTable {
 		columnNames = new String[] { "Keyboard Key", "Square Location", "Key Type" };
 		this.roi = roi;
 		this.prop = prop;
-		this.currentPropFile = currentPropFile;
+		this.folderPath = folderPath;
+		this.currentPropFile = selectedPropFile;
 		comboBoxKeyType = new JComboBox<String>(new String[] { KeyPressType.CONSTANT.toString(),
 				KeyPressType.PRESS.toString(), KeyPressType.TOGGLE.toString() });
 		attachMouseListener(display.getFrame());
@@ -291,7 +294,7 @@ public class KeyTable extends JTable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				prop.saveRoiToProperties();
+				prop.saveRoiToPropFile(folderPath,currentPropFile);
 				
 			}
 		});

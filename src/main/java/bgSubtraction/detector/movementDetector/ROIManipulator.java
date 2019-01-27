@@ -30,14 +30,14 @@ public class ROIManipulator {
 		return list;
 	}
 
-	//TODO uses 40 size hardcoded value
+	// TODO uses 40 size hardcoded value
 	public void addRoiToList(int point1, int point2, int keyEvent, KeyPressType keyPressType) {
 		isCoordinateWithinCameraRange(point1, point2);
 		isSizeWithinCameraRange(point1, point2, 40, 40);
 		list.add(new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
 	}
 
-	//TODO uses 40 size hardcoded value
+	// TODO uses 40 size hardcoded value
 	/**
 	 * percentage overload
 	 * 
@@ -102,15 +102,24 @@ public class ROIManipulator {
 		isSizeWithinCameraRange(point1, point2, 40, 40);
 		list.add(new ROI(new Point(point1, point2), key));
 	}
-	
-	public void updateRoiFromList(int index,int point1, int point2, int keyEvent, KeyPressType keyPressType) {
+
+	public void updateRoiFromList(int index, int point1, int point2, int keyEvent, KeyPressType keyPressType) {
 		isCoordinateWithinCameraRange(point1, point2);
 		isSizeWithinCameraRange(point1, point2, 40, 40);
 		list.set(index, new ROI(new Point(point1, point2), new Key(keyEvent, keyPressType)));
 	}
-	
+
 	public void removeRoiFromList(int index) {
 		list.remove(index);
+	}
+
+	// TODO reduce with 0.01-0.02 percent if out of bounds when saving with high res
+	// and loading at low res
+	public double[] convertToPercentage(Point location) {
+		double[] percentagePoints = new double[2];
+		percentagePoints[0] = ((double) location.x / (double) currentCameraWidth);
+		percentagePoints[1] = ((double) location.y / (double) currentCameraHeight);
+		return percentagePoints;
 	}
 
 	public void executeAllROI(Mat bgResult) {
@@ -145,6 +154,7 @@ public class ROIManipulator {
 
 	/**
 	 * Throws exception when the parameters are not in camera range
+	 * 
 	 * @param point1
 	 * @param point2
 	 * @param point3
@@ -154,7 +164,7 @@ public class ROIManipulator {
 		// from point1 starts point 3 and from point 2 starts point 4
 		int widthLength = point1 + point3;
 		int heightLength = point2 + point4;
-		
+
 		if (!isWithinCameraRangeWidth(widthLength)) {
 			throw new IllegalStateException("ROI Width (Horisontal) length is not in range");
 		}
