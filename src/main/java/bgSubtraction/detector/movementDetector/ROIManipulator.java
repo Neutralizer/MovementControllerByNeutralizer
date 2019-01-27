@@ -120,7 +120,7 @@ public class ROIManipulator {
 		double[] percentagePoints = new double[2];
 		double x = ((double) location.x / (double) currentCameraWidth);
 		double y = ((double) location.y / (double) currentCameraHeight);
-		DecimalFormat df = new DecimalFormat("#.##");//TODO find another way and remove this ugly thing
+		DecimalFormat df = new DecimalFormat("#.##");//TODO find another way if possible
 		percentagePoints[0] = Double.parseDouble(df.format(x));
 		percentagePoints[1] = Double.parseDouble(df.format(y));
 		return percentagePoints;

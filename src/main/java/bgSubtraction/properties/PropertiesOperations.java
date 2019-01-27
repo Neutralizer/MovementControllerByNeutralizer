@@ -97,7 +97,7 @@ public class PropertiesOperations {
 		}
 		
 		int timesOfOccurrence = duplicates.get(keyName);
-		if(timesOfOccurrence > 1) {
+		if(timesOfOccurrence > 0) {
 			return keyName + timesOfOccurrence;
 		}
 		return keyName;
