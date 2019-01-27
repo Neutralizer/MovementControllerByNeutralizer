@@ -8,15 +8,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import bgSubtraction.detector.movementDetector.ROI;
 import bgSubtraction.detector.movementDetector.ROIManipulator;
 import bgSubtraction.keyboardControl.KeyPressType;
-import interfacePanel.panel.UtilitiesPanel;
 
 /**
  * 
@@ -48,14 +47,17 @@ public class PropertiesOperations {
 			File file = new File(folderPath + "\\" + currentPropFile);
 			if (!file.delete()) {
 				throw new IllegalStateException("File cound not be cleaned before saving");
-			} 
+			}
 			output = new FileOutputStream(folderPath + "\\" + currentPropFile);
+			
+			Map<String, Integer> duplicates = new HashMap<String, Integer>();
 
-			//TODO make unique intermediary check with map
+			// TODO make unique intermediary check with map
 			for (ROI roi : roiManipulator.getListRoi()) {
 				String keyName = KeyEvent.getKeyText(roi.getKey().getKeyCode());
-				float percentage[] = roiManipulator.convertToPercentage(roi.getCoordinate());
-				addRoiToProperty(keyName, percentage[0], percentage[1], roi.getKey().getKeyCode(),
+				String modifiedKeyName = modifyKeyNameToAvoidDuplicates(duplicates,keyName);
+				float percentageLoc[] = roiManipulator.convertToPercentage(roi.getCoordinate());
+				addRoiToProperty(modifiedKeyName, percentageLoc[0], percentageLoc[1], roi.getKey().getKeyCode(),
 						roi.getKey().getKeyPressType());
 			}
 
@@ -74,6 +76,31 @@ public class PropertiesOperations {
 
 		}
 
+	}
+
+	/**
+	 * Uses a map with key name as the key and the value is the occurrence number of
+	 * that key </br>
+	 * EX: C first time - write to map with value 1; C second time - change value to
+	 * map to 2 and change the name of the c value returned to C2
+	 * @param duplicates 
+	 * 
+	 * @param keyName
+	 *            actual key name, returned from KeyEvent.getKeyText(...)
+	 * @return Modified key name if it is duplicate - to be used as key in properties file
+	 */
+	private String modifyKeyNameToAvoidDuplicates(Map<String, Integer> duplicates, String keyName) {
+		if(duplicates.get(keyName) == null) {
+			duplicates.put(keyName, 0);
+		} else {
+			duplicates.put(keyName, duplicates.get(keyName) + 1);
+		}
+		
+		int timesOfOccurrence = duplicates.get(keyName);
+		if(timesOfOccurrence > 1) {
+			return keyName + timesOfOccurrence;
+		}
+		return keyName;
 	}
 
 	public void createPropFile(String folderPath, String filename) {
