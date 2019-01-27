@@ -44,9 +44,9 @@ public class PropertiesOperations {
 	public void saveRoiToPropFile(String folderPath, String currentPropFile) {
 		try {
 
-			output = new FileOutputStream(folderPath + currentPropFile);
+			output = new FileOutputStream(folderPath + "\\" + currentPropFile);
 
-			//TODO make unique intermediary checek with map
+			//TODO make unique intermediary check with map
 			for (ROI roi : roiManipulator.getListRoi()) {
 				String keyName = KeyEvent.getKeyText(roi.getKey().getKeyCode());
 				double percentage[] = roiManipulator.convertToPercentage(roi.getCoordinate());
