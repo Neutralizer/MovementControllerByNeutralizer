@@ -183,7 +183,8 @@ public class KeyController {
 	 *
 	 * @param listRoi
 	 */
-	public static void unpressAllRoiButtons(ArrayList<ROI> listRoi) {
+	public static void unpressAllRoiButtons(ArrayList<ROI> listRoi) {//TODO move to roimanipulator maybe
+		//or release a key here and loop in roi manip
 		for (ROI roi : listRoi) {
 			System.out.println("releasing " + roi.getKey().getKeyCode());//TODO test sysout
 			r.keyRelease(roi.getKey().getKeyCode());

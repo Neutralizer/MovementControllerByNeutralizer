@@ -96,6 +96,8 @@ public class MainPanel extends JFrame{
 			public void windowClosing(WindowEvent e) {
 				//execute closing
 				System.out.println("closing window000000000000000");
+				//unpress all buttons - move from keycontroller to roimanipulator
+				//release camera - grabber close?
 				System.exit(0);
 			}
 			
