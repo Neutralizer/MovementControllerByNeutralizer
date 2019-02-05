@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -88,7 +90,17 @@ public class MainPanel extends JFrame{
 		loadPresets();
 		createView();
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(EXIT_ON_CLOSE);//TODO remove for close listener
+		
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				//execute closing
+				System.out.println("closing window000000000000000");
+				System.exit(0);
+			}
+			
+		});
+		
 		setSize(500, 600);
 		setLocationRelativeTo(null);
 		setResizable(false);
