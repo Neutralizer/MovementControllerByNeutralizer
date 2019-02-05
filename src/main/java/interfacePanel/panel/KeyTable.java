@@ -112,13 +112,14 @@ public class KeyTable extends JTable {
 			public void mouseClicked(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
-				clicked = new java.awt.Point(x, y);
 				
 				//TODO set only if point within range
 				try {
 					roi.isSizeWithinCameraRange(x, y, 40, 40);
+					clicked = new java.awt.Point(x, y);
 					locText.setText(clicked.x + "," + clicked.y);
 				} catch (IllegalStateException exception) {
+					// catches the exception if the roi is out of range and does not set clicked and text
 					// TODO: handle exception
 				}
 				
@@ -211,17 +212,18 @@ public class KeyTable extends JTable {
 
 				row[0] = comboBoxKeyName.getSelectedItem().toString();
 
-				if (clicked != null) {
+				if (locText.getText() != null) {
 					row[1] = locText.getText();
 				}
 
 				row[2] = comboBoxKeyType.getSelectedItem().toString();
 
-				// add row to the model
-				model.addRow(row);
+				
 
 				// will add roi only if location is selected
 				if (clicked != null) {
+					// add row to the model
+					model.addRow(row);
 					int keyCode = allowedKeysObject.getKeyCode(row[0].toString());
 
 					roi.addRoiToList(clicked.x, clicked.y, new Key(keyCode, KeyPressType.valueOf(row[2].toString())));
