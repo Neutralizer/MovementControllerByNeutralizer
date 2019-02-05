@@ -303,7 +303,7 @@ public class KeyTable extends JTable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				prop.saveRoiToPropFile(folderPath,currentPropFile);
+				prop.saveRoiToPropFile(null,currentPropFile);//TODO changed to current dir
 				
 			}
 		});

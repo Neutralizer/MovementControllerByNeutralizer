@@ -250,16 +250,15 @@ public class MainPanel extends JFrame{
 		Display display = new Display();
 		roi = new ROIManipulator(camera);
 		prop = new PropertiesOperations(roi);//cpp way - give obj and populate it
-		prop.loadPropertiesFileIntoInternalRoiManipulator(UtilitiesPanel.FILE_DIR, selectedPropFile);// "config.properties"
+		prop.loadPropertiesFileIntoInternalRoiManipulator(null, selectedPropFile);// "config.properties"
 
-		if(useWS) {
+		if(useWS) {//TODO dropped to deprecated status
 		SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
 		roi.addRoiToList(0, 0.52, wsKey);
 		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
 		}
-		kt = new KeyTable(display,roi,prop,UtilitiesPanel.FILE_DIR, selectedPropFile);
+		kt = new KeyTable(display,roi,prop,null, selectedPropFile);
 		
-//		kt.fill(c, panelForm);
 		kt.createTable(c,panelForm);
 		this.pack();
 		
@@ -277,7 +276,7 @@ public class MainPanel extends JFrame{
 		Camera camera = new Camera(cameraNum);
 		roi = new ROIManipulator(camera);
 		prop = new PropertiesOperations(roi);
-		prop.loadPropertiesFileIntoInternalRoiManipulator(UtilitiesPanel.FILE_DIR, comboBoxPresets.getSelectedItem().toString());
+//		prop.loadPropertiesFileIntoInternalRoiManipulator(UtilitiesPanel.FILE_DIR, comboBoxPresets.getSelectedItem().toString());
 	}
 
 }

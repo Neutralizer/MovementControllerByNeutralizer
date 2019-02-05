@@ -43,16 +43,17 @@ public class PropertiesOperations {
 
 	public void saveRoiToPropFile(String folderPath, String currentPropFile) {
 		try {
-
-			File file = new File(folderPath + "\\" + currentPropFile);
-			if (!file.delete()) {
-				throw new IllegalStateException("File cound not be cleaned before saving");
+			prop = new Properties();
+			File file = new File(currentPropFile);
+			boolean isFiledeleted = file.delete();
+			if (!isFiledeleted) {
+				throw new IllegalStateException("File cound not be cleaned before saving or does not exist");
 			}
-			output = new FileOutputStream(folderPath + "\\" + currentPropFile);
+			
+			output = new FileOutputStream(currentPropFile);
 			
 			Map<String, Integer> duplicates = new HashMap<String, Integer>();
 
-			// TODO make unique intermediary check with map
 			for (ROI roi : roiManipulator.getListRoi()) {
 				String keyName = KeyEvent.getKeyText(roi.getKey().getKeyCode());
 				String modifiedKeyName = modifyKeyNameToAvoidDuplicates(duplicates,keyName);
@@ -103,6 +104,7 @@ public class PropertiesOperations {
 		return keyName;
 	}
 
+	//TODO debug
 	public void createPropFile(String folderPath, String filename) {
 		try {
 
@@ -153,7 +155,8 @@ public class PropertiesOperations {
 	 */
 	public void loadPropertiesFileIntoInternalRoiManipulator(String folderPath, String filename) {
 		try {
-			input = new FileInputStream(folderPath + "\\" + filename);
+//			input = new FileInputStream(folderPath + "\\" + filename);//TODO not curr dir
+			input = new FileInputStream(filename);
 			// input = new FileInputStream("REMOVEME.properties");//TODO for prop inside jar
 			if (input == null) {
 				System.err.println("Error - unable to find " + filename);// TODO throw for future displaying of err
