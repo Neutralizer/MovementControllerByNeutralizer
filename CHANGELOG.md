@@ -1,3 +1,11 @@
+### 0.0.6 - 05.02.2019
+* Bug fix - now you can't add keys to the table that don't have location
+* Closing the window now closes camera and unpresses keys (main window only)
+
+### 0.0.5 - 05.02.2019
+* Bug fix - saving to prop file now works as intended
+* Unique key in properties file now allows for duplicate keys 
+
 ### 0.0.4 - 27.01.2019
 * Added Big feature - table to show and modify virtual key regions with ease
 * Choose virtual key location by clicking on the video feed 

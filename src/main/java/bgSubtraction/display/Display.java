@@ -8,6 +8,8 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.Point;
@@ -38,8 +40,9 @@ public class Display {
 	public Display(final Camera camera,final ROIManipulator roi) {
 		converter = new OpenCVFrameConverter.ToIplImage();
 		frame = createNewFrame("Movement", new java.awt.Point(0, 0));
-		addCloseListener(camera, roi);
-		
+//		addCloseListener(camera, roi);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//TODO the frame will be integrated in the future 
 		frame.setSize(640, 480);
 	}
 
