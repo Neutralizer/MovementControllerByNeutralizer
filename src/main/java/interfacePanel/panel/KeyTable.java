@@ -44,7 +44,6 @@ public class KeyTable extends JTable {
 	String[] columnNames;
 	ROIManipulator roi;
 	PropertiesOperations prop;
-	String folderPath;
 	String currentPropFile;
 	JTable table;
 	DefaultTableModel model;
@@ -69,7 +68,7 @@ public class KeyTable extends JTable {
 	 * @param currentPropFile
 	 * @param selectedPropFile 
 	 */
-	public KeyTable(Display display, ROIManipulator roi, PropertiesOperations prop, String folderPath, String selectedPropFile) {
+	public KeyTable(Display display, ROIManipulator roi, PropertiesOperations prop, String selectedPropFile) {
 
 		this.display = display;
 		allowedKeysObject = new AllowedKeys();
@@ -77,7 +76,6 @@ public class KeyTable extends JTable {
 		columnNames = new String[] { "Keyboard Key", "Square Location", "Key Type" };
 		this.roi = roi;
 		this.prop = prop;
-		this.folderPath = folderPath;
 		this.currentPropFile = selectedPropFile;
 		comboBoxKeyType = new JComboBox<String>(new String[] { KeyPressType.CONSTANT.toString(),
 				KeyPressType.PRESS.toString(), KeyPressType.TOGGLE.toString() });
@@ -241,7 +239,7 @@ public class KeyTable extends JTable {
 				if (i >= 0) {
 					// remove a row from jtable
 					model.removeRow(i);
-					roi.removeRoiFromList(i);// TODO test if indexes will not be the same
+					roi.removeRoiFromList(i);
 				} else {
 					System.out.println("Delete Error");
 				}
@@ -303,7 +301,7 @@ public class KeyTable extends JTable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				prop.saveRoiToPropFile(null,currentPropFile);//TODO changed to current dir
+				prop.saveRoiToPropFile(currentPropFile);
 				
 			}
 		});

@@ -41,7 +41,7 @@ public class PropertiesOperations {
 		this.roiManipulator = roiManipulator;
 	}
 
-	public void saveRoiToPropFile(String folderPath, String currentPropFile) {
+	public void saveRoiToPropFile(String currentPropFile) {
 		try {
 			prop = new Properties();
 			File file = new File(currentPropFile);
@@ -153,11 +153,9 @@ public class PropertiesOperations {
 	 * @param folderPath
 	 * @param filename
 	 */
-	public void loadPropertiesFileIntoInternalRoiManipulator(String folderPath, String filename) {
+	public void loadPropertiesFileIntoInternalRoiManipulator(String filename) {
 		try {
-//			input = new FileInputStream(folderPath + "\\" + filename);//TODO not curr dir
 			input = new FileInputStream(filename);
-			// input = new FileInputStream("REMOVEME.properties");//TODO for prop inside jar
 			if (input == null) {
 				System.err.println("Error - unable to find " + filename);// TODO throw for future displaying of err
 				return;

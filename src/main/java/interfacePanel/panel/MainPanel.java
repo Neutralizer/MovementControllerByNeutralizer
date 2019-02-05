@@ -68,7 +68,6 @@ public class MainPanel extends JFrame{
 	JSlider sliderDilate2 = new JSlider(1, 15, 1);
 	JSlider sliderHistory = new JSlider(1, 50, 1);
 	JSlider sliderThresh = new JSlider(1, 100, 16);
-	private boolean started = false;
 	GridBagConstraints c;
 	JPanel panelMain;
 	JPanel panelForm;
@@ -250,14 +249,14 @@ public class MainPanel extends JFrame{
 		Display display = new Display();
 		roi = new ROIManipulator(camera);
 		prop = new PropertiesOperations(roi);//cpp way - give obj and populate it
-		prop.loadPropertiesFileIntoInternalRoiManipulator(null, selectedPropFile);// "config.properties"
+		prop.loadPropertiesFileIntoInternalRoiManipulator(selectedPropFile);// "config.properties"
 
 		if(useWS) {//TODO dropped to deprecated status
 		SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
 		roi.addRoiToList(0, 0.52, wsKey);
 		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
 		}
-		kt = new KeyTable(display,roi,prop,null, selectedPropFile);
+		kt = new KeyTable(display,roi,prop, selectedPropFile);
 		
 		kt.createTable(c,panelForm);
 		this.pack();
