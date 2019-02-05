@@ -77,7 +77,13 @@ public class Camera {
 		return null;
 	}
 	
-	
+	public void releaseCurrentCamera() {
+		try {
+			grabber.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	private void getFps() {
 		//get current time milis - if 1 second has passed - check a counter++ value and return the fps - set the current time

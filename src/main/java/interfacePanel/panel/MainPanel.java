@@ -2,6 +2,7 @@ package interfacePanel.panel;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -40,15 +41,15 @@ import bgSubtraction.properties.PropertiesOperations;
  *
  */
 @SuppressWarnings("serial")
-public class MainPanel extends JFrame{
+public class MainPanel extends JFrame {
 
 	UtilitiesPanel util = new UtilitiesPanel();
 	MovementDetector detector = new MovementDetector();
 	private String[] cameras;
-//	Camera camera;
+	Camera camera;
 	ROIManipulator roi;
 	PropertiesOperations prop;
-	
+
 	KeyTable kt;
 
 	private JComboBox<String> comboBoxCamera;
@@ -73,8 +74,8 @@ public class MainPanel extends JFrame{
 	GridBagConstraints c;
 	JPanel panelMain;
 	JPanel panelForm;
-	private boolean useWS = false;//TODO not dynamically changed
-	
+	private boolean started = false;
+	private boolean useWS = false;// TODO not dynamically changed
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -90,22 +91,23 @@ public class MainPanel extends JFrame{
 		loadPresets();
 		createView();
 
-//		setDefaultCloseOperation(EXIT_ON_CLOSE);//TODO remove for close listener
-		
-		this.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				//execute closing
-				System.out.println("closing window000000000000000");
-				//unpress all buttons - move from keycontroller to roimanipulator
-				//release camera - grabber close?
-				System.exit(0);
-			}
-			
-		});
-		
+		addCloseListener(this);
+
 		setSize(500, 600);
 		setLocationRelativeTo(null);
 		setResizable(false);
+	}
+
+	private void addCloseListener(Frame frame) {
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				if (started) {
+					KeyController.unpressAllRoiButtons(roi.getListRoi());
+					camera.releaseCurrentCamera();
+				}
+				System.exit(0);
+			}
+		});
 	}
 
 	private void loadPresets() {
@@ -120,12 +122,12 @@ public class MainPanel extends JFrame{
 	}
 
 	private void createView() {
-//      frame.setLayout(null);//TODO maybe will look better?
+		// frame.setLayout(null);//TODO maybe will look better?
 		panelMain = new JPanel();
 		getContentPane().add(panelMain);
 		panelForm = new JPanel(new GridBagLayout());
 		panelMain.add(panelForm);
-		c= new GridBagConstraints();
+		c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
 
@@ -136,160 +138,161 @@ public class MainPanel extends JFrame{
 		c.gridy++;
 		comboBoxPresets.setToolTipText(boxPropertiesHover);
 		panelForm.add(comboBoxPresets, c);
-		
-		//when preset is changed fire this
+
+		// when preset is changed fire this
 		comboBoxPresets.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-//				String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
-//				populateKeyTable(selectedPropFile,c,panelForm); //gridy 6
+				// String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
+				// populateKeyTable(selectedPropFile,c,panelForm); //gridy 6
 			}
 		});
-		
-		sliderTemplate(panelForm, c,sliderErode1,"Erode", erodeHover,2,1);
-		sliderTemplate(panelForm, c,sliderDilate2,"Dilate",dilateHover,2,1);
-		sliderTemplate(panelForm, c,sliderHistory,"History",historyHover,10,1);
-		sliderTemplate(panelForm, c,sliderThresh,"Threshold",threshHover,10,1);
-		
+
+		sliderTemplate(panelForm, c, sliderErode1, "Erode", erodeHover, 2, 1);
+		sliderTemplate(panelForm, c, sliderDilate2, "Dilate", dilateHover, 2, 1);
+		sliderTemplate(panelForm, c, sliderHistory, "History", historyHover, 10, 1);
+		sliderTemplate(panelForm, c, sliderThresh, "Threshold", threshHover, 10, 1);
+
 		sliderErode1.addChangeListener(new ChangeListener() {
-			
+
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				JSlider source = (JSlider)e.getSource();
+				JSlider source = (JSlider) e.getSource();
 				if (!source.getValueIsAdjusting()) {
-					int value = (int)source.getValue();
+					int value = (int) source.getValue();
 					detector.changeErode(value);
 				}
 			}
 		});
-		
+
 		sliderDilate2.addChangeListener(new ChangeListener() {
-			
+
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				JSlider source = (JSlider)e.getSource();
+				JSlider source = (JSlider) e.getSource();
 				if (!source.getValueIsAdjusting()) {
-					int value = (int)source.getValue();
+					int value = (int) source.getValue();
 					detector.changeDilate(value);
 
 				}
 			}
 		});
-		
+
 		sliderHistory.addChangeListener(new ChangeListener() {
-			
+
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				JSlider source = (JSlider)e.getSource();
+				JSlider source = (JSlider) e.getSource();
 				if (!source.getValueIsAdjusting()) {
-					int value = (int)source.getValue();
+					int value = (int) source.getValue();
 					detector.changeHistory(value);
 				}
 			}
 		});
-		
+
 		sliderThresh.addChangeListener(new ChangeListener() {
-			
+
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				JSlider source = (JSlider)e.getSource();
+				JSlider source = (JSlider) e.getSource();
 				if (!source.getValueIsAdjusting()) {
-					int value = (int)source.getValue();
+					int value = (int) source.getValue();
 					detector.changeSubTresh(value);
 				}
 			}
 		});
-		
-		
-		
+
 		// 2nd column
 		c.anchor = GridBagConstraints.LINE_START;
-		
+
 		c.gridx = 1;
 		c.gridy = 0;
 		buttonStartCamera.setToolTipText(buttonCameraHover);
 		panelForm.add(buttonStartCamera, c);
-		
+
 		buttonStartCamera.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				startExecution();
 			}
 		});
-		
+
 		c.gridy++;
 		buttonCameraProperties.setToolTipText(buttonCameraPropertiesHover);
-		panelForm.add(buttonCameraProperties,c);
-		
+		panelForm.add(buttonCameraProperties, c);
+
 		buttonCameraProperties.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				VideoCapture v = null;
 				try {
-					v = new VideoCapture(util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString()));
+					v = new VideoCapture(util.getCameraNum(cameras, comboBoxCamera.getSelectedItem().toString()));
 					v.set(37, 1);
-					
+
 				} catch (java.lang.Exception ex) {
 				} finally {
-//					v.close();
+					// v.close();
 				}
 			}
 		});
-		
-		//TODO insert tick check for ws combo - boolean isAcive
-//		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
-//		populateKeyTable(selectedPropFile);
+
+		// TODO insert tick check for ws combo - boolean isAcive
+		// String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
+		// populateKeyTable(selectedPropFile);
 
 	}
 
-	private void sliderTemplate(JPanel panelForm, GridBagConstraints c,JSlider slider, String labelName, String tooltip, int majorSpacing,int minorSpacing) {
+	private void sliderTemplate(JPanel panelForm, GridBagConstraints c, JSlider slider, String labelName,
+			String tooltip, int majorSpacing, int minorSpacing) {
 		c.gridy++;
 		c.anchor = GridBagConstraints.ABOVE_BASELINE;
 		JLabel sliderLabel = new JLabel(labelName);
 		sliderLabel.setToolTipText(tooltip);
-		panelForm.add(sliderLabel,c);
+		panelForm.add(sliderLabel, c);
 		c.gridy++;
 		slider.setMajorTickSpacing(majorSpacing);
 		slider.setMinorTickSpacing(minorSpacing);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
-		panelForm.add(slider,c);
+		panelForm.add(slider, c);
 	}
-	
-	private void startExecution() {
-		int cameraNum = util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString());
-		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
-		Camera camera = new Camera(cameraNum);
-		Display display = new Display();
-		roi = new ROIManipulator(camera);
-		prop = new PropertiesOperations(roi);//cpp way - give obj and populate it
-		prop.loadPropertiesFileIntoInternalRoiManipulator(selectedPropFile);// "config.properties"
 
-		if(useWS) {//TODO dropped to deprecated status
-		SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
-		roi.addRoiToList(0, 0.52, wsKey);
-		roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
+	private void startExecution() {
+		int cameraNum = util.getCameraNum(cameras, comboBoxCamera.getSelectedItem().toString());
+		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
+		camera = new Camera(cameraNum);
+		roi = new ROIManipulator(camera);
+		Display display = new Display(camera,roi);
+		prop = new PropertiesOperations(roi);// cpp way - give obj and populate it
+		prop.loadPropertiesFileIntoInternalRoiManipulator(selectedPropFile);// "config.properties"
+		started = true;
+
+		if (useWS) {// TODO dropped to deprecated status
+			SpecialKey wsKey = new SpecialKey(KeyEvent.VK_DOLLAR, KeyPressType.SPECIAL);
+			roi.addRoiToList(0, 0.52, wsKey);
+			roi.addRoiToList(0.16, 0.96, 0.70, 0.04, KeyEvent.VK_W, KeyPressType.CONSTANT);// must be last
 		}
-		kt = new KeyTable(display,roi,prop, selectedPropFile);
-		
-		kt.createTable(c,panelForm);
+		kt = new KeyTable(display, roi, prop, selectedPropFile);
+
+		kt.createTable(c, panelForm);
 		this.pack();
-		
+
 		try {
-			MainMovement.startAlgorithm(camera, display, selectedPropFile,detector, roi, useWS);
+			MainMovement.startAlgorithm(camera, display, selectedPropFile, detector, roi, useWS);
 		} catch (AWTException e) {
-			e.printStackTrace();//TODO show which is the error
+			e.printStackTrace();// TODO show which is the error
 		}
-		
+
 	}
 
 	@Deprecated
 	public void initializePropertiesAfterCameraIsLoaded() {
-		int cameraNum = util.getCameraNum(cameras,comboBoxCamera.getSelectedItem().toString());
+		int cameraNum = util.getCameraNum(cameras, comboBoxCamera.getSelectedItem().toString());
 		Camera camera = new Camera(cameraNum);
 		roi = new ROIManipulator(camera);
 		prop = new PropertiesOperations(roi);
-//		prop.loadPropertiesFileIntoInternalRoiManipulator(UtilitiesPanel.FILE_DIR, comboBoxPresets.getSelectedItem().toString());
+		// prop.loadPropertiesFileIntoInternalRoiManipulator(UtilitiesPanel.FILE_DIR,
+		// comboBoxPresets.getSelectedItem().toString());
 	}
 
 }

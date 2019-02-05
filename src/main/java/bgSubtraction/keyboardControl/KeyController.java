@@ -179,14 +179,11 @@ public class KeyController {
 	}
 	
 	/**
-	 * for more than 2 unpress commands the shutdown hook locks the program
 	 *
 	 * @param listRoi
 	 */
-	public static void unpressAllRoiButtons(ArrayList<ROI> listRoi) {//TODO move to roimanipulator maybe
-		//or release a key here and loop in roi manip
+	public static void unpressAllRoiButtons(ArrayList<ROI> listRoi) {
 		for (ROI roi : listRoi) {
-			System.out.println("releasing " + roi.getKey().getKeyCode());//TODO test sysout
 			r.keyRelease(roi.getKey().getKeyCode());
 		}
 	}

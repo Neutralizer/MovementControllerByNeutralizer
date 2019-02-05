@@ -3,8 +3,8 @@ package bgSubtraction.display;
 import static org.bytedeco.javacpp.opencv_core.cvFlip;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -18,7 +18,10 @@ import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 
+import bgSubtraction.camera.Camera;
 import bgSubtraction.detector.movementDetector.ROI;
+import bgSubtraction.detector.movementDetector.ROIManipulator;
+import bgSubtraction.keyboardControl.KeyController;
 
 /**
  * 
@@ -32,11 +35,22 @@ public class Display {
 	private OpenCVFrameConverter.ToIplImage converter;
 	Java2DFrameConverter c = new Java2DFrameConverter();// for BufferedImage
 
-	public Display() {
+	public Display(final Camera camera,final ROIManipulator roi) {
 		converter = new OpenCVFrameConverter.ToIplImage();
 		frame = createNewFrame("Movement", new java.awt.Point(0, 0));
+		addCloseListener(camera, roi);
+		
 		frame.setSize(640, 480);
-//		attachMouseListener();//TODO moved in jtable to get square location
+	}
+
+	private void addCloseListener(final Camera camera, final ROIManipulator roi) {
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+					KeyController.unpressAllRoiButtons(roi.getListRoi());
+					camera.releaseCurrentCamera();
+				System.exit(0);
+			}
+		});
 	}
 
 	/**
@@ -49,7 +63,7 @@ public class Display {
 
 	private CanvasFrame createNewFrame(String name, java.awt.Point location) {
 		frame = new CanvasFrame(name);
-		frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+//		frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(location);
 		return frame;
 	}
@@ -92,35 +106,6 @@ public class Display {
 		cvFlip(img, img, 1);// mirror
 		return img;
 	}
-
-//	public void attachMouseListener() {
-//		frame.getCanvas().addMouseListener(new MouseListener() {
-//			@Override
-//			public void mouseReleased(MouseEvent e) {
-//			}
-//
-//			@Override
-//			public void mousePressed(MouseEvent e) {
-//			}
-//
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//			}
-//
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//			}
-//
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				int x = e.getX();
-//				int y = e.getY();
-//				clicked = new java.awt.Point(x, y);
-//				System.out.println("enters");
-//				System.out.println("X:" + x + " Y:" + y);
-//			}
-//		});
-//	}
 
 	public void drawAllROI(ArrayList<ROI> listRoi, Mat bgResult) {
 		for (ROI roi : listRoi) {
