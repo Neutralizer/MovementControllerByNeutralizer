@@ -18,26 +18,29 @@ public class Camera {
 	private final int cameraNum;
 	private FrameGrabber grabber;
 	private long startTime = System.currentTimeMillis();
+	private long startTimeLimiter = System.currentTimeMillis();
 	private int fps = 0;
 	private int currentfps = 0;
-	
+	private boolean limitFPS = true;
+
 	public Camera(int cameraNum) {
 		this.cameraNum = cameraNum;
-		
+
 		VideoCapture v = new VideoCapture();
 		boolean openingSuccessful = v.open(cameraNum);
-		if(!openingSuccessful) {
+		if (!openingSuccessful) {
 			v.close();
 			throw new IllegalStateException("Camera is busy or unavailable");
 		}
-		
-//		v.set(5,24);//TODO FPS limiter - video capture is not used actually
+
+		// v.set(5,24);//TODO FPS limiter - video capture is not used actually
 		cameraWidth = (int) v.get(3);
 		cameraHeight = (int) v.get(4);
-//		v.set(37, 1);//TODO testing camera settings panel-setting prop after opening the cam
+		// v.set(37, 1);//TODO testing camera settings panel-setting prop after opening
+		// the cam
 		if (isCameraBiggerThan640()) {
-			v.set(3,640);
-			v.set(4,480);
+			v.set(3, 640);
+			v.set(4, 480);
 			cameraWidth = 640;
 			cameraHeight = 480;
 		}
@@ -68,6 +71,10 @@ public class Camera {
 	 * @return
 	 */
 	public Frame getFrame() {
+		if(limitfps()) {
+			return null;
+		}
+		
 		getFps();
 		try {
 			return grabber.grab();
@@ -76,7 +83,7 @@ public class Camera {
 		}
 		return null;
 	}
-	
+
 	public void releaseCurrentCamera() {
 		try {
 			grabber.close();
@@ -85,12 +92,34 @@ public class Camera {
 		}
 	}
 
+	/**
+	 * must allow execution once in 33ms (for 30 fps limiter) </br>
+	 * if 33ms have not passed and another execution is requested - block it
+	 * 
+	 * @param fpsLimit
+	 * @return
+	 */
+	private boolean limitfps() {
+		int desiredMiliExecutionLimiterTime = 1000 / 30;// 33.3
+		long currentTime = System.currentTimeMillis();
+
+		if ((currentTime - startTimeLimiter) < desiredMiliExecutionLimiterTime) {
+			return true;
+		} else {
+			startTimeLimiter = currentTime;
+			return false;
+		}
+
+	}
+
+	/**
+	 * get current time milis - if 1 second has passed - check a counter++ value and
+	 * return the fps - set the current time as the start time
+	 */
 	private void getFps() {
-		//get current time milis - if 1 second has passed - check a counter++ value and return the fps - set the current time
-		//as the start time
 		long currentTime = System.currentTimeMillis();
 		currentfps++;
-		if((currentTime - startTime) > 1000) {
+		if ((currentTime - startTime) > 1000) {
 			fps = currentfps;
 			currentfps = 0;
 			startTime = currentTime;
@@ -112,7 +141,7 @@ public class Camera {
 	public int getCameraNum() {
 		return cameraNum;
 	}
-	
+
 	public int getFPS() {
 		return fps;
 	}

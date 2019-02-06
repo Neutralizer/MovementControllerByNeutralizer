@@ -46,6 +46,11 @@ public class Display {
 		frame.setSize(640, 480);
 	}
 
+	/**
+	 * makes error logs due to javacpp problems
+	 * @param camera
+	 * @param roi
+	 */
 	private void addCloseListener(final Camera camera, final ROIManipulator roi) {
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
