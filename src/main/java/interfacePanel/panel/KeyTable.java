@@ -113,7 +113,6 @@ public class KeyTable extends JTable {
 				int x = e.getX();
 				int y = e.getY();
 
-				// TODO set only if point within range
 				try {
 					roi.isSizeWithinCameraRange(x, y, 40, 40);
 					clicked = new java.awt.Point(x, y);
@@ -254,13 +253,10 @@ public class KeyTable extends JTable {
 				// i = the index of the selected row
 				int i = table.getSelectedRow();
 				if (i >= 0) {
-					// keyText.setText(model.getValueAt(i, 0).toString());
 					comboBoxKeyName.setSelectedItem(model.getValueAt(i, 0));
 					if (model.getValueAt(i, 1) != null) {
 						locText.setText(model.getValueAt(i, 1).toString());
 					}
-					// typeText.setText(model.getValueAt(i, 2).toString());//TODO check if next
-					// works
 					comboBoxKeyType.setSelectedItem(model.getValueAt(i, 2));
 				}
 			}

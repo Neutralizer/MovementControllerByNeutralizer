@@ -2,11 +2,11 @@
 * Closing the window now closes camera and unpresses keys (main window only)
 * Added fps limiter - set to 30 fps
 * Bug fix - now you can't add keys to the table that don't have location
-* Bug fix - 
+* Bug fix - update button can now update without selecting location
 
 ### 0.0.5 - 05.02.2019
 * Bug fix - saving to prop file now works as intended
-* Unique key in properties file now allows for duplicate keys 
+* Unique key in properties file now allows for duplicate keys
 
 ### 0.0.4 - 27.01.2019
 * Added Big feature - table to show and modify virtual key regions with ease
