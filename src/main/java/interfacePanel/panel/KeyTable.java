@@ -64,9 +64,9 @@ public class KeyTable extends JTable {
 	 *            - needed to get the coordinates from display for roi square
 	 *            manipulation
 	 * @param roi
-	 * @param prop 
+	 * @param prop
 	 * @param currentPropFile
-	 * @param selectedPropFile 
+	 * @param selectedPropFile
 	 */
 	public KeyTable(Display display, ROIManipulator roi, PropertiesOperations prop, String selectedPropFile) {
 
@@ -112,18 +112,18 @@ public class KeyTable extends JTable {
 			public void mouseClicked(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
-				
-				//TODO set only if point within range
+
+				// TODO set only if point within range
 				try {
 					roi.isSizeWithinCameraRange(x, y, 40, 40);
 					clicked = new java.awt.Point(x, y);
 					locText.setText(clicked.x + "," + clicked.y);
 				} catch (IllegalStateException exception) {
-					// catches the exception if the roi is out of range and does not set clicked and text
+					// catches the exception if the roi is out of range and does not set clicked and
+					// text
 					// TODO: handle exception
 				}
-				
-				
+
 				System.out.println("enters");// TOOD debug test
 				System.out.println("X:" + x + " Y:" + y);
 			}
@@ -164,7 +164,6 @@ public class KeyTable extends JTable {
 		btnUpdate = new JButton("Update");
 		btnSave = new JButton("Save");
 
-
 		JScrollPane pane = new JScrollPane(table);
 
 		locText.setPreferredSize(new Dimension(70, 20));// TODO make it look bette r
@@ -198,7 +197,7 @@ public class KeyTable extends JTable {
 		c.gridx = 0;
 		c.gridy = 20;
 		frame.add(btnUpdate, c);
-		
+
 		c.gridx = 0;
 		c.gridy = 21;
 		frame.add(btnSave, c);
@@ -217,8 +216,6 @@ public class KeyTable extends JTable {
 				}
 
 				row[2] = comboBoxKeyType.getSelectedItem().toString();
-
-				
 
 				// will add roi only if location is selected
 				if (clicked != null) {
@@ -280,31 +277,28 @@ public class KeyTable extends JTable {
 				if (i >= 0) {
 
 					model.setValueAt(comboBoxKeyName.getSelectedItem().toString(), i, 0);
-					if (clicked != null) {
-						model.setValueAt(locText.getText(), i, 1);
-
-					}
+					model.setValueAt(locText.getText(), i, 1);
 					model.setValueAt(comboBoxKeyType.getSelectedItem().toString(), i, 2);
 
-					if (clicked != null) {
-						int keyCode = allowedKeysObject.getKeyCode(comboBoxKeyName.getSelectedItem().toString());
+					int keyCode = allowedKeysObject.getKeyCode(comboBoxKeyName.getSelectedItem().toString());
 
-						roi.updateRoiFromList(i, clicked.x, clicked.y, keyCode,
-								KeyPressType.valueOf(comboBoxKeyType.getSelectedItem().toString()));
-					}
+					String coord = locText.getText();
+					String[] values = coord.split(",");
+					roi.updateRoiFromList(i, Integer.valueOf(values[0]), Integer.valueOf(values[1]), keyCode,
+							KeyPressType.valueOf(comboBoxKeyType.getSelectedItem().toString()));
 				} else {
 					System.out.println("Update Error");
 				}
 			}
 		});
-		
+
 		btnSave.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				prop.saveRoiToPropFile(currentPropFile);
-				
+
 			}
 		});
 
