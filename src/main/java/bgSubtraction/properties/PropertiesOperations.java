@@ -1,5 +1,6 @@
 package bgSubtraction.properties;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,10 +59,12 @@ public class PropertiesOperations {
 				String keyName = KeyEvent.getKeyText(roi.getKey().getKeyCode());
 				String modifiedKeyName = modifyKeyNameToAvoidDuplicates(duplicates, keyName);
 				double percentageLoc[] = roiManipulator.convertToPercentage(roi.getCoordinate());
-				addRoiToProperty(modifiedKeyName, percentageLoc[0], percentageLoc[1], roi.getKey().getKeyCode(),
-						roi.getKey().getKeyPressType());
-			} // TODO make the size of the square saved so that big w does not get deleted
-				// when saving to prop
+				double percentageLocSize[] = roiManipulator
+						.convertToPercentage(new Point(roi.getRoi().width(), roi.getRoi().height()));
+
+				addRoiToProperty(modifiedKeyName, percentageLoc[0], percentageLoc[1], percentageLocSize[0],
+						percentageLocSize[1], roi.getKey().getKeyCode(), roi.getKey().getKeyPressType());
+			}
 
 			prop.store(output, null);
 

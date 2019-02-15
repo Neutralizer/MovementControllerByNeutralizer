@@ -1,6 +1,7 @@
 ### 0.0.7 
 * Blur preprocessing added
 * Row selection type bugfix
+* Now saving size of virtual button in prop file - bugfix for custom squares not being saved
 
 ### 0.0.6 - 06.02.2019
 * Closing the window now closes camera and unpresses keys (main window only)
