@@ -49,18 +49,19 @@ public class PropertiesOperations {
 			if (!isFiledeleted) {
 				throw new IllegalStateException("File cound not be cleaned before saving or does not exist");
 			}
-			
+
 			output = new FileOutputStream(currentPropFile);
-			
+
 			Map<String, Integer> duplicates = new HashMap<String, Integer>();
 
 			for (ROI roi : roiManipulator.getListRoi()) {
 				String keyName = KeyEvent.getKeyText(roi.getKey().getKeyCode());
-				String modifiedKeyName = modifyKeyNameToAvoidDuplicates(duplicates,keyName);
+				String modifiedKeyName = modifyKeyNameToAvoidDuplicates(duplicates, keyName);
 				double percentageLoc[] = roiManipulator.convertToPercentage(roi.getCoordinate());
 				addRoiToProperty(modifiedKeyName, percentageLoc[0], percentageLoc[1], roi.getKey().getKeyCode(),
 						roi.getKey().getKeyPressType());
-			}
+			} // TODO make the size of the square saved so that big w does not get deleted
+				// when saving to prop
 
 			prop.store(output, null);
 
@@ -84,27 +85,29 @@ public class PropertiesOperations {
 	 * that key </br>
 	 * EX: C first time - write to map with value 1; C second time - change value to
 	 * map to 2 and change the name of the c value returned to C2
-	 * @param duplicates 
+	 * 
+	 * @param duplicates
 	 * 
 	 * @param keyName
 	 *            actual key name, returned from KeyEvent.getKeyText(...)
-	 * @return Modified key name if it is duplicate - to be used as key in properties file
+	 * @return Modified key name if it is duplicate - to be used as key in
+	 *         properties file
 	 */
 	private String modifyKeyNameToAvoidDuplicates(Map<String, Integer> duplicates, String keyName) {
-		if(duplicates.get(keyName) == null) {
+		if (duplicates.get(keyName) == null) {
 			duplicates.put(keyName, 0);
 		} else {
 			duplicates.put(keyName, duplicates.get(keyName) + 1);
 		}
-		
+
 		int timesOfOccurrence = duplicates.get(keyName);
-		if(timesOfOccurrence > 0) {
+		if (timesOfOccurrence > 0) {
 			return keyName + timesOfOccurrence;
 		}
 		return keyName;
 	}
 
-	//TODO debug
+	// TODO debug
 	public void createPropFile(String folderPath, String filename) {
 		try {
 
@@ -132,18 +135,24 @@ public class PropertiesOperations {
 	}
 
 	private void addRoiToProperty(String keyString, int width, int height, int keyEvent, KeyPressType type) {
-		int[] f = new int[] { width, height, keyEvent, type.ordinal() };
+		int[] f = new int[] { width, height, keyEvent, type.ordinal() };// TODO split by , internally - not needed
 		prop.setProperty(keyString, f[0] + "," + f[1] + "," + f[2] + "," + f[3] + "");
-	}
-
-	private void addRoiToProperty(String keyString, double width, double height, int keyEvent, KeyPressType type) {
-		prop.setProperty(keyString, width + "," + height + "," + keyEvent + "," + type.ordinal() + "");
 	}
 
 	private void addRoiToProperty(String key, int width, int height, int sizeWidth, int sizeHeight, int keyEvent,
 			KeyPressType type) {
 		int[] f = new int[] { width, height, sizeWidth, sizeHeight, keyEvent, type.ordinal() };
 		prop.setProperty(key, f[0] + "," + f[1] + "," + f[2] + "," + f[3] + "," + f[4] + "," + f[5] + "");
+	}
+
+	private void addRoiToProperty(String keyString, double width, double height, int keyEvent, KeyPressType type) {
+		prop.setProperty(keyString, width + "," + height + "," + keyEvent + "," + type.ordinal() + "");
+	}
+
+	private void addRoiToProperty(String keyString, double width, double height, double sizeWidth, double sizeHeight,
+			int keyEvent, KeyPressType type) {
+		prop.setProperty(keyString,
+				width + "," + height + "," + sizeWidth + "," + sizeHeight + "," + keyEvent + "," + type.ordinal() + "");
 	}
 
 	/**
