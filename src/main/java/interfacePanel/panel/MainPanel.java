@@ -105,7 +105,14 @@ public class MainPanel extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				if (started) {
 					KeyController.unpressAllRoiButtons(roi.getListRoi());
-					camera.releaseCurrentCamera();
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					camera.releaseCurrentCamera();//TODO throws those cpp errors
+					
 				}
 				System.exit(0);
 			}
