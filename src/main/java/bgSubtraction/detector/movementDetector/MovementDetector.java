@@ -24,10 +24,11 @@ public class MovementDetector implements Detector {
 	Mat firstKernelErode;
 	Mat secondKernelDilate;
 	BackgroundSubtractorMOG2 fgbg;
-	int firstKernelErodeSize = 5;//5
-	int secondKernelDilateSize = 1;//1; even number above 0 - 1 = no effect
-	int subtractorHistoryLength = 1;//1; not 0
-	int subractorThreshold = 16;//16
+	int blurSize = 1;// 21 max
+	int firstKernelErodeSize = 5;// 5
+	int secondKernelDilateSize = 1;// 1; even number above 0 - 1 = no effect
+	int subtractorHistoryLength = 1;// 1; not 0
+	int subractorThreshold = 16;// 16
 
 	public MovementDetector() {
 		this.firstKernelErode = opencv_imgproc.getStructuringElement(opencv_imgproc.MORPH_RECT,
@@ -38,6 +39,16 @@ public class MovementDetector implements Detector {
 																													// for
 																													// 1.4;1,100,false
 																													// for1.4.2
+	}
+	
+	/**
+	 * only odd numbers 
+	 * @param blur
+	 */
+	public void changeBlur(int blur) {
+		if (blurSize != blur) {
+			blurSize = blur;
+		}
 	}
 
 	public void changeErode(int erode) {
@@ -71,11 +82,15 @@ public class MovementDetector implements Detector {
 	}
 
 	public void processImage(IplImage img, Mat bgResult) {
-		fgbg.apply(new Mat(img), bgResult);
+		Mat imgMat = new Mat(img);
+
+		fgbg.apply(imgMat, bgResult);
+
+		opencv_imgproc.medianBlur(bgResult, bgResult, blurSize);
 
 		opencv_imgproc.erode(bgResult, bgResult, firstKernelErode);
-		opencv_imgproc.dilate(bgResult, bgResult, secondKernelDilate);// TODO new addition since 001
-		
+		opencv_imgproc.dilate(bgResult, bgResult, secondKernelDilate);
+
 	}
 
 	/**

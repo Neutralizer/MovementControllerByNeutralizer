@@ -67,6 +67,8 @@ public class MainPanel extends JFrame {
 	String dilateHover = "Makes found pixels bigger";
 	String historyHover = "Creates trail from detected pixels";
 	String threshHover = "Controls main detection - more means less detection";
+	String blurHover = "Blurs the image to reduce noise";
+	JSlider sliderBlur = new JSlider(1, 19, 1);
 	JSlider sliderErode1 = new JSlider(1, 15, 5);
 	JSlider sliderDilate2 = new JSlider(1, 15, 1);
 	JSlider sliderHistory = new JSlider(1, 50, 1);
@@ -148,10 +150,26 @@ public class MainPanel extends JFrame {
 			}
 		});
 
+		sliderTemplate(panelForm, c, sliderBlur, "Blur", blurHover, 10, 2);
 		sliderTemplate(panelForm, c, sliderErode1, "Erode", erodeHover, 2, 1);
 		sliderTemplate(panelForm, c, sliderDilate2, "Dilate", dilateHover, 2, 1);
 		sliderTemplate(panelForm, c, sliderHistory, "History", historyHover, 10, 1);
 		sliderTemplate(panelForm, c, sliderThresh, "Threshold", threshHover, 10, 1);
+
+		sliderBlur.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				if (!source.getValueIsAdjusting()) {
+					int value = (int) source.getValue();
+					if (value % 2 == 0) {// need only odd numbers
+						value = value - 1;
+					}
+					detector.changeBlur(value);
+				}
+			}
+		});
 
 		sliderErode1.addChangeListener(new ChangeListener() {
 
@@ -262,7 +280,7 @@ public class MainPanel extends JFrame {
 		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
 		camera = new Camera(cameraNum);
 		roi = new ROIManipulator(camera);
-		Display display = new Display(camera,roi);
+		Display display = new Display(camera, roi);
 		prop = new PropertiesOperations(roi);// cpp way - give obj and populate it
 		prop.loadPropertiesFileIntoInternalRoiManipulator(selectedPropFile);// "config.properties"
 		started = true;
