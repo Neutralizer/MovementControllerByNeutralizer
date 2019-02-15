@@ -257,7 +257,7 @@ public class KeyTable extends JTable {
 					if (model.getValueAt(i, 1) != null) {
 						locText.setText(model.getValueAt(i, 1).toString());
 					}
-					comboBoxKeyType.setSelectedItem(model.getValueAt(i, 2));
+					comboBoxKeyType.setSelectedItem(model.getValueAt(i, 2).toString());
 				}
 			}
 		});
