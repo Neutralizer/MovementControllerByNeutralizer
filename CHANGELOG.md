@@ -1,4 +1,4 @@
-### 0.0.7 
+### 0.0.7 - 15.02.2019
 * Blur preprocessing added
 * Row selection type bugfix
 * Now saving size of virtual button in prop file - bugfix for custom squares not being saved
