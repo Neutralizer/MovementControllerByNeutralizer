@@ -1,3 +1,7 @@
+### 0.0.8 - 24.02.2019
+* Panel changes - key name loading is now uniform in table and dropdown menu
+
+
 ### 0.0.7 - 15.02.2019
 * Blur preprocessing added
 * Row selection type bugfix

@@ -56,18 +56,18 @@ public final class AllowedKeys {
 		allowedMap.put("9", KeyEvent.VK_9);
 		allowedMap.put("0", KeyEvent.VK_0);
 
-		allowedMap.put("ESCAPE", KeyEvent.VK_ESCAPE);
-		allowedMap.put("TAB", KeyEvent.VK_TAB);
-		allowedMap.put("CAPSLOCK", KeyEvent.VK_CAPS_LOCK);
-		allowedMap.put("SHIFT", KeyEvent.VK_SHIFT);
-		allowedMap.put("CONTROL", KeyEvent.VK_CONTROL);
-		allowedMap.put("ALT", KeyEvent.VK_ALT);
-		allowedMap.put("SPACE", KeyEvent.VK_SPACE);
-		allowedMap.put("LEFT", KeyEvent.VK_LEFT);
-		allowedMap.put("RIGHT", KeyEvent.VK_RIGHT);
-		allowedMap.put("UP", KeyEvent.VK_UP);
-		allowedMap.put("DOWN", KeyEvent.VK_DOWN);
-		allowedMap.put("ENTER", KeyEvent.VK_ENTER);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_ESCAPE), KeyEvent.VK_ESCAPE);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_TAB), KeyEvent.VK_TAB);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_CAPS_LOCK), KeyEvent.VK_CAPS_LOCK);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_SHIFT), KeyEvent.VK_SHIFT);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_CONTROL), KeyEvent.VK_CONTROL);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_ALT), KeyEvent.VK_ALT);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_SPACE), KeyEvent.VK_SPACE);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_LEFT), KeyEvent.VK_LEFT);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_RIGHT), KeyEvent.VK_RIGHT);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_UP), KeyEvent.VK_UP);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_DOWN), KeyEvent.VK_DOWN);
+		allowedMap.put(KeyEvent.getKeyText(KeyEvent.VK_ENTER), KeyEvent.VK_ENTER);
 
 		allowedKeys = allowedMap.keySet().toArray(new String[allowedMap.keySet().size()]);
 
