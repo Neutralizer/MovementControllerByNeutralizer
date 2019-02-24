@@ -36,6 +36,7 @@ public class Camera {
 		// v.set(5,24);//TODO FPS limiter - video capture is not used actually
 		cameraWidth = (int) v.get(3);
 		cameraHeight = (int) v.get(4);
+		v.set(39, 0);
 		// v.set(37, 1);//TODO testing camera settings panel-setting prop after opening
 		// the cam
 		if (isCameraBiggerThan640()) {
