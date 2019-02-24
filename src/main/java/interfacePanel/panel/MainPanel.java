@@ -256,7 +256,8 @@ public class MainPanel extends JFrame {
 
 				} catch (java.lang.Exception ex) {
 				} finally {
-					// v.close();
+					v.release();
+					v.close();
 				}
 			}
 		});

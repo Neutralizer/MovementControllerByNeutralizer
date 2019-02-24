@@ -44,6 +44,7 @@ public class Camera {
 			cameraWidth = 640;
 			cameraHeight = 480;
 		}
+		v.release();
 		v.close();
 
 		try {
