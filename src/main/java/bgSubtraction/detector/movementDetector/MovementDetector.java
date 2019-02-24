@@ -24,7 +24,7 @@ public class MovementDetector implements Detector {
 	Mat firstKernelErode;
 	Mat secondKernelDilate;
 	BackgroundSubtractorMOG2 fgbg;
-	int blurSize = 3;// 21 max Even numbers only
+	int blurSize = 5;// 21 max Even numbers only
 	int firstKernelErodeSize = 3;// 5
 	int secondKernelDilateSize = 3;// 1; even number above 0 - 1 = no effect
 	int subtractorHistoryLength = 4;// 1; not 0

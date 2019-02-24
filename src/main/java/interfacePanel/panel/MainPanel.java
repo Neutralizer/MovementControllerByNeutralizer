@@ -68,7 +68,7 @@ public class MainPanel extends JFrame {
 	String historyHover = "Creates trail from detected pixels";
 	String threshHover = "Controls main detection - more means less detection";
 	String blurHover = "Blurs the image to reduce noise";
-	JSlider sliderBlur = new JSlider(1, 19, 3);
+	JSlider sliderBlur = new JSlider(1, 19, 5);
 	JSlider sliderErode1 = new JSlider(1, 15, 3);
 	JSlider sliderDilate2 = new JSlider(1, 15, 3);
 	JSlider sliderHistory = new JSlider(1, 50, 4);
