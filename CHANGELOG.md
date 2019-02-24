@@ -3,6 +3,7 @@
 * Changed starting tweakable detector values to most used ones
 * Camera properties button now more stable
 * Now automatically disables camera autofocus if the driver allows it
+* Buttons and dropdowns disabled after starting the program
 
 ### 0.0.7 - 15.02.2019
 * Blur preprocessing added

@@ -39,12 +39,12 @@ public class Camera {
 		v.set(39, 0);
 		// v.set(37, 1);//TODO testing camera settings panel-setting prop after opening
 		// the cam
-		if (isCameraBiggerThan640()) {
-			v.set(3, 640);
-			v.set(4, 480);
-			cameraWidth = 640;
-			cameraHeight = 480;
-		}
+//		if (isCameraBiggerThan640()) {//TODO make scaling down if needed
+//			v.set(3, 640);
+//			v.set(4, 480);
+//			cameraWidth = 640;
+//			cameraHeight = 480;
+//		}
 		v.release();
 		v.close();
 

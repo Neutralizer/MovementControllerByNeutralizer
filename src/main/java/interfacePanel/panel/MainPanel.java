@@ -57,9 +57,9 @@ public class MainPanel extends JFrame {
 	// = new JComboBox<String>(
 	// new String[] { "config.properties", "quake.properties" });
 	private JButton buttonStartCamera = new JButton("Start Camera");
-	private JButton buttonCameraProperties = new JButton("Unstable:Camera Properties");
+	private JButton buttonCameraProperties = new JButton("Camera Properties");
 	// private JButton buttonLoadPreset= new JButton("Load Preset");
-	String buttonCameraPropertiesHover = "Opens current camera properties - Experimental";
+	String buttonCameraPropertiesHover = "Opens current camera properties ";
 	String buttonCameraHover = "Starts the camera and the controller";
 	String boxCameraHover = "Shows available cameras";
 	String boxPropertiesHover = "Shows available presets as .properties files in current folder";
@@ -284,6 +284,11 @@ public class MainPanel extends JFrame {
 	}
 
 	private void startExecution() {
+		comboBoxCamera.setEnabled(false);
+		comboBoxPresets.setEnabled(false);
+		buttonStartCamera.setEnabled(false);
+		buttonCameraProperties.setEnabled(false);
+		
 		int cameraNum = util.getCameraNum(cameras, comboBoxCamera.getSelectedItem().toString());
 		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
 		camera = new Camera(cameraNum);
