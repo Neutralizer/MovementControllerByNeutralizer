@@ -1,5 +1,5 @@
 ### 0.0.8 - 24.02.2019
-* Panel changes - key name loading is now uniform in table and dropdown menu
+* Panel bugfix - key name loading is now uniform in table and dropdown menu
 * Changed starting tweakable detector values to most used ones
 * Camera properties button now more stable
 * Now automatically disables camera autofocus if the driver allows it
