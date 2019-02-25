@@ -34,11 +34,11 @@ After starting the program you can manipulate the virtual buttons from the butto
 #### Updating a button:
 1. Click on the table row with the button you want to update.
 2. Update it via the dropdown menus or by changing its location by clickin on the video feed.
-3. Press update.
+3. Press Update.
 #### Deleting a button:
 1. Click on the table row with the button you want to update.
-2. Press delete.<br>
-You can save the current preset by pressing save.
+2. Press Delete.
+#### You can save the current preset by pressing save.
 
 ## History
 ### The idea
