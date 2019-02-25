@@ -58,11 +58,9 @@ Thus I combined circle(shape) tracking for mouse control and background subtract
 With the mouse problems solved by using the actual mouse the need to customise keys arouse and I chose to use .properties file as a simple offline database to store the location of the region and the type of the virtual key to be pressed. The program detects the amount of white pixels in those regions, and if they are above a certain threshold, then the key is pressed. Currently the only drawback of the program is that movement is not detected very good in poor lightning conditions, so this is curcumvented by increasing the detection threshold (this option is hardcoded for now).
 ## Known Issues
 
-
-
 ## F.A.Q.
-### Q. Can I use my smartphone as a web camera?
-A. You can via software, but unfortunately this creates a flickering input and is not good for detection. All virtual cameras have the same problem.
+### Q. Can I use my smartphone as a web camera and how?
+A. Yes, you can via software, although the video feed will flicker. All virtual cameras have the same problem, but due to recent improvements this will not impair detection too much. I tried with DroidCam and it worked - enter its official site for info on how to download it <a href="https://www.dev47apps.com/">www.dev47apps.com</a>. You don't need premium, because my program is designed to run 640x480 p.
 ### Q. Will this be useful in VR?
 A. I think it would be great for VR - you just need a simple web camera. I have not tested it for VR, because I do not have one.
 ### Q. How do I determine the effect of the exercise?
@@ -70,4 +68,4 @@ A. The faster it makes you sweat, the more efficient is the exercise. Note that 
 ### Q. Why First person and third person games (FPS) and not RTS (real time strategy) and strategy games?
 A. 1st and 3rd person games let you take on the view of the soldier/warrior/ and is more immersive and intuitive - you move your feet - the avatar moves; you move your hand for the reload button - the avatar executes the reload animation with his hands. On the other side in RTS you play a commander, which is delegating the tough job of fighting to his subordinates, so basically he just shouts orders - go there, attack that, build this. I personally like very much strategy games and if I can make this program be immersive for them I will be very happy.
 ### Q. What about racing games?
-A. In racing games you are seated while driving, so that is not much of an exercise. Though it still can be used, but I don't have anything in mind conserning the steering wheel virtualisation.
+A. In racing games you are seated while driving, so that is not much of an exercise. Though it still can be used, it will probably be like driving the flintstones' car and you spread your hands like an airplane in order to turn the car - I imagine it will be quite hilarious.
