@@ -60,11 +60,13 @@ With the mouse problems solved by using the actual mouse the need to customise k
 
 ## F.A.Q.
 ### Q. Can I use my smartphone as a web camera and how?
-A. Yes, you can via software, although the video feed will flicker. All virtual cameras have the same problem, but due to recent improvements this will not impair detection too much. I tried with DroidCam and it worked - enter its official site for info on how to download it <a href="https://www.dev47apps.com/">www.dev47apps.com</a>. You don't need premium, because my program is designed to run 640x480 p.
+A. Yes, you can via software, although the video feed will flicker. All virtual cameras have the same problem, but due to recent improvements this will not impair detection too much. I tried with DroidCam and it worked - enter its official site for info on how to download it: <a href="https://www.dev47apps.com/">www.dev47apps.com</a>. You don't need premium, because my program is designed to run 640x480 p.
 ### Q. Will this be useful in VR?
 A. I think it would be great for VR - you just need a simple web camera. I have not tested it for VR, because I do not have one.
 ### Q. How do I determine the effect of the exercise?
 A. The faster it makes you sweat, the more efficient is the exercise. Note that with time your body will adapt to constant exercise and you will not be sweating so easily.
+### Q. Will the program work in 3D if I add another camera?
+A. Yes, it will. Just start the program 2 times and load 2 different cameras with 2 different presets - 1st in front of you and the 2nd on your side. The front camera will detect your movement as you move from left to right and the side camera will detect your movement as you move forward and backward.
 ### Q. Why First person and third person games (FPS) and not RTS (real time strategy) and strategy games?
 A. 1st and 3rd person games let you take on the view of the soldier/warrior/ and is more immersive and intuitive - you move your feet - the avatar moves; you move your hand for the reload button - the avatar executes the reload animation with his hands. On the other side in RTS you play a commander, which is delegating the tough job of fighting to his subordinates, so basically he just shouts orders - go there, attack that, build this. I personally like very much strategy games and if I can make this program be immersive for them I will be very happy.
 ### Q. How about competitive games?
