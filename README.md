@@ -16,10 +16,14 @@ The <a href="https://github.com/Neutralizer/MovementControllerByNeutralizer/rele
 ### Running the program
 1. Select a camera and a preset(.properties file) from the dropdown menu.
 2. After starting the camera and several(no more than 5) seconds pass, a black window will appear, which should detect your movement if it is not very dark in your room. If nothing happens, then check the Known Issues section.
-3. With the sliders adjust the detection - the white on the screen should appear only when you move.<br>
+3. With the sliders - adjust the detection: the white on the screen should appear only when you move.<br>
 Insert picture here.<br>
+#### What actually happens
 When you move your hand in a square(region of interest) on the video feed, the program will press the respective key. Open a notepad and move your hands in the detection range of the camera, to see how the buttons are being pressed.<br>
 When you are comfortable with the controls, alt tab to your game and enjoy.<br>
+#### What about the mouse
+Emulating mouse via computer vision is very unreliable, so the design is that the real mouse is to be used: Hold a carboard box in your hands as a gun and on its surface move the mouse to look around and aim.
+
 Insert tutorial video here<br>
 ### Using the GUI - graphic user interface
 After starting the program you can manipulate the virtual buttons from the button table and key dropdown menus.<br> 
