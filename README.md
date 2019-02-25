@@ -21,6 +21,16 @@ Insert picture here.<br>
 When you move your hand in a square(region of interest) on the video feed, the program will press the respective key. Open a notepad and move your hands in the detection range of the camera, to see how the buttons are being pressed.<br>
 When you are comfortable with the controls, alt tab to your game and enjoy.<br>
 Insert tutorial video here<br>
+### Using the GUI - graphic user interface
+After starting the program you can manipulate the virtual buttons from the button table and key dropdown menus.<br> 
+Adding a new button: 
+1. Click on the video feed on the location you want it to be placed.
+2. Select the key you want to virtualise from the key dropdown menu
+3. Choose the key type: 
+* CONSTANT - whenever movement is detected, the key will be pressed with low delay - Equal to pressing repeatedly the selected key.
+* PRESS - (Default virtual type) whenever movement is detected, the key will be pressed with a normal delay - Equal to pressing a key once and releasing it.
+* TOGGLE - whenever movement is detected, the key will be held down. When movement is detected again the key will be released. Equal to leaving something heavy on your key to keep it pressed. 
+
 ## History
 ### The idea
 I wanted to create a project that will motivate me to lose weight, while doing the thing I love - playing games. The goal of the project was for it to be as cheap as possible, as easy to use as possible and to be accessible to others also. Currently the dominant lifestyle is very passive and one may sit at work and at home in front of the computer all day. With a program such as this one, you are motivated to exercise in your home, without worrying about bad weather, without having extra space taken for exercise equipment, without the problem of being bored - you can just change the game. Find excuse to skip exercising is also a problem - I am lazy to go out, I am too tired from work, I don't have someone to go out with and so on. With this program you will have to find an excuse not to play a game.
