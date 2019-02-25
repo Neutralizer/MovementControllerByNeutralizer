@@ -9,14 +9,16 @@ The program is still in its ALPHA state and is unfinished. Check Known Issues se
 ## Getting Started
 What should I do to run this alpha concoction:
 ### Download
-The <a href="https://github.com/Neutralizer/MovementControllerByNeutralizer/releases">Releases</a> page holds the current version and presets
+The <a href="https://github.com/Neutralizer/MovementControllerByNeutralizer/releases">Releases</a> page holds the current version and presets - you need a preset (.properties file) in the same folder as the executable (.jar file). 
 ### Preparation
-1. In order to be able to run this program you need java installed: If you can't run the executable jar go to java official site and download - https://www.java.com/en/download/ . <br>
-2. You need a web camera in order for the whole "computer vision" magic to work (Make sure that you have drivers for your web camera).<br>
+1. In order to be able to run this program you need java installed: If you can't run the executable jar go to java official site and download it - https://www.java.com/en/download/ . <br>
+2. You need a web camera in order for the whole "computer vision" magic to work (Make sure that you have drivers for your web camera (not needed for windows 10)).<br>
 ### Running the program
-While there is currently a very mediocre GUI, you can select a camera and a preset(.properties file) from it. The .properties files hold predefined regions, which press their respective keys when movement is detected. For now they are hardcoded, but in the future they will be manipulated via GUI. After starting the program and several(no more than 5) seconds pass, a black window will appear, which should detect your movement if it is not very dark in your room. If nothing happens, then check the F.A.Q. <br>
+1. Select a camera and a preset(.properties file) from the dropdown menu.
+2. After starting the camera and several(no more than 5) seconds pass, a black window will appear, which should detect your movement if it is not very dark in your room. If nothing happens, then check the Known Issues section.
+3. With the sliders adjust the detection - the white on the screen should appear only when you move.<br>
 Insert picture here.<br>
-When you move your hand in a square(region of interest) on the camera, the program will press the respective key. Open a notepad and move your hands in the detection range of the camera, to see how the buttons are being pressed.<br>
+When you move your hand in a square(region of interest) on the video feed, the program will press the respective key. Open a notepad and move your hands in the detection range of the camera, to see how the buttons are being pressed.<br>
 When you are comfortable with the controls, alt tab to your game and enjoy.<br>
 Insert tutorial video here<br>
 ## History
