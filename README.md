@@ -30,14 +30,14 @@ Adding a new button:
 * CONSTANT - whenever movement is detected, the key will be pressed with low delay - Equal to pressing repeatedly the selected key.
 * PRESS - (Default virtual type) whenever movement is detected, the key will be pressed with a normal delay - Equal to pressing a key once and releasing it.
 * TOGGLE - whenever movement is detected, the key will be held down. When movement is detected again the key will be released. Equal to leaving something heavy on your key to keep it pressed. 
-4. Press Add.
+4. Press Add. <br>
 Updating a button:
 1. Click on the table row with the button you want to update.
 2. Update it via the dropdown menus or by changing its location by clickin on the video feed.
-3. Press update.
+3. Press update.<br>
 Deleting a button:
 1. Click on the table row with the button you want to update.
-2. Press delete.
+2. Press delete.<br>
 You can save the current preset by pressing save.
 
 ## History
