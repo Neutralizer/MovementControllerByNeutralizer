@@ -36,7 +36,19 @@ public class PropertiesOperations {
 	// // cl.loadPropertiesFile("config.properties");
 	// cl.createPropFile(UtilitiesPanel.FILE_DIR,"config.properties");
 	// }
+	
+	/**
+	 * Used only for creating default prop 
+	 */
+	public PropertiesOperations() {
+		
+	}
 
+	/**
+	 * Manages properties files for roi virtual button
+	 * @param roiManipulator the actual virtual button manipulator object
+	 * 
+	 */
 	public PropertiesOperations(ROIManipulator roiManipulator) {
 		super();
 		this.roiManipulator = roiManipulator;
@@ -110,16 +122,16 @@ public class PropertiesOperations {
 		return keyName;
 	}
 
-	// TODO debug
-	public void createPropFile(String folderPath, String filename) {
+	// TODO debug -now used to create default file
+	public void createPropFile(String filename) {
 		try {
 
-			output = new FileOutputStream(folderPath + filename);
+			output = new FileOutputStream(filename);
 
-			addRoiToProperty("R", 0.14, 0.0, KeyEvent.VK_R, KeyPressType.PRESS);
-			addRoiToProperty("E", 0.80, 0.0, KeyEvent.VK_E, KeyPressType.PRESS);
+			addRoiToProperty("R", 0.00, 0.2, KeyEvent.VK_R, KeyPressType.PRESS);
+			addRoiToProperty("E", 0.2, 0.0, KeyEvent.VK_E, KeyPressType.PRESS);
 			addRoiToProperty("F", 0.92, 0.0, KeyEvent.VK_F, KeyPressType.PRESS);
-			addRoiToProperty("ESCAPE", 0.0, 0.0, KeyEvent.VK_ESCAPE, KeyPressType.PRESS);
+			addRoiToProperty("Space", 0.5, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
 
 			prop.store(output, null);
 

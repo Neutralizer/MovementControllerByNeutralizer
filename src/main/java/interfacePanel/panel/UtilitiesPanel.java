@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.github.sarxos.webcam.Webcam;
 
+import bgSubtraction.properties.PropertiesOperations;
+
 /**
  * 
  * @author Tsvetan "Neutralizer" Trifonov
@@ -30,8 +32,9 @@ public class UtilitiesPanel {
 		String[] list = dir.list(filter);
 
 		if (list.length == 0) {
-			//no files found
-			return list;//TODO throw 
+			//no files found - create default prop in folder
+			new PropertiesOperations().createPropFile("Default.properties");
+			return new String[] {"Default.properties"};
 		}
 
 		return list;

@@ -57,7 +57,7 @@ public class MainPanel extends JFrame {
 	// = new JComboBox<String>(
 	// new String[] { "config.properties", "quake.properties" });
 	private JButton buttonStartCamera = new JButton("Start Camera");
-	private JButton buttonCameraProperties = new JButton("Camera Properties");
+	private JButton buttonCameraProperties = new JButton("UNSTABLE:Camera Properties");
 	// private JButton buttonLoadPreset= new JButton("Load Preset");
 	String buttonCameraPropertiesHover = "Opens current camera properties ";
 	String buttonCameraHover = "Starts the camera and the controller";
