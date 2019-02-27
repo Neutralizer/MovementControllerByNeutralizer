@@ -45,7 +45,7 @@ public class PropertiesOperations {
 	}
 
 	/**
-	 * Manages properties files for roi virtual button
+	 * Manages properties files for ROI virtual button
 	 * @param roiManipulator the actual virtual button manipulator object
 	 * 
 	 */
