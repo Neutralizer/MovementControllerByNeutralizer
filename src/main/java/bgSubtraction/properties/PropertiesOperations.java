@@ -38,13 +38,6 @@ public class PropertiesOperations {
 	// }
 	
 	/**
-	 * Used only for creating default prop 
-	 */
-	public PropertiesOperations() {
-		
-	}
-
-	/**
 	 * Manages properties files for ROI virtual button
 	 * @param roiManipulator the actual virtual button manipulator object
 	 * 

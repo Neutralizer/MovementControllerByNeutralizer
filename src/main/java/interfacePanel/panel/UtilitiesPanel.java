@@ -33,7 +33,7 @@ public class UtilitiesPanel {
 
 		if (list.length == 0) {
 			//no files found - create default prop in folder
-			new PropertiesOperations().createPropFile("Default.properties");
+			new PropertiesOperations(null).createPropFile("Default.properties");
 			return new String[] {"Default.properties"};
 		}
 
