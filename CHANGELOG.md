@@ -1,5 +1,6 @@
 ### 0.0.9 -
 * Now creating default properties file if none is present in the current folder
+* CONSTANT virtual button type - press time changed from 100 ms to 500 ms (initially was 10 ms)
 
 ### 0.0.8 - 24.02.2019
 * Panel bugfix - key name loading is now uniform in table and dropdown menu
