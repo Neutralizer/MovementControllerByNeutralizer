@@ -131,7 +131,7 @@ public class KeyTable extends JTable {
 
 	public void createTable(GridBagConstraints c, JPanel frame) {
 		c.gridx = 0;
-		c.gridy = 12;//TODO was 10 but blur slider was added
+		c.gridy = 12;
 		table = new JTable();
 		table.setPreferredScrollableViewportSize(new Dimension(400, 100));
 		table.setFillsViewportHeight(true);
