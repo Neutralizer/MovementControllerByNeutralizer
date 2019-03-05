@@ -1,4 +1,4 @@
-### 0.0.9 -
+### 0.0.9 - 04.03.2019
 * Now creating default properties file if none is present in the current folder
 * CONSTANT virtual button type - press time changed from 100 ms to 500 ms (initially was 10 ms)
 
