@@ -57,10 +57,13 @@ With the mouse problems solved by using the actual mouse the need to customise k
 ## Known Issues
 ### General logical problems:
 * The illumination must be good for the computer vision part.
-* You should not have anyone else moving in the camera view, or they will also press the buttons.
+* If there is someone else moving in the camera view, they will also press the buttons.
 * Being dressed in white clothes improves movement detection, because it is easier for the human eye to see a white object in a dark room than a black object in a dark room. Well, same applies for cameras.
-* Vision cone problem - 
-
+* Vision cone problem - when you back away from your camera, the camera feed will perceive you as a smaller object (just as the human eye sees an object that is far away as small). This means that when you back away and wave your hands you will not reach the end of the camera vision and you will not press the virtual button. This happens because the program emulates 3D vision space in a 2D plane, thus making the video feed cone shaped. 
+### Other issues
+* Error files may be generated in the program's current folder.
+* Camera properties button is unstable - it may lock the camera.
+* Currently you can not edit the size of custom size virtual buttons.
 ## F.A.Q.
 ### Q. Can I use my smartphone as a web camera and how?
 A. Yes, you can via software, although the video feed will flicker. All virtual cameras have the same problem, but due to recent improvements this will not impair detection too much. I tried with DroidCam and it worked - enter its official site for info on how to download it: <a href="https://www.dev47apps.com/">www.dev47apps.com</a>. You don't need premium, because my program is designed to run 640x480 p.
