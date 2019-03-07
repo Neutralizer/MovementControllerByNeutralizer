@@ -2,8 +2,6 @@
 
 ## Introduction
 This program is designed with the idea of losing weight while playing computer games. It is based on 2 technologies - computer vision and game bot command issuing(automation testing): Movement is detected in specific regions via a web camera and when it is detected, the respective keyboard key attached to that region is being pressed. 
-## Limitations
-There are 2 main limitations - the illumination must be good for the computer vision part and you should not have anyone else moving in the camera view, or they will also press the buttons. It appears that being dressed in white clothes helps detecting movement more precisely.
 ## Disclaimer
 The program is still in its ALPHA state and is unfinished. Check Known Issues section if you encounter any problems.
 ## Getting Started
@@ -31,7 +29,7 @@ After starting the program you can manipulate the virtual buttons from the butto
 1. Click on the video feed on the location you want it to be placed.
 2. Select the key you want to virtualise from the key dropdown menu
 3. Choose the key type: 
-* CONSTANT - whenever movement is detected, the key will be pressed with low delay - Equal to pressing repeatedly the selected key.
+* CONSTANT - whenever movement is detected, the key will be pressed and when more movement is detected it will refresh the action. When no movement is detected for a short period of time the key is released. Equal to constantly pressing the key and it will release by itself when left alone.
 * PRESS - (Default virtual type) whenever movement is detected, the key will be pressed with a normal delay - Equal to pressing a key once and releasing it.
 * TOGGLE - whenever movement is detected, the key will be held down. When movement is detected again the key will be released. Equal to leaving something heavy on your key to keep it pressed. 
 4. Press Add.
@@ -57,6 +55,11 @@ Unable to complete my program with only 2 reliably detected shapes I almost scra
 Thus I combined circle(shape) tracking for mouse control and background subtraction for key control via regions of interest to form the first stable working prototype. The plan was for the user to hold a cardboard box like a weapon (remember-low cost) with a piece of paper that has a circle on it attached to the supposed weapon muzzle and control it like a free look game mode. The problems that arose next: The mouse is used quite often to press mouse keys in many games, but with the then current setup moving the "gun" would interfere with movement detection and pressing buttons reliably very often is impossible. The next major problem is that since the circle detection uses approximation algorithm (and tracking on the other side), the location of the circle is being approximated and in between frames it was stuttering, though this was happening very often only in good lighting conditions. The next major problem that made me drop the circle mouse control was that IT WAS TOO GOOD: When walking in one place you naturally move your "gun", which is simulated as gun bobbing in some games, but in the current example it was bobbing the whole screen, which was undesirable. On top of everything the circle to mouse control was executed using calculations per frame, so if you had a weaker computer, your mouse speed would have been different, compared to if you have had a faster computer. Speaking about mouse speed, this program represented a 3rd layer of control (1st being operating system mouse speed, 2nd being game mouse speed, if no custom mouse settings are used(DPI settings)), which was confusing. The last problem was that my program had to emulate mouse look or free look (the gameplay FPS view) on top of the current game (normal mouse move was simple): 1st way was to make the mouse move when you move the circle away from the virtual center - but this had the uneasy feeling of balancing a stick on your finger and I did not like it. 2nd way was to turn only when the camera sees the circle near the border - you swing your "gun" to the left - you turn left and vice versa, but it was still uncomfortable and combined with previous problems I decided to drop the circle detection and use mouse on the cardboard "gun" while standing.
 With the mouse problems solved by using the actual mouse the need to customise keys arouse and I chose to use .properties file as a simple offline database to store the location of the region and the type of the virtual key to be pressed. The program detects the amount of white pixels in those regions, and if they are above a certain threshold, then the key is pressed. Currently the only drawback of the program is that movement is not detected very good in poor lightning conditions, so this is curcumvented by increasing the detection threshold (this option is hardcoded for now).
 ## Known Issues
+### General logical problems:
+* The illumination must be good for the computer vision part.
+* You should not have anyone else moving in the camera view, or they will also press the buttons.
+* Being dressed in white clothes improves movement detection, because it is easier for the human eye to see a white object in a dark room than a black object in a dark room. Well, same applies for cameras.
+* Vision cone problem - 
 
 ## F.A.Q.
 ### Q. Can I use my smartphone as a web camera and how?
