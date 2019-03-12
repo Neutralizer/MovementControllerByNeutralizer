@@ -91,6 +91,6 @@ A. Unfortunately I don't recommend the program for competitive gaming and it is 
 ### Q. So then casual gaming?
 A. Casual and Forgiving games are the games that I recommend. The lower difficulty is hard enough when you get sweaty and tired. You can play competitive games if you don't mind the disadvantage in human response time. The purpose of the movement controller is to make you move and not be bored. Think about it like an exersice, but you are doing something interesting.
 ### Q. What do you mean by Forgiving games?
-A. Games that let you make mistakes I call forgiving games. Usually incorporate health/shield regeneration. Example is Destiny 2 - you take damage, hide for a while and the current skirmish is reset - you can try again.
+A. Games that let you make mistakes and don't punish you too hard I call forgiving games. Usually incorporate health/shield regeneration. Example is Destiny 2 - you take damage, hide for a while and the current skirmish is reset - you can try again.
 ### Q. What about racing games?
 A. In racing games you are seated while driving, so that is not much of an exercise. Though it still can be used, it will probably be like driving the flintstones' car and you spread your hands like an airplane in order to turn the car - I imagine it will be quite hilarious.
