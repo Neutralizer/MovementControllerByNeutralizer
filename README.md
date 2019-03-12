@@ -3,15 +3,15 @@
 ## Introduction
 This program is designed with the idea of losing weight while playing computer games. It is based on 2 technologies - computer vision and game bot command issuing(automation testing): Movement is detected in specific regions via a web camera and when it is detected, the respective keyboard key attached to that region is being pressed. 
 ## Disclaimer
-The program is still in its ALPHA state and is unfinished. Check Known Issues section if you encounter any problems.
+The movement controller is still in its ALPHA state and is unfinished. Check Known Issues section if you encounter any problems.
 ## Getting Started
 What should I do to run this alpha concoction:
 ### Download
 The <a href="https://github.com/Neutralizer/MovementControllerByNeutralizer/releases">Releases</a> page holds the current version and presets - you need a preset (.properties file) in the same folder as the executable (.jar file). 
 ### Preparation
-1. In order to be able to run this program you need java installed: If you can't run the executable jar go to java official site and download it - https://www.java.com/en/download/ . <br>
-2. You need a web camera in order for the whole "computer vision" magic to work (Make sure that you have drivers for your web camera (not needed for windows 10)).<br>
-### Running the program
+1. In order to be able to run movement controller you need java installed: If you can't run the executable jar go to java official site and download it - https://www.java.com/en/download/ . <br>
+2. You need a web camera in order for the whole "computer vision" magic to work (Make sure that you have drivers for your web camera (not required for windows 10)).<br>
+### Running the movement controller
 1. Select a camera and a preset(.properties file) from the dropdown menu.
 2. After starting the camera and several(no more than 5) seconds pass, a black window will appear, which should detect your movement if it is not very dark in your room. If nothing happens, then check the Known Issues section.
 3. With the sliders - adjust the detection: the white on the screen should appear only when you move.<br>
@@ -66,20 +66,23 @@ With the mouse problems solved by using the actual mouse the need to customise k
 * Currently you can't edit the size of custom size virtual buttons from the GUI.
 * Program can't save properties file if it is opened in notepad or if it has no permission to save.
 * Program is 250+ MB due to deployment issues - all opencv packages are inside and that's why it is so big.
+* Running the program 2 times can be computationally heavy and create lag (especially if 1 of them is a virtual/HD camera).
 
 ## F.A.Q.
 ### Q. Why do I need to download this program, why not run it from my browser?
-A.
+A. In order to protect the user's privacy I decided to make it run locally. It is definitely easier to use and maintain via site, but privacy is my top priority.
 ### Q. Can I use my smartphone as a web camera and how?
 A. Yes, you can via software, although the video feed will flicker and consume much resources because it is a form of virtual camera. All virtual cameras have the same problem, but due to recent improvements this will not impair detection too much. I tried with DroidCam and it worked - enter its official site for info on how to download it: <a href="https://www.dev47apps.com/">www.dev47apps.com</a>. You don't need premium, because my program is designed to run 640x480 p.
+### Q. Can I use other type of smartphone virtual camera like IP camera?
+A. Short answer - it has about 2 seconds delay, which is unacceptable. IP cameras' main purpose is to be used for surveillance, where the delay isn't a problem. The movement controller's reaction must be instant. 
 ### Q. Will this be useful in VR?
 A. I think it would be great for VR - you just need a simple web camera. I have not tested it for VR, because I do not have one.
 ### Q. How do I determine the effect of the exercise?
 A. The faster it makes you sweat, the more efficient is the exercise. Note that with time your body will adapt to constant exercise and you will not be sweating so easily.
 ### Q. Will the program work in 3D if I add another camera?
 A. Yes, it will. Just start the program 2 times and load 2 different cameras with 2 different presets - 1st in front of you and the 2nd on your side. The front camera will detect your movement as you move from left to right and the side camera will detect your movement as you move forward and backward.
-### Q. Will the program press buttons if I change my keyboard language?
-A.
+### Q. Will the program press buttons correctlly if I change my keyboard language?
+A. Yes, it will. Since the movement controller works with a virtual keyboard, it will press the respective key of your other keyboard layout (atleast in Windows). 
 ### Q. Why First person and third person games (FPS) and not RTS (real time strategy) and strategy games?
 A. 1st and 3rd person games let you take on the view of the soldier/warrior/ and is more immersive and intuitive - you move your feet - the avatar moves; you move your hand for the reload button - the avatar executes the reload animation with his hands. On the other side in RTS you play a commander, which is delegating the tough job of fighting to his subordinates, so basically he just shouts orders - go there, attack that, build this. I personally like very much strategy games and if I can make this program be immersive for them I will be very happy.
 ### Q. How about competitive games?
