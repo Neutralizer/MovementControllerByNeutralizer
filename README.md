@@ -68,6 +68,7 @@ With the mouse problems solved by using the actual mouse the need to customise k
 * Program is 250+ MB due to deployment issues - all opencv packages are inside and that's why it is so big.
 * Running the program 2 times can be computationally heavy and create lag (especially if 1 of them uses a virtual/HD camera).
 * FPS will be low if the web camera has <b>low light compensation</b> checkmark active and it is dark in the room - can be disabled from camera properties button.
+* Camera autofocus is detrimental for the movement controller-disable it via camera properties if your camera has that option.
 
 ## F.A.Q.
 ### Q. Why do I need to download this program, why not run it from my browser?
