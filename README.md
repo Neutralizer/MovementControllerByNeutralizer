@@ -1,7 +1,7 @@
 # MovementControllerByNeutralizer
 
 ## Introduction
-This program is designed with the idea of losing weight while playing computer games. It is based on 2 technologies - computer vision and game bot command issuing(automation testing): Movement is detected in specific regions via a web camera and when it is detected, the respective keyboard key attached to that region is being pressed. 
+This program is designed with the idea of losing weight while playing computer games <b>on a budget</b>. It is based on 2 technologies - computer vision and game bot command issuing(automation testing): Movement is detected in specific regions via a web camera (or emulated smartphone camera) and when it is detected, the respective keyboard key attached to that region is being pressed.
 ## Disclaimer
 The movement controller is still in its ALPHA state and is unfinished. Check Known Issues section if you encounter any problems.
 ## Getting Started
@@ -67,6 +67,7 @@ With the mouse problems solved by using the actual mouse the need to customise k
 * Program can't save properties file if it is opened in notepad or if it has no permission to save.
 * Program is 250+ MB due to deployment issues - all opencv packages are inside and that's why it is so big.
 * Running the program 2 times can be computationally heavy and create lag (especially if 1 of them is a virtual/HD camera).
+* FPS will be low if the web camera has <b>low light compensation</b> checkmark active and it is dark in the room - disabled from camera properties button.
 
 ## F.A.Q.
 ### Q. Why do I need to download this program, why not run it from my browser?
