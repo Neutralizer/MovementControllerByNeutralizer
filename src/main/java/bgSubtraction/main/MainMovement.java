@@ -100,7 +100,7 @@ public class MainMovement implements Runnable {
 					Mat bgResult = new Mat();
 					movementDetector.processImage(img, bgResult);
 
-					//TODO if wscombo active here
+					//TODO if wscombo active here 
 					if(useWS) {
 					int keyWS = keyController.switchKeyToBePressed(SpecialKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
 					roi.getListRoi().get(roi.getListRoi().size()-1).getKey().setKeyCode(keyWS);
