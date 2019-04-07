@@ -16,6 +16,7 @@ import bgSubtraction.keyboardControl.KeyPressType;
 import bgSubtraction.keyboardControl.SpecialKey;
 import bgSubtraction.properties.PropertiesOperations;
 import interfacePanel.panel.UtilitiesPanel;
+import logger.PersonalLoggerFactory;
 
 /**
  * 
@@ -31,8 +32,7 @@ public class MainMovement implements Runnable {
 //	private KeyController keyController;
 //	private static String selectedPropertiesFile;// TODO make it not static
 
-	public static void startAlgorithm(Camera camera, Display display, String selectedPropFile, MovementDetector detector, ROIManipulator roi, boolean useWS)
-			throws AWTException {
+	public static void startAlgorithm(Camera camera, Display display, String selectedPropFile, MovementDetector detector, ROIManipulator roi, boolean useWS){
 //		Display display = new Display();
 		MovementDetector movementDetector = detector;
 //		KeyController keyController = new KeyController();// TODO may be moved to mpanel to access keys and roi creation
@@ -92,12 +92,13 @@ public class MainMovement implements Runnable {
 			 * roi.addRoiToList(0, 440, KeyEvent.VK_CONTROL, KeyPressType.PRESS);
 			 */
 			Thread.sleep(500);// delay for camera
+			Mat bgResult = new Mat();
 			while (true) {
 				img = display.convertFromFrameToIplImage(camera.getFrame());
 				if (img != null) {
 					img = display.flipImage(img);
 
-					Mat bgResult = new Mat();
+//					Mat bgResult = new Mat();
 					movementDetector.processImage(img, bgResult);
 
 					//TODO if wscombo active here
@@ -117,6 +118,7 @@ public class MainMovement implements Runnable {
 				}
 			}
 		} catch (Exception e) {
+			PersonalLoggerFactory.getLogger().error(e.getStackTrace().toString());
 			System.err.println("Unexpected error");
 			e.printStackTrace();
 		}

@@ -1,3 +1,9 @@
+### 0.1.0 - 07.04.2019
+* Minor optimization of main cycle
+* Tooltip updates
+* Minor legacy code cleanup
+* Added file logger
+
 ### 0.0.9 - 04.03.2019
 * Now creating default properties file if none is present in the current folder
 * CONSTANT virtual button type - press time changed from 100 ms to 500 ms (initially was 10 ms)

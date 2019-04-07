@@ -1,7 +1,5 @@
 package interfacePanel.panel;
 
-import java.awt.AWTException;
-import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,9 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSlider;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -42,7 +38,7 @@ import bgSubtraction.properties.PropertiesOperations;
  */
 @SuppressWarnings("serial")
 public class MainPanel extends JFrame {
-
+	
 	UtilitiesPanel util = new UtilitiesPanel();
 	MovementDetector detector = new MovementDetector();
 	private String[] cameras;
@@ -54,20 +50,21 @@ public class MainPanel extends JFrame {
 
 	private JComboBox<String> comboBoxCamera;
 	private JComboBox<String> comboBoxPresets;
-	// = new JComboBox<String>(
-	// new String[] { "config.properties", "quake.properties" });
+
 	private JButton buttonStartCamera = new JButton("Start Camera");
 	private JButton buttonCameraProperties = new JButton("UNSTABLE:Camera Properties");
-	// private JButton buttonLoadPreset= new JButton("Load Preset");
-	String buttonCameraPropertiesHover = "Opens current camera properties ";
+
+	String buttonCameraPropertiesHover = "Opens current camera properties. It is advised "
+			+ "after accessing the properties to start the camera, or it may become locked";
 	String buttonCameraHover = "Starts the camera and the controller";
 	String boxCameraHover = "Shows available cameras";
 	String boxPropertiesHover = "Shows available presets as .properties files in current folder";
-	String erodeHover = "Remove noise from camera input";
+	String erodeHover = "Remove noise from camera input. More means less noise.";
 	String dilateHover = "Makes found pixels bigger";
-	String historyHover = "Creates trail from detected pixels";
-	String threshHover = "Controls main detection - more means less detection";
+	String historyHover = "Creates trail from detected pixels. Also removes noise.";
+	String threshHover = "Controls main detection. More means less detection";
 	String blurHover = "Blurs the image to reduce noise";
+
 	JSlider sliderBlur = new JSlider(1, 19, 5);
 	JSlider sliderErode1 = new JSlider(1, 15, 3);
 	JSlider sliderDilate2 = new JSlider(1, 15, 3);
@@ -89,6 +86,7 @@ public class MainPanel extends JFrame {
 	}
 
 	public MainPanel() {
+		
 		loadCameras();
 		loadPresets();
 		createView();
@@ -105,14 +103,14 @@ public class MainPanel extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				if (started) {
 					KeyController.unpressAllRoiButtons(roi.getListRoi());
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					camera.releaseCurrentCamera();//TODO throws those cpp errors
-					
+//					try {
+//						Thread.sleep(100);
+//					} catch (InterruptedException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+					camera.releaseCurrentCamera();// TODO throws those cpp errors - try first
+
 				}
 				System.exit(0);
 			}
@@ -252,11 +250,14 @@ public class MainPanel extends JFrame {
 				VideoCapture v = null;
 				try {
 					v = new VideoCapture(util.getCameraNum(cameras, comboBoxCamera.getSelectedItem().toString()));
-					v.set(37, 1);
+					v.set(37, 1);//37 - properties
 
 				} catch (java.lang.Exception ex) {
+					//TODO logger
 				} finally {
-					v.release();
+					if(v.isOpened()) {
+						v.release();
+					}
 					v.close();
 				}
 			}
@@ -288,7 +289,7 @@ public class MainPanel extends JFrame {
 		comboBoxPresets.setEnabled(false);
 		buttonStartCamera.setEnabled(false);
 		buttonCameraProperties.setEnabled(false);
-		
+
 		int cameraNum = util.getCameraNum(cameras, comboBoxCamera.getSelectedItem().toString());
 		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
 		camera = new Camera(cameraNum);
@@ -308,11 +309,7 @@ public class MainPanel extends JFrame {
 		kt.createTable(c, panelForm);
 		this.pack();
 
-		try {
-			MainMovement.startAlgorithm(camera, display, selectedPropFile, detector, roi, useWS);
-		} catch (AWTException e) {
-			e.printStackTrace();// TODO show which is the error
-		}
+		MainMovement.startAlgorithm(camera, display, selectedPropFile, detector, roi, useWS);
 
 	}
 

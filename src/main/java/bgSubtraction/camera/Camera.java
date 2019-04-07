@@ -36,7 +36,7 @@ public class Camera {
 		// v.set(5,24);//TODO FPS limiter - video capture is not used actually
 		cameraWidth = (int) v.get(3);
 		cameraHeight = (int) v.get(4);
-		v.set(39, 0);
+		v.set(39, 0);//39 - autofocus
 		// v.set(37, 1);//TODO testing camera settings panel-setting prop after opening
 		// the cam
 //		if (isCameraBiggerThan640()) {//TODO make scaling down if needed
@@ -96,7 +96,7 @@ public class Camera {
 
 	/**
 	 * must allow execution once in 33ms (for 30 fps limiter) </br>
-	 * if 33ms have not passed and another execution is requested - block it
+	 * if 33ms have not passed and another execution is requested - block it/skip it
 	 * 
 	 * @param fpsLimit
 	 * @return
