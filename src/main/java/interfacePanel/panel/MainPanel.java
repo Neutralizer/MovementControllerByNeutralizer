@@ -77,6 +77,7 @@ public class MainPanel extends JFrame {
 	private boolean useWS = false;// TODO not dynamically changed
 
 	public static void main(String[] args) {
+		org.bytedeco.javacpp.avutil.av_log_set_level(org.bytedeco.javacpp.avutil.AV_LOG_QUIET);// disable javacv logging
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -102,6 +103,7 @@ public class MainPanel extends JFrame {
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				if (started) {
+					camera.releaseCurrentCamera();// TODO throws those cpp errors - try first or stop the main loop first
 					KeyController.unpressAllRoiButtons(roi.getListRoi());
 //					try {
 //						Thread.sleep(100);
@@ -109,7 +111,6 @@ public class MainPanel extends JFrame {
 //						// TODO Auto-generated catch block
 //						e1.printStackTrace();
 //					}
-					camera.releaseCurrentCamera();// TODO throws those cpp errors - try first
 
 				}
 				System.exit(0);

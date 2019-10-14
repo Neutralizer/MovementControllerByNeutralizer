@@ -1,3 +1,8 @@
+### 0.1.1 - .2019
+* Better resource release
+* Disabled javacv logging
+* Planned improvements section added
+
 ### 0.1.0 - 07.04.2019
 * Minor optimization of main cycle
 * Tooltip updates
