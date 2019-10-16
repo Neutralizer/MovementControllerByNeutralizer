@@ -29,6 +29,8 @@ public class MovementDetector implements Detector {
 	int secondKernelDilateSize = 3;// 1; even number above 0 - 1 = no effect
 	int subtractorHistoryLength = 4;// 1; not 0
 	int subractorThreshold = 10;// 16
+	int detectionLimitPercentage = 75;
+	int totalMovementFoundPercentage = 0;
 
 	public MovementDetector() {
 		this.firstKernelErode = opencv_imgproc.getStructuringElement(opencv_imgproc.MORPH_RECT,
@@ -80,6 +82,16 @@ public class MovementDetector implements Detector {
 			this.fgbg.setVarThreshold(subractorThreshold);
 		}
 	}
+	
+	public void changeDetectionLimit(int detLimit) {
+		if (detectionLimitPercentage != detLimit) {
+			detectionLimitPercentage = detLimit;
+		}
+	}
+	
+	public int getTotalMovementPercentage() {
+		return totalMovementFoundPercentage;
+	}
 
 	public void processImage(IplImage img, Mat bgResult) {
 		Mat imgMat = new Mat(img);
@@ -91,6 +103,20 @@ public class MovementDetector implements Detector {
 		opencv_imgproc.erode(bgResult, bgResult, firstKernelErode);
 		opencv_imgproc.dilate(bgResult, bgResult, secondKernelDilate);
 
+	}
+	
+	/**
+	 * 
+	 * If too much movement is detected on the whole screen, then it is a flicker and do not press buttons.
+	 * DetectionLimitPercentage - percentage threshold - if the total movement detection is above it - do not press
+	 * @param bgResult whole screen
+	 *  
+	 * @return true if there is more than detectionLimitPercentage (75% for ex) of the screen detected as movement
+	 */
+	public boolean isMovementDetectedAndLimitReached(Mat bgResult) {
+		int percentageFound = findPercentageWhitePixelsWholeScreen(bgResult);
+		totalMovementFoundPercentage = percentageFound;
+		return percentageFound >= detectionLimitPercentage;
 	}
 
 	/**
@@ -114,7 +140,37 @@ public class MovementDetector implements Detector {
 
 		return percentageFound >= percentageLimit;
 	}
+	
+	/**
+	 * This one does not close the image, because it needs to be further processed by individual buttons
+	 * @param image whole screen
+	 * @return percentage of white pixels in image - where movement is detected
+	 */
+	private int findPercentageWhitePixelsWholeScreen(Mat image) {
+		int whitePixelCounter = 0;
+		// if there are a lot of white pixels - do work
+		UByteIndexer srcIndexer = image.createIndexer();
+		for (int x = 0; x < srcIndexer.rows()-1; x++) {
+			for (int y = 0; y < srcIndexer.cols()-1; y++) {
+				int[] values = new int[3];
+				srcIndexer.get(x, y, values);
+				if (Arrays.equals(values, WHITE)) {
+					whitePixelCounter++;
+				}
+			}
+		}
+//		image.close();
+		// white pixels / total number of pixels
+		double percentage = ((double) whitePixelCounter / (double) (srcIndexer.rows() * srcIndexer.cols())) * 100;
+		return (int) percentage;
+	}
 
+	
+	/**
+	 * Closes the roi cutout of the main image from video feed
+	 * @param croppedImage roi virtual button
+	 * @return percentage of white pixels in image - where movement is detected
+	 */
 	private int findPercentageWhitePixelsDetected(Mat croppedImage) {
 		int whitePixelCounter = 0;
 		// if there are a lot of white pixels in the rect - do work

@@ -125,7 +125,7 @@ public class ROIManipulator {
 		percentagePoints[1] = Double.parseDouble(df.format(y));
 		return percentagePoints;
 	}
-
+	
 	public void executeAllROI(Mat bgResult) {
 		for (ROI roi : list) {
 			roi.execute(bgResult);

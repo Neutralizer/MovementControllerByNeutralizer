@@ -106,19 +106,23 @@ public class MainMovement implements Runnable {
 					int keyWS = keyController.switchKeyToBePressed(SpecialKey.getSwitched(), KeyEvent.VK_W, KeyEvent.VK_S);
 					roi.getListRoi().get(roi.getListRoi().size()-1).getKey().setKeyCode(keyWS);
 					}
-					roi.executeAllROI(bgResult);
+					
+					if(!movementDetector.isMovementDetectedAndLimitReached(bgResult)) {
+						roi.executeAllROI(bgResult);
+					}
+					
 
 					display.drawAllROI(roi.getListRoi(), bgResult);
 					display.showImage(bgResult);
 
 					display.setTitle("Resolution: " + camera.getCameraWidthAndHeight() + "; FPS: "
-							+ Integer.toString(camera.getFPS()));
+							+ Integer.toString(camera.getFPS()) + "; Total Movement: " + movementDetector.getTotalMovementPercentage() + "%");
 
 //					display.attachMouseListener();//TODO attaches mouse listener
 				}
 			}
 		} catch (Exception e) {
-			PersonalLoggerFactory.getLogger().error(e.getStackTrace().toString());
+			PersonalLoggerFactory.getLogger().error(e.getMessage(), e);//TODO not showing properly - check if fixed
 			System.err.println("Unexpected error");
 			e.printStackTrace();
 		}

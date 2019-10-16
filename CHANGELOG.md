@@ -2,6 +2,9 @@
 * Better resource release
 * Disabled javacv logging
 * Planned improvements section added
+* Flicker limiter added
+* fixed personal error logging
+
 
 ### 0.1.0 - 07.04.2019
 * Minor optimization of main cycle

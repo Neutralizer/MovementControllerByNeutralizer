@@ -38,7 +38,7 @@ import bgSubtraction.properties.PropertiesOperations;
  */
 @SuppressWarnings("serial")
 public class MainPanel extends JFrame {
-	
+
 	UtilitiesPanel util = new UtilitiesPanel();
 	MovementDetector detector = new MovementDetector();
 	private String[] cameras;
@@ -64,12 +64,17 @@ public class MainPanel extends JFrame {
 	String historyHover = "Creates trail from detected pixels. Also removes noise.";
 	String threshHover = "Controls main detection. More means less detection";
 	String blurHover = "Blurs the image to reduce noise";
+	String limiterHover = "When there is too much detection on the screen the buttons will not be pressed. "
+			+ "At 50 - when there is more than 50% white on the screen the buttons will not be pressed."
+			+ "To disable the limiter set it to 100%";
 
 	JSlider sliderBlur = new JSlider(1, 19, 5);
 	JSlider sliderErode1 = new JSlider(1, 15, 3);
 	JSlider sliderDilate2 = new JSlider(1, 15, 3);
 	JSlider sliderHistory = new JSlider(1, 50, 4);
 	JSlider sliderThresh = new JSlider(1, 100, 10);
+	JSlider sliderLimiter = new JSlider(2, 100, 75);
+
 	GridBagConstraints c;
 	JPanel panelMain;
 	JPanel panelForm;
@@ -87,7 +92,7 @@ public class MainPanel extends JFrame {
 	}
 
 	public MainPanel() {
-		
+
 		loadCameras();
 		loadPresets();
 		createView();
@@ -103,14 +108,15 @@ public class MainPanel extends JFrame {
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				if (started) {
-					camera.releaseCurrentCamera();// TODO throws those cpp errors - try first or stop the main loop first
+					camera.releaseCurrentCamera();// TODO throws those cpp errors - try first or stop the main loop
+													// first
 					KeyController.unpressAllRoiButtons(roi.getListRoi());
-//					try {
-//						Thread.sleep(100);
-//					} catch (InterruptedException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
+					// try {
+					// Thread.sleep(100);
+					// } catch (InterruptedException e1) {
+					// // TODO Auto-generated catch block
+					// e1.printStackTrace();
+					// }
 
 				}
 				System.exit(0);
@@ -161,6 +167,7 @@ public class MainPanel extends JFrame {
 		sliderTemplate(panelForm, c, sliderDilate2, "Dilate", dilateHover, 2, 1);
 		sliderTemplate(panelForm, c, sliderHistory, "History", historyHover, 10, 1);
 		sliderTemplate(panelForm, c, sliderThresh, "Threshold", threshHover, 10, 1);
+		sliderTemplate(panelForm, c, sliderLimiter, "Limiter", limiterHover, 10, 5);
 
 		sliderBlur.addChangeListener(new ChangeListener() {
 
@@ -225,6 +232,18 @@ public class MainPanel extends JFrame {
 				}
 			}
 		});
+		
+		sliderLimiter.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				if (!source.getValueIsAdjusting()) {
+					int value = (int) source.getValue();
+					detector.changeDetectionLimit(value);
+				}
+			}
+		});
 
 		// 2nd column
 		c.anchor = GridBagConstraints.LINE_START;
@@ -251,12 +270,12 @@ public class MainPanel extends JFrame {
 				VideoCapture v = null;
 				try {
 					v = new VideoCapture(util.getCameraNum(cameras, comboBoxCamera.getSelectedItem().toString()));
-					v.set(37, 1);//37 - properties
+					v.set(37, 1);// 37 - properties
 
 				} catch (java.lang.Exception ex) {
-					//TODO logger
+					// TODO logger
 				} finally {
-					if(v.isOpened()) {
+					if (v.isOpened()) {
 						v.release();
 					}
 					v.close();
