@@ -105,6 +105,14 @@ public class MovementDetector implements Detector {
 
 	}
 	
+	public String tellIfMovementDetectionIsBlocked() {
+		if(totalMovementFoundPercentage >= detectionLimitPercentage ) {
+			return "MOVEMENT DETECTION BLOCKED";
+		} else {
+			return "";
+		}
+	}
+	
 	/**
 	 * 
 	 * If too much movement is detected on the whole screen, then it is a flicker and do not press buttons.
@@ -149,6 +157,7 @@ public class MovementDetector implements Detector {
 	private int findPercentageWhitePixelsWholeScreen(Mat image) {
 		int whitePixelCounter = 0;
 		// if there are a lot of white pixels - do work
+		// -1 because it crashes 
 		UByteIndexer srcIndexer = image.createIndexer();
 		for (int x = 0; x < srcIndexer.rows()-1; x++) {
 			for (int y = 0; y < srcIndexer.cols()-1; y++) {

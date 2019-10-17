@@ -73,7 +73,7 @@ public class MainPanel extends JFrame {
 	JSlider sliderDilate2 = new JSlider(1, 15, 3);
 	JSlider sliderHistory = new JSlider(1, 50, 4);
 	JSlider sliderThresh = new JSlider(1, 100, 10);
-	JSlider sliderLimiter = new JSlider(2, 100, 75);
+	JSlider sliderLimiter = new JSlider(50, 100, 75);
 
 	GridBagConstraints c;
 	JPanel panelMain;

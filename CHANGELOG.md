@@ -1,10 +1,12 @@
-### 0.1.1 - .2019
+### 0.1.2 - 
+* Planned improvements section added
+
+### 0.1.1 - 17.10.2019
 * Better resource release
 * Disabled javacv logging
-* Planned improvements section added
 * Flicker limiter added
 * fixed personal error logging
-
+* added custom W rectangle button to automatically created preset
 
 ### 0.1.0 - 07.04.2019
 * Minor optimization of main cycle

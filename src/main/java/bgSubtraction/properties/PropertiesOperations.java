@@ -125,6 +125,7 @@ public class PropertiesOperations {
 			addRoiToProperty("E", 0.2, 0.0, KeyEvent.VK_E, KeyPressType.PRESS);
 			addRoiToProperty("F", 0.92, 0.0, KeyEvent.VK_F, KeyPressType.PRESS);
 			addRoiToProperty("Space", 0.5, 0.0, KeyEvent.VK_SPACE, KeyPressType.PRESS);
+			addRoiToProperty("W", 0.16, 0.96,0.7,0.01, KeyEvent.VK_W, KeyPressType.CONSTANT);
 
 			prop.store(output, null);
 

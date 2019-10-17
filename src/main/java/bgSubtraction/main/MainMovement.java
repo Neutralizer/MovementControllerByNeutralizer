@@ -116,13 +116,15 @@ public class MainMovement implements Runnable {
 					display.showImage(bgResult);
 
 					display.setTitle("Resolution: " + camera.getCameraWidthAndHeight() + "; FPS: "
-							+ Integer.toString(camera.getFPS()) + "; Total Movement: " + movementDetector.getTotalMovementPercentage() + "%");
+							+ Integer.toString(camera.getFPS()) + "; Total Movement: " + 
+							movementDetector.getTotalMovementPercentage() + "% " + 
+							movementDetector.tellIfMovementDetectionIsBlocked());
 
 //					display.attachMouseListener();//TODO attaches mouse listener
 				}
 			}
 		} catch (Exception e) {
-			PersonalLoggerFactory.getLogger().error(e.getMessage(), e);//TODO not showing properly - check if fixed
+			PersonalLoggerFactory.getLogger().error(e.getMessage(), e);
 			System.err.println("Unexpected error");
 			e.printStackTrace();
 		}
