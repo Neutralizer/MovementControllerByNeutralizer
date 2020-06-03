@@ -177,27 +177,28 @@ public class KeyTable extends JTable {
 
 		frame.add(pane, c);
 
-		c.gridy = startPosY++;
+		c.gridy = ++startPosY;
+		System.out.println(c.gridy);
 		frame.add(comboBoxKeyName, c);
 
-		c.gridy = startPosY++;
+		c.gridy = ++startPosY;
 		frame.add(locText, c);
 
-		c.gridy = startPosY++;
+		c.gridy = ++startPosY;
 		frame.add(comboBoxKeyType, c);
 
 		// add JButtons to the jframe
 
-		c.gridy = startPosY++;
+		c.gridy = ++startPosY;
 		frame.add(btnAdd, c);
 
-		c.gridy = startPosY++;
+		c.gridy = ++startPosY;
 		frame.add(btnDelete, c);
 
-		c.gridy = startPosY++;
+		c.gridy = ++startPosY;
 		frame.add(btnUpdate, c);
 
-		c.gridy = startPosY++;
+		c.gridy = ++startPosY;
 		frame.add(btnSave, c);
 
 		row = new Object[3];
