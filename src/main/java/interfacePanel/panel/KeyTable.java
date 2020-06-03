@@ -129,9 +129,15 @@ public class KeyTable extends JTable {
 		});
 	}
 
+	/**
+	 * Generate and populate table with virtual buttons
+	 * @param c GridBagConstraints for align
+	 * @param frame The panel onto which the table will be displayed
+	 */
 	public void createTable(GridBagConstraints c, JPanel frame) {
+		int startPosY = 16;
 		c.gridx = 0;
-		c.gridy = 14;
+		c.gridy = startPosY;
 		table = new JTable();
 		table.setPreferredScrollableViewportSize(new Dimension(400, 100));
 		table.setFillsViewportHeight(true);
@@ -171,34 +177,27 @@ public class KeyTable extends JTable {
 
 		frame.add(pane, c);
 
-		c.gridx = 0;
-		c.gridy = 15;
+		c.gridy = startPosY++;
 		frame.add(comboBoxKeyName, c);
 
-		c.gridx = 0;
-		c.gridy = 16;
+		c.gridy = startPosY++;
 		frame.add(locText, c);
 
-		c.gridx = 0;
-		c.gridy = 17;
+		c.gridy = startPosY++;
 		frame.add(comboBoxKeyType, c);
 
 		// add JButtons to the jframe
 
-		c.gridx = 0;
-		c.gridy = 18;
+		c.gridy = startPosY++;
 		frame.add(btnAdd, c);
 
-		c.gridx = 0;
-		c.gridy = 19;
+		c.gridy = startPosY++;
 		frame.add(btnDelete, c);
 
-		c.gridx = 0;
-		c.gridy = 20;
+		c.gridy = startPosY++;
 		frame.add(btnUpdate, c);
 
-		c.gridx = 0;
-		c.gridy = 21;
+		c.gridy = startPosY++;
 		frame.add(btnSave, c);
 
 		row = new Object[3];
