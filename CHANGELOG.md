@@ -1,4 +1,4 @@
-### 0.1.2 - 02.06.2020
+### 0.1.2 - 03.06.2020
 * Added background learning rate slider (reducing the autofocus flicker problem)
 * Restructured slider UI
 
