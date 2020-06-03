@@ -55,18 +55,19 @@ public class MainPanel extends JFrame {
 	private JButton buttonCameraProperties = new JButton("UNSTABLE:Camera Properties");
 
 	String buttonCameraPropertiesHover = "Opens current camera properties. It is advised "
-			+ "after accessing the properties to start the camera, or it may become locked";
-	String buttonCameraHover = "Starts the camera and the controller";
-	String boxCameraHover = "Shows available cameras";
-	String boxPropertiesHover = "Shows available presets as .properties files in current folder";
+			+ "after accessing the properties to start the camera, or it may become locked.";
+	String buttonCameraHover = "Starts the camera and the controller.";
+	String boxCameraHover = "Shows available cameras.";
+	String boxPropertiesHover = "Shows available presets as .properties files in current folder.";
 	String erodeHover = "Remove noise from camera input. More means less noise.";
-	String dilateHover = "Makes found pixels bigger";
+	String dilateHover = "Makes found pixels bigger.";
 	String historyHover = "Creates trail from detected pixels. Also removes noise.";
-	String threshHover = "Controls main detection. More means less detection";
-	String blurHover = "Blurs the image to reduce noise";
+	String threshHover = "Controls main detection. More means less detection.";
+	String blurHover = "Blurs the image to reduce noise.";
 	String limiterHover = "When there is too much detection on the screen the buttons will not be pressed. "
 			+ "At 50 - when there is more than 50% white on the screen the buttons will not be pressed."
-			+ "To disable the limiter set it to 100%";
+			+ "To disable the limiter set it to 100%. To disable detection set it to 0%.";
+	String backgroundUpdateRateHover = "Reduces flickering. Less is better controlled detection.";
 
 	JSlider sliderBlur = new JSlider(1, 19, 5);
 	JSlider sliderErode1 = new JSlider(1, 15, 3);
@@ -74,6 +75,7 @@ public class MainPanel extends JFrame {
 	JSlider sliderHistory = new JSlider(1, 50, 4);
 	JSlider sliderThresh = new JSlider(1, 100, 10);
 	JSlider sliderLimiter = new JSlider(50, 100, 75);
+	JSlider sliderBgUpdateRate = new JSlider(0, 100, 5);
 
 	GridBagConstraints c;
 	JPanel panelMain;
@@ -166,8 +168,11 @@ public class MainPanel extends JFrame {
 		sliderTemplate(panelForm, c, sliderErode1, "Erode", erodeHover, 2, 1);
 		sliderTemplate(panelForm, c, sliderDilate2, "Dilate", dilateHover, 2, 1);
 		sliderTemplate(panelForm, c, sliderHistory, "History", historyHover, 10, 1);
+		c.gridx = 1;// 2nd col
+		c.gridy = 2;
 		sliderTemplate(panelForm, c, sliderThresh, "Threshold", threshHover, 10, 1);
 		sliderTemplate(panelForm, c, sliderLimiter, "Limiter", limiterHover, 10, 5);
+		sliderTemplate(panelForm, c, sliderBgUpdateRate, "Background Update Rate", backgroundUpdateRateHover, 10, 1);
 
 		sliderBlur.addChangeListener(new ChangeListener() {
 
@@ -241,6 +246,18 @@ public class MainPanel extends JFrame {
 				if (!source.getValueIsAdjusting()) {
 					int value = (int) source.getValue();
 					detector.changeDetectionLimit(value);
+				}
+			}
+		});
+		
+		sliderBgUpdateRate.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				if (!source.getValueIsAdjusting()) {
+					int value = (int) source.getValue();
+					detector.changebackgroundUpdateRate(value);
 				}
 			}
 		});

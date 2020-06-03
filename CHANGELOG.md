@@ -1,5 +1,6 @@
-### 0.1.2 - 
-* Planned improvements section added
+### 0.1.2 - 03.06.2020
+* Added background learning rate slider (reducing the autofocus flicker problem)
+* Restructured slider UI
 
 ### 0.1.1 - 17.10.2019
 * Better resource release
@@ -7,6 +8,7 @@
 * Flicker limiter added
 * fixed personal error logging
 * added custom W rectangle button to automatically created preset
+* Planned improvements section added
 
 ### 0.1.0 - 07.04.2019
 * Minor optimization of main cycle
@@ -54,6 +56,6 @@
 * Shown resolution and fps counter in frame header
 
 ### 0.0.1 - 10.11.2018
-* Initial Alpha version
+* Initial Pre-Alpha version
 
 

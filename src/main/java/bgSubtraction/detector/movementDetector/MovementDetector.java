@@ -31,6 +31,7 @@ public class MovementDetector implements Detector {
 	int subractorThreshold = 10;// 16
 	int detectionLimitPercentage = 75;
 	int totalMovementFoundPercentage = 0;
+	int backgroundUpdateRate = 5;//0-100
 
 	public MovementDetector() {
 		this.firstKernelErode = opencv_imgproc.getStructuringElement(opencv_imgproc.MORPH_RECT,
@@ -89,6 +90,12 @@ public class MovementDetector implements Detector {
 		}
 	}
 	
+	public void changebackgroundUpdateRate(int bgUpdateRate) {
+		if (backgroundUpdateRate != bgUpdateRate) {
+			backgroundUpdateRate = bgUpdateRate;
+		}
+	}
+	
 	public int getTotalMovementPercentage() {
 		return totalMovementFoundPercentage;
 	}
@@ -96,7 +103,7 @@ public class MovementDetector implements Detector {
 	public void processImage(IplImage img, Mat bgResult) {
 		Mat imgMat = new Mat(img);
 
-		fgbg.apply(imgMat, bgResult);
+		fgbg.apply(imgMat, bgResult, backgroundUpdateRate  / 100d);
 
 		opencv_imgproc.medianBlur(bgResult, bgResult, blurSize);
 
