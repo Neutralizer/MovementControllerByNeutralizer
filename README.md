@@ -4,6 +4,7 @@
 This program is designed with the idea of losing weight while playing computer games <b>on a budget</b>. It is based on 2 technologies - computer vision and game bot command issuing(automation testing): Movement is detected in specific regions via a web camera (or emulated smartphone camera) and when it is detected, the respective keyboard key attached to that region is being pressed.
 ## Disclaimer
 The movement controller is in its Alpha state now and is still unfinished. Check Known Issues section if you encounter any problems.
+Quick demo can be found <a href="https://www.youtube.com/watch?v=CL8TFtdbtDw&feature=youtu.be&ab_channel=NeutralizerPrime">here</a>.
 ## Getting Started
 What should I do to run the program:
 ### Download
