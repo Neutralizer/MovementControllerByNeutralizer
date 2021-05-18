@@ -32,6 +32,7 @@ public class MovementDetector implements Detector {
 	int detectionLimitPercentage = 75;
 	int totalMovementFoundPercentage = 0;
 	int backgroundUpdateRate = 5;//0-100
+	public boolean isPaused = false;
 
 	public MovementDetector() {
 		this.firstKernelErode = opencv_imgproc.getStructuringElement(opencv_imgproc.MORPH_RECT,
@@ -99,6 +100,14 @@ public class MovementDetector implements Detector {
 	public int getTotalMovementPercentage() {
 		return totalMovementFoundPercentage;
 	}
+	
+	public boolean getIsPaused() {
+		return isPaused;
+	}
+
+	public void setIsPaused(boolean isPaused) {
+		this.isPaused = isPaused;
+	}
 
 	public void processImage(IplImage img, Mat bgResult) {
 		Mat imgMat = new Mat(img);
@@ -115,6 +124,14 @@ public class MovementDetector implements Detector {
 	public String tellIfMovementDetectionIsBlocked() {
 		if(totalMovementFoundPercentage >= detectionLimitPercentage ) {
 			return "MOVEMENT DETECTION BLOCKED";
+		} else {
+			return "";
+		}
+	}
+	
+	public String tellIfPaused() {
+		if(isPaused) {
+			return "PAUSED";
 		} else {
 			return "";
 		}
