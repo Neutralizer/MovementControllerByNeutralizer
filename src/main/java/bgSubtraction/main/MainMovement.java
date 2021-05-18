@@ -107,17 +107,16 @@ public class MainMovement implements Runnable {
 					roi.getListRoi().get(roi.getListRoi().size()-1).getKey().setKeyCode(keyWS);
 					}
 					
-					if(!movementDetector.isMovementDetectedAndLimitReached(bgResult)) {
+					if(!movementDetector.isMovementDetectedAndLimitReached(bgResult) && !movementDetector.isPaused) {
 						roi.executeAllROI(bgResult);
 					}
 					
-
 					display.drawAllROI(roi.getListRoi(), bgResult);
 					display.showImage(bgResult);
 
 					display.setTitle("Resolution: " + camera.getCameraWidthAndHeight() + "; FPS: "
 							+ Integer.toString(camera.getFPS()) + "; Total Movement: " + 
-							movementDetector.getTotalMovementPercentage() + "% " + 
+							movementDetector.getTotalMovementPercentage() + "% " + " " + movementDetector.tellIfPaused() +
 							movementDetector.tellIfMovementDetectionIsBlocked());
 
 //					display.attachMouseListener();//TODO attaches mouse listener

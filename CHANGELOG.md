@@ -1,3 +1,7 @@
+### 0.1.3 - 18.05.2021
+* Added pause button to halt virtual button execution
+* Added pause textual indication on camera panel header (when paused)
+
 ### 0.1.2 - 03.06.2020
 * Added background learning rate slider (reducing the autofocus flicker problem)
 * Restructured slider UI

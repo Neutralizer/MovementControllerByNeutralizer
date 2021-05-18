@@ -1,5 +1,6 @@
 package interfacePanel.panel;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -324,8 +325,34 @@ public class MainPanel extends JFrame {
 	private void startExecution() {
 		comboBoxCamera.setEnabled(false);
 		comboBoxPresets.setEnabled(false);
-		buttonStartCamera.setEnabled(false);
-		buttonCameraProperties.setEnabled(false);
+		buttonStartCamera.setVisible(false);
+		buttonCameraProperties.setVisible(false);
+		
+		//-- Pause button
+		c.gridx = 1;// 2nd col
+		c.gridy = 0;
+		final JButton buttonTogglePause = new JButton("Pause");
+		buttonTogglePause.setBackground(Color.GREEN);
+		
+		buttonTogglePause.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//if it is not paused, pause it; else unpause it
+				if(!detector.getIsPaused()) {
+					detector.setIsPaused(true);
+					buttonTogglePause.setBackground(Color.RED);
+					buttonTogglePause.setText("Paused");
+				} else {
+					detector.setIsPaused(false);
+					buttonTogglePause.setBackground(Color.GREEN);
+					buttonTogglePause.setText("Pause");
+				}
+				
+			}
+		});
+		panelForm.add(buttonTogglePause,c);
+		//--
 
 		int cameraNum = util.getCameraNum(cameras, comboBoxCamera.getSelectedItem().toString());
 		String selectedPropFile = comboBoxPresets.getSelectedItem().toString();
